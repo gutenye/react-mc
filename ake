@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+example() {
+  npm run example
+}
+
+build() {
+  npm run build
+}
+
+case "$1" in
+  b | build ) build ;;
+  e | example ) example ;;
+esac
