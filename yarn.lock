@@ -2,10 +2,6 @@
 # yarn lockfile v1
 
 
-"@gutenye/eslint-config-react-app@^0.7.0":
-  version "0.7.3"
-  resolved "http://registry.npm.taobao.org/@gutenye/eslint-config-react-app/download/@gutenye/eslint-config-react-app-0.7.3.tgz#11f34eb2bb6322d5ee55c3a4c87e7365cdd45a59"
-
 "@material/animation@^0.1.0":
   version "0.1.0"
   resolved "http://registry.npm.taobao.org/@material/animation/download/@material/animation-0.1.0.tgz#1f0348c0df4e2d5dabe284b6cced811ac608346a"
@@ -1924,6 +1920,10 @@ icss-replace-symbols@^1.0.2:
 ieee754@^1.1.4:
   version "1.1.8"
   resolved "http://registry.npm.taobao.org/ieee754/download/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
+
+immutable@^3.8.1:
+  version "3.8.1"
+  resolved "http://registry.npm.taobao.org/immutable/download/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
 
 indexes-of@^1.0.1:
   version "1.0.1"

@@ -23,6 +23,7 @@
   "license": "MIT",
   "dependencies": {
     "classnames": "^2.2.5",
+    "immutable": "^3.8.1",
     "material-components-web": "^0.1.1"
   },
   "devDependencies": {
@@ -38,10 +39,6 @@
     "react-dom": "^15.4.1",
     "style-loader": "^0.13.1",
     "webpack": "^2.2.0-rc",
-    "webpack-dev-server": "^2.2.0-rc",
-    "@gutenye/eslint-config-react-app": "^0.7.0"
-  },
-  "eslintConfig": {
-    "extends": "@gutenye/react-app"
+    "webpack-dev-server": "^2.2.0-rc"
   }
 }

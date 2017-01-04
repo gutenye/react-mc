@@ -1,13 +1,23 @@
 import React, { Component } from 'react'
 import { render } from 'react-dom'
-import { Button } from '../src'
+
+const pages = [
+  require('./Button').default,
+  require('./Checkbox').default,
+  require('./FAB').default,
+  require('./List').default,
+  require('./Card').default,
+  require('./Radio').default,
+  require('./Snackbar').default,
+]
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Button>Flat Button</Button>
-        <Button raised primary>Raised Primary Button</Button>
+        {pages.map((v,i) =>
+          React.createElement(v, {key: i})
+        )}
       </div>
     )
   }
