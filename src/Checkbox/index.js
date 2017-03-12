@@ -1,7 +1,6 @@
 import '@material/checkbox/dist/mdc.checkbox.css'
 import React, { Component, PropTypes } from 'react'
 import cx from 'classnames'
-import { Set } from 'immutable'
 import { MDCCheckboxFoundation } from '@material/checkbox'
 import * as helper from '../helper'
 
@@ -19,7 +18,7 @@ export default class Checkbox extends Component {
   }
 
   state = {
-    classes: new Set(),
+    rootClassName: [],
     checked: this.props.checked,
   }
 
@@ -32,19 +31,15 @@ export default class Checkbox extends Component {
     deregisterAnimationEndHandler: helper.deregisterHandler('root', ANIM_END_EVENT_NAME, this),
     registerChangeHandler: helper.registerHandler('input', 'change', this),
     deregisterChangeHandler: helper.deregisterHandler('input', 'change', this),
-    forceLayout: () => {
-      if (this.refs.input) {
-        this.refs.input.offsetWidth
-      }
-    },
+    forceLayout: () => this.refs.input.offsetWidth,
   })
 
   render() {
     const {children, className, ...rest} = this.props
-    let {classes, checked} = this.state
-    classes = cx('mdc-checkbox', classes.toJS(), className)
+    const {checked} = this.state
+    const rootClassName = cx('mdc-checkbox', this.state.className, className)
     return (
-      <div ref='root' className={classes} {...rest}>
+      <div ref='root' className={rootClassName} {...rest}>
        <input ref='input' type='checkbox' className='mdc-checkbox__native-control' checked={checked} onChange={this.onChange} />
        <div className='mdc-checkbox__background'>
          <svg version='1.1' className='mdc-checkbox__checkmark' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' xmlSpace='preserve'>

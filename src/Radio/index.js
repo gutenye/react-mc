@@ -1,7 +1,6 @@
 import '@material/Radio/dist/mdc.Radio.css'
 import React, { Component, PropTypes } from 'react'
 import cx from 'classnames'
-import { Set } from 'immutable'
 import { MDCRadioFoundation } from '@material/radio'
 import * as helper from '../helper'
 
@@ -17,7 +16,7 @@ class Radio extends Component {
   }
 
   state = {
-    rootClassName: new Set(),
+    rootClassName: [],
   }
 
   foundation = new MDCRadioFoundation({
@@ -28,13 +27,12 @@ class Radio extends Component {
 
   render() {
     const {disabled, name, checked, onChange, children, className, ...rest} = this.props
-    const {rootClassName} = this.state
-    const c = cx('mdc-radio', rootClassName.toJS(), {
+    const rootClassName = cx('mdc-radio', this.state.rootClassName, {
       'mdc-radio--disabled': disabled,
     }, className)
     return (
       <div style={{display: 'inline-block'}}>
-        <div ref='root' className={c} {...rest}>
+        <div ref='root' className={rootClassName} {...rest}>
           <input ref='input' className='mdc-radio__native-control' type='radio' name={name} checked={checked} />
           <div className='mdc-radio__background'>
             <div className='mdc-radio__outer-circle'></div>

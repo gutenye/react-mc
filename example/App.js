@@ -3,6 +3,8 @@ import { render } from 'react-dom'
 
 const pages = [
   require('./Button').default,
+  require('./Select').default,
+  require('./Textfield').default,
   require('./Checkbox').default,
   require('./FAB').default,
   require('./List').default,

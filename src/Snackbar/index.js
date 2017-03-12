@@ -1,7 +1,6 @@
 import '@material/snackbar/dist/mdc.snackbar.css'
 import React, { Component, PropTypes } from 'react'
 import cx from 'classnames'
-import { Set } from 'immutable'
 import { MDCSnackbarFoundation } from '@material/snackbar'
 import * as helper from '../helper'
 
@@ -10,7 +9,7 @@ const {TRANS_END_EVENT_NAME} = MDCSnackbarFoundation.strings
 class Snackbar extends Component {
   static propTypes = {}
   state = {
-    rootClassName: new Set(),
+    rootClassName: [],
     ariaHidden: 'true',
     message: '',
     actionText: '',
@@ -34,16 +33,24 @@ class Snackbar extends Component {
 
   render() {
     const {children, className, ...rest} = this.props
-    const {rootClassName, ariaHidden, message, actionText, actionAriaHidden} = this.state
-    const c = cx('mdc-snackbar', rootClassName.toJS(), className)
+    const {ariaHidden, message, actionText, actionAriaHidden} = this.state
+    const rootClassName = cx('mdc-snackbar', this.state.rootClassName, className)
     return (
-      <div ref='root' aria-live='assertive' aria-atomic aria-hidden={ariaHidden} className={c} {...rest}>
+      <div ref='root' aria-live='assertive' aria-atomic aria-hidden={ariaHidden} className={rootClassName} {...rest}>
         <div className='mdc-snackbar__text'>{message}</div>
         <div className='mdc-snackbar__action-wrapper'>
           <button ref='el' type='button' className='mdc-button mdc-snackbar__action-button' aria-hidden={actionAriaHidden}>{actionText}</button>
         </div>
       </div>
     )
+  }
+  
+  componentDidMount() {
+    this.foundation.init()
+  }
+
+  componentWillUnmount() {
+    this.foundation.destroy()
   }
 
   show(options) {

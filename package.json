@@ -23,7 +23,7 @@
   "license": "MIT",
   "dependencies": {
     "classnames": "^2.2.5",
-    "immutable": "^3.8.1",
+    "lodash": "^4.17.4",
     "material-components-web": "^0.1.1"
   },
   "devDependencies": {

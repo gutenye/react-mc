@@ -6,7 +6,7 @@ export default class Header extends Component {
 
   render() {
     const {children, className, ...rest} = this.props
-    const classes = cx('mdc-temporary-drawer__header' className)
+    const classes = cx('mdc-temporary-drawer__header', className)
     return (
       <header className={classes} {...rest}>
         <div className='mdc-temporary-drawer__header-content'>
