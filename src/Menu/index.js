@@ -15,7 +15,7 @@ class Menu extends Component {
     hasClass: helper.hasClass(this),
     hasNecessaryDom: () => Bool(this.refs.items),
     getInnerDimensions: () => ({width: this.refs.items.offsetWidth, height: this.refs.items.offsetHeight}),
-    hasAnchor: () => this.refs.root.parentElement && this.refs.root.parentElement.classList.contains('mdc-menu-anchor'),,
+    hasAnchor: () => this.refs.root.parentElement && this.refs.root.parentElement.classList.contains('mdc-menu-anchor'),
     getAnchorDimensions: () => this.refs.root.parentElement.getBoundingClientRect(),
     getWindowDimensions: () => ({width: window.innerWidth, height: window.innerHeight}),
     setScale: (x, y) => this.refs.root.style[getTransformPropertyName(window)] = `scale(${x}, ${y})`,
@@ -31,6 +31,7 @@ class Menu extends Component {
     },
     setTransitionDelayForItemAtIndex: (index, value) => this.items[index].style.setProperty('transition-delay', value),
 
+    /*
     getIndexForEventTarget(target: EventTarget) => number	Checks to see if the target of an event pertains to one of the menu items, and if so returns the index of that item. Returns -1 if the target is not one of the menu items. The same notice for index applies here as above.
     notifySelected(evtData: {index: number}) => void	Dispatches an event notifying listeners that a menu item has been selected. The function should accept an evtData parameter containing the an object with an index property representing the index of the selected item. Implementations may choose to supplement this data with additional data, such as the item itself.
     notifyCancel() => void	Dispatches an event notifying listeners that the menu has been closed with no selection made.
@@ -43,6 +44,8 @@ class Menu extends Component {
     isRtl() => boolean	Returns boolean indicating whether the current environment is RTL.
     setTransformOrigin(value: string) => void	Sets the transform origin for the menu element.
     setPosition(position: { top: string, right: string, bottom: string, left: string }) => void	Sets the position of the menu element.
+    */
+  })
 
   render() {
     const {children, className, ...rest} = this.props
