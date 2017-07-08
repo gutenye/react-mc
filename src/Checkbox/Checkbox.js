@@ -2,9 +2,9 @@
 import React from 'react'
 import cx from 'classnames'
 import { MDCCheckboxFoundation } from '@material/checkbox'
-import { getCorrectEventName } from '@material/animation'
+import { MDCRippleFoundation } from '@material/ripple'
 import { getMatchesProperty } from '@material/ripple/util'
-import createRippleFoundation from '../Ripple'
+import Ripple from '../Ripple'
 import * as helper from '../helper'
 import type { PropsT } from '../types'
 
@@ -12,10 +12,12 @@ class Checkbox extends React.Component {
   props: {
     checked: boolean,
     onChange: Function,
-    themeDark?: boolean,
+    theme?: 'dark',
     disabled?: boolean,
   } & PropsT
-  rippleFoundation_: any
+  root_: any
+  nativeCb_: any
+  ripple_: any
 
   static defaultProps = {
     checked: false,
@@ -41,13 +43,40 @@ class Checkbox extends React.Component {
     isAttachedToDOM: helper.isAttachedToDOM('root', this),
   })
 
+  initRipple_() {
+    this.root_ = this.refs.root
+    this.nativeCb_ = this.refs.nativeCb
+    const MATCHES = getMatchesProperty(HTMLElement.prototype)
+    const adapter = Ripple.createAdapter(this, {
+      isUnbounded: () => true,
+      isSurfaceActive: () => this.nativeCb_[MATCHES](':active'),
+      registerInteractionHandler: (type, handler) =>
+        this.nativeCb_.addEventListener(type, handler),
+      deregisterInteractionHandler: (type, handler) =>
+        this.nativeCb_.removeEventListener(type, handler),
+      computeBoundingRect: () => {
+        const { left, top } = this.root_.getBoundingClientRect()
+        const DIM = 40
+        return {
+          top,
+          left,
+          right: left + DIM,
+          bottom: top + DIM,
+          width: DIM,
+          height: DIM,
+        }
+      },
+    })
+    return new MDCRippleFoundation(adapter)
+  }
+
   render() {
-    const { children, className, themeDark, disabled, ...rest } = this.props
+    const { children, className, theme, disabled, ...rest } = this.props
     const { rootProps, nativeCbProps, checked } = this.state
     const rootClassName = cx(
       'mdc-checkbox',
       {
-        'mdc-checkbox--theme-dark': themeDark,
+        [`mdc-checkbox--theme-${theme}`]: theme,
         'mdc-checkbox--disabled': disabled,
       },
       Array.from(rootProps.className),
@@ -81,35 +110,13 @@ class Checkbox extends React.Component {
 
   componentDidMount() {
     this.foundation_.init()
-    const root_ = this.refs.root
-    const nativeCb_ = this.refs.nativeCb
-    const MATCHES = getMatchesProperty(HTMLElement.prototype)
-    this.rippleFoundation_ = createRippleFoundation(this, {
-      isUnbounded: () => true,
-      isSurfaceActive: () => nativeCb_[MATCHES](':active'),
-      registerInteractionHandler: (type, handler) =>
-        nativeCb_.addEventListener(type, handler),
-      deregisterInteractionHandler: (type, handler) =>
-        nativeCb_.removeEventListener(type, handler),
-      computeBoundingRect: () => {
-        const { left, top } = root_.getBoundingClientRect()
-        const DIM = 40
-        return {
-          top,
-          left,
-          right: left + DIM,
-          bottom: top + DIM,
-          width: DIM,
-          height: DIM,
-        }
-      },
-    })
-    this.rippleFoundation_.init()
+    this.ripple_ = this.initRipple_()
+    this.ripple_.init()
   }
 
   componentWillUnmount() {
     this.foundation_.destroy()
-    this.rippleFoundation_.destroy()
+    this.ripple_.destroy()
   }
 
   onChange = (e: any) => {

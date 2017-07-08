@@ -1,3 +1,4 @@
+/* eslint-disable */
 import 'material-components-web/material-components-web.scss'
 import React from 'react'
 import { render } from 'react-dom'
@@ -10,7 +11,13 @@ import {
   TemporaryDrawer,
   Elevation,
   Checkbox,
-  FAB,
+  Fab,
+  FormField,
+  GridList,
+  IconToggle,
+  LayoutGrid,
+  LinearProgress,
+  Menu,
   List,
   Radio,
   Select,
@@ -27,10 +34,16 @@ const getPages = () => [
   //MyPermanentDrawer,
   //MyPersistentDrawer,
   //MyTemporaryDrawer,
-  MyElevation,
-  //MyFAB
-  //MyList
-  //MyRadio
+  //MyElevation,
+  //MyFab,
+  //MyFormField,
+  //MyGridList,
+  //MyIconToggle,
+  //MyLayoutGrid,
+  //MyLinearProgress,
+  //MyList,
+  //MyMenu,
+  MyRadio,
   //MySelect
   //MySnackBar
   //MyTextfield
@@ -217,19 +230,176 @@ class MyElevation extends React.Component {
   }
 }
 
-class MyFAB extends React.Component {
+class MyFab extends React.Component {
   render() {
-    return <FAB>hello</FAB>
+    return (
+      <Fab className="material-icons">
+        <Fab.Icon>favorite</Fab.Icon>
+      </Fab>
+    )
+  }
+}
+
+class MyFormField extends React.Component {
+  render() {
+    return (
+      <FormField>
+        <input type="checkbox" id="input" />
+        <label htmlFor="input">Input Label</label>
+      </FormField>
+    )
+  }
+}
+
+class MyGridList extends React.Component {
+  render() {
+    return (
+      <GridList>
+        <GridList.Tiles>
+          {[1, 2].map(v =>
+            <GridList.Tile key={v}>
+              <GridList.Tile.Primary>
+                <GridList.Tile.PrimaryContent src="//via.placeholder.com/300x300" />
+              </GridList.Tile.Primary>
+              <GridList.Tile.Secondary>
+                <GridList.Tile.Title>Title</GridList.Tile.Title>
+              </GridList.Tile.Secondary>
+            </GridList.Tile>
+          )}
+        </GridList.Tiles>
+      </GridList>
+    )
+  }
+}
+
+class MyIconToggle extends React.Component {
+  state = {
+    on: true,
+  }
+  render() {
+    return (
+      <div>
+        <IconToggle
+          on={this.state.on}
+          onChange={({ isOn }) => this.setState({ on: isOn })}
+          className="material-icons"
+          dataToggleOn={{ label: 'Remove from favorites', content: 'favorite' }}
+          dataToggleOff={{
+            label: 'Add to favorites',
+            content: 'favorite_border',
+          }}
+        >
+          favorite_border
+        </IconToggle>
+        {JSON.stringify(this.state.on)}
+      </div>
+    )
+  }
+}
+
+class MyLayoutGrid extends React.Component {
+  render() {
+    return (
+      <LayoutGrid>
+        <LayoutGrid.Inner>
+          <LayoutGrid.Cell order="2"> a </LayoutGrid.Cell>
+          <LayoutGrid.Cell order="1"> b </LayoutGrid.Cell>
+          <LayoutGrid.Cell> c </LayoutGrid.Cell>
+        </LayoutGrid.Inner>
+      </LayoutGrid>
+    )
+  }
+}
+
+class MyLinearProgress extends React.Component {
+  render() {
+    return (
+      <div>
+        <p>
+          <LinearProgress progress={0.5} />
+          Determinate
+        </p>
+        <p>
+          <LinearProgress progress={0.5} indeterminate />
+          Indeterminate
+        </p>
+        <p>
+          <LinearProgress progress={0.5} buffer={0.75} />
+          Buffer
+        </p>
+        <p>
+          <LinearProgress progress={0.5} reversed />
+          Reversed
+        </p>
+        <p>
+          <LinearProgress progress={0.5} indeterminate reversed />
+          Indeterminate Reversed
+        </p>
+        <p>
+          <LinearProgress progress={0.5} buffer={0.75} reversed />
+          Buffer Reversed
+        </p>
+        <p>
+          <LinearProgress progress={0.5} accent />
+          Accent
+        </p>
+      </div>
+    )
   }
 }
 
 class MyList extends React.Component {
   render() {
     return (
-      <List>
-        <List.Item>hello</List.Item>
-        <List.Item>hello</List.Item>
-      </List>
+      <div>
+        <List>
+          {[1, 2].map(i =>
+            <List.Item key={i}>
+              hello {i}
+            </List.Item>
+          )}
+        </List>
+
+        <List twoLine>
+          {[1, 2].map(i =>
+            <List.Item key={i}>
+              <List.Item.Text>
+                Two-line item {i}
+                <List.Item.Text.Secondary>
+                  Seconday Text
+                </List.Item.Text.Secondary>
+              </List.Item.Text>
+            </List.Item>
+          )}
+        </List>
+      </div>
+    )
+  }
+}
+
+class MyMenu extends React.Component {
+  state = {
+    open: true,
+  }
+  render() {
+    return (
+      <div>
+        <Menu.Simple
+          open={this.state.open}
+          onClose={() => this.setState({ open: false })}
+        >
+          <Menu.Simple.Items>
+            {[1, 2].map(i =>
+              <Menu.Simple.Item key={i}>
+                Item {i}
+              </Menu.Simple.Item>
+            )}
+          </Menu.Simple.Items>
+        </Menu.Simple>
+        <button onClick={() => this.setState({ open: !this.state.open })}>
+          toggle menu: {JSON.stringify(this.state.open)}
+        </button>
+      </div>
     )
   }
 }

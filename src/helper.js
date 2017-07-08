@@ -95,6 +95,12 @@ export function deregisterInteractionHandler(propsName, self) {
   }
 }
 
+export function getAttr(propsName, self) {
+  return function(name) {
+    return self.state[propsName][name]
+  }
+}
+
 // setAttr('rootProps', this) with state = {rootProps: {}}
 export function setAttr(propsName, self) {
   return function(name, value) {
@@ -161,5 +167,21 @@ export function eventTargetHasClass() {
 export function isElement(selector, self) {
   return function(el) {
     return ReactDOM.findDOMNode(self).querySelector(selector) === el
+  }
+}
+
+// state = { rootProps: { tabIndex: 0 }}
+export function getTabIndex(propsName, self) {
+  return function() {
+    return self.state[propsName].tabIndex
+  }
+}
+
+export function setTabIndex(propsName, self) {
+  return function(tabIndex) {
+    self.setState(state => {
+      state[propsName].tabIndex = tabIndex
+      return state
+    })
   }
 }

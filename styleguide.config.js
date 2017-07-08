@@ -5,7 +5,6 @@ module.exports = {
   title: 'react-mc docs',
   styleguideDir: 'build.docs',
   //assetsDir: 'static',
-  require: ['material-components-web/material-components-web.scss', './styleguide'],
 
   sections: [
     { name: 'Button', content: 'src/Button/README.md',  components: 'src/Button/[A-Z]*.js' },
@@ -16,6 +15,8 @@ module.exports = {
   getExampleFilename(componentPath) {
     return componentPath.replace(/\.js$/, '.md')
   },
+
+  require: ['material-components-web/material-components-web.scss', './styleguide/global.js'],
 
   webpackConfig: {
     module: {

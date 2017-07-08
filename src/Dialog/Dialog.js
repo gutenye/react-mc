@@ -114,9 +114,12 @@ class Dialog extends React.Component {
   }
 
   componentWillReceiveProps(nextProps: PropsT) {
-    if (nextProps.open !== this.props.open) {
+    if (
+      nextProps.open !== this.props.open &&
+      nextProps.open !== this.foundation_.isOpen()
+    ) {
       if (nextProps.open) this.foundation_.open()
-      // Don't call close_() here, for foundation_.close will be called twice
+      else this.foundation_.close()
     }
   }
 

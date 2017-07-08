@@ -1,1 +1,6 @@
-export { default } from './createRippleFoundation'
+// @flow
+import createAdapter from './createAdapter'
+
+export default {
+  createAdapter,
+}

@@ -5,22 +5,16 @@ import type { PropsT } from '../types'
 
 class Card extends React.Component {
   props: {
-    horizontalBlock: boolean,
-    themeDark: boolean,
+    horizontalBlock?: boolean,
+    theme?: 'dark',
   } & PropsT
 
   render() {
-    const {
-      horizontalBlock,
-      themeDark,
-      children,
-      className,
-      ...rest
-    } = this.props
+    const { horizontalBlock, theme, children, className, ...rest } = this.props
     const rootClassName = cx(
       horizontalBlock ? 'mdc-card__horizontal-block' : 'mdc-card',
       {
-        'mdc-card--theme-dark': themeDark,
+        [`mdc-card--theme-${theme}`]: theme,
       },
       className
     )

@@ -1,7 +1,8 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import createRippleFoundation from '../Ripple'
+import { MDCRippleFoundation } from '@material/ripple'
+import Ripple from '../Ripple'
 
 class Button extends React.Component {
   props: {
@@ -13,10 +14,15 @@ class Button extends React.Component {
     className?: string,
     children: any,
   }
-  rippleFoundation_: any
+  ripple_: any
 
   state = {
     rootProps: { className: new Set() },
+  }
+
+  initRipple_() {
+    const adapter = Ripple.createAdapter(this)
+    return new MDCRippleFoundation(adapter)
   }
 
   render() {
@@ -51,12 +57,12 @@ class Button extends React.Component {
   }
 
   componentDidMount() {
-    this.rippleFoundation_ = createRippleFoundation(this)
-    this.rippleFoundation_.init()
+    this.ripple_ = this.initRipple_()
+    this.ripple_.init()
   }
 
   componentWillUnmount() {
-    this.rippleFoundation_.destroy()
+    this.ripple_.destroy()
   }
 }
 
