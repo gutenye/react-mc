@@ -1,16 +1,21 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import cx from 'classnames'
+import type { PropsT } from '../types'
 
-export default class MediaItem extends Component {
-  static propTypes = {
-    size: PropTypes.string,
-  }
+class MediaItem extends React.Component {
+  props: {
+    size?: string,
+  } & PropsT
 
   render() {
-    const {size, children, className, ...rest} = this.props
-    const classes = cx('mdc-card__media-item', size && `mdc-card__media-item--${size}`, className)
-    return (
-      <img className={classes} {...rest}></img>
+    const { size, children, className, ...rest } = this.props
+    const rootClassName = cx(
+      'mdc-card__media-item',
+      size && `mdc-card__media-item--${size}`,
+      className
     )
+    return <img className={rootClassName} {...rest} />
   }
 }
+
+export default MediaItem

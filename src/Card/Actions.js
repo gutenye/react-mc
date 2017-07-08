@@ -1,20 +1,28 @@
-import React, { Component, PropTypes } from 'react'
+// @flow
+import React from 'react'
 import cx from 'classnames'
+import type { PropsT } from '../types'
 
-export default class Actions extends Component {
-  static propTypes = {
-    vertical: PropTypes.bool
-  }
+class Actions extends React.Component {
+  props: {
+    vertical: boolean,
+  } & PropsT
 
   render() {
-    const {vertical, children, className, ...rest} = this.props
-    const classes = cx('mdc-card__actions', {
-      'mdc-card__actions--vertical': vertical
-    }, className)
+    const { vertical, children, className, ...rest } = this.props
+    const rootClassName = cx(
+      'mdc-card__actions',
+      {
+        'mdc-card__actions--vertical': vertical,
+      },
+      className
+    )
     return (
-      <section className={classes} {...rest}>
+      <section className={rootClassName} {...rest}>
         {children}
       </section>
     )
   }
 }
+
+export default Actions

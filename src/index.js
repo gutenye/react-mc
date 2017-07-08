@@ -1,8 +1,12 @@
 export { default as Button } from './Button'
 export { default as Card } from './Card'
 export { default as Checkbox } from './Checkbox'
+export { default as Dialog } from './Dialog'
 export { default as PermanentDrawer } from './PermanentDrawer'
+export { default as PersistentDrawer } from './PersistentDrawer'
 export { default as TemporaryDrawer } from './TemporaryDrawer'
+export { default as Elevation } from './Elevation'
+/*
 export { default as FAB } from './FAB'
 export { default as FormField } from './FormField'
 export { default as List } from './List'
@@ -11,3 +15,4 @@ export { default as Snackbar } from './Snackbar'
 export { default as Textfield } from './Textfield'
 export { default as Select } from './Select'
 export { default as NativeSelect } from './Select/NativeSelect'
+*/

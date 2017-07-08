@@ -1,16 +1,19 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import cx from 'classnames'
+import type { PropsT } from '../types'
 
-export default class Subtitle extends Component {
-  static propTypes = {}
+class Subtitle extends React.Component {
+  props: PropsT
 
   render() {
-    const {children, className, ...rest} = this.props
-    const classes = cx('mdc-card__subtitle', className)
+    const { children, className, ...rest } = this.props
+    const rootClassName = cx('mdc-card__subtitle', className)
     return (
-      <h1 className={classes} {...rest}>
+      <h1 className={rootClassName} {...rest}>
         {children}
       </h1>
     )
   }
 }
+
+export default Subtitle

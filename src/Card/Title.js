@@ -1,18 +1,26 @@
-import React, { Component, PropTypes } from 'react'
+// @flow
+import React from 'react'
 import cx from 'classnames'
+import type { PropsT } from '../types'
 
-export default class Title extends Component {
-  static propTypes = {
-    large: PropTypes.bool
-  }
+class Title extends React.Component {
+  props: {
+    large: boolean,
+  } & PropsT
 
   render() {
-    const {large, children, className, ...rest} = this.props
-    const classes = cx('mdc-card__title', {'md-card__title--large': large}, className)
+    const { large, children, className, ...rest } = this.props
+    const rootClassName = cx(
+      'mdc-card__title',
+      { 'md-card__title--large': large },
+      className
+    )
     return (
-      <h1 className={classes} {...rest}>
+      <h1 className={rootClassName} {...rest}>
         {children}
       </h1>
     )
   }
 }
+
+export default Title

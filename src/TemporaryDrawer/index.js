@@ -1,19 +1,15 @@
-import '@material/drawer/dist/mdc.drawer.css'
-import React, { Component, PropTypes } from 'react'
-import cx from 'classnames'
+// @flow
+import Content from './Content'
+import Drawer from './Drawer'
+import Header from './HeaderContent'
+import HeaderContent from './HeaderContent'
+import TemporaryDrawer from './TemporaryDrawer'
+import ToolbarSpacer from './ToolbarSpacer'
 
-export default class TemporaryDrawer extends Component {
-  static propTypes = {}
+TemporaryDrawer.Content = Content
+TemporaryDrawer.Drawer = Drawer
+TemporaryDrawer.Header = Header
+TemporaryDrawer.HeaderContent = HeaderContent
+TemporaryDrawer.ToolbarSpacer = ToolbarSpacer
 
-  render() {
-    const {children, className, ...rest} = this.props
-    const classes = cx('mdc-temporary-drawer', 'mdc-typography', className)
-    return (
-      <aside className={classes} {...rest}>
-        <nav className='mdc-temporary-drawer__drawer'>
-          {children}
-        </nav>
-      </aside>
-    )
-  }
-}
+export default TemporaryDrawer

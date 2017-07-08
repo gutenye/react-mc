@@ -1,67 +1,127 @@
-import { add, remove } from './utils'
+import ReactDOM from 'react-dom'
+import EVENT_MAP from './EVENT_MAP'
 
-// state = {
-//   rootClassName: []
-// }
-export function addClass(stateName, self) {
-  return function(className) {
-    self.setState({
-      [stateName]: add(self.state[stateName], className)
-    })
-  }
-}
-
-export function removeClass(stateName, self) {
-  return function(className) {
-    self.setState({
-      [stateName]: remove(self.state[stateName], className)
-    })
-  }
-}
-
-export function hasClass(ref, self) {
-  return function(className) {
-    if (self.refs[ref]) {
-      self.refs[ref].classList.contains(className)
+// addClass('rootProps', this) with state = {rootProps: {className: new Set()}}
+// addClass(document.body)
+export function addClass(propsName, self) {
+  if (typeof propsName === 'string') {
+    return function(className) {
+      self.setState(state => {
+        state[propsName].className.add(className)
+        return { [propsName]: state[propsName] }
+      })
+    }
+  } else {
+    return function(className) {
+      propsName.classList.add(className)
     }
   }
 }
 
+export function removeClass(propsName, self) {
+  if (typeof propsName === 'string') {
+    return function(className) {
+      self.setState(state => {
+        state[propsName].className.delete(className)
+        return { [propsName]: state[propsName] }
+      })
+    }
+  } else {
+    return function(className) {
+      propsName.classList.remove(className)
+    }
+  }
+}
 
-// state = {
-//   inputAttr: {}
-// }
-export function setAttr(stateName, self) {
+export function hasClass(propsName, self) {
+  return function(className) {
+    return self.state[propsName].className.has(className)
+  }
+}
+
+// registerHandler('rootProps', this, 'click')
+// registerHandler(document, 'click')
+export function registerHandler(propsName, self, type) {
+  if (typeof propsName === 'string') {
+    return function(handler) {
+      registerInteractionHandler(propsName, self)(type, handler)
+    }
+  } else {
+    return function(handler) {
+      propsName.addEventListener(self, handler)
+    }
+  }
+}
+
+export function deregisterHandler(propsName, self, type) {
+  if (typeof propsName === 'string') {
+    return function(handler) {
+      deregisterInteractionHandler(propsName, self)(type, handler)
+    }
+  } else {
+    return function(handler) {
+      propsName.removeEventListener(self, handler)
+    }
+  }
+}
+
+// state = { rootProps: {} }
+export function registerInteractionHandler(propsName, self) {
+  return function(type, handler) {
+    // convert `click` to `onClick`
+    const reactType = EVENT_MAP[type]
+    if (reactType) {
+      self.setState(state => ({
+        [propsName]: { ...state[propsName], [reactType]: handler },
+      }))
+    } else {
+      // for events not supported on React, e.g. pointerdown
+      ReactDOM.findDOMNode(self).addEventListener(type, handler)
+    }
+  }
+}
+
+export function deregisterInteractionHandler(propsName, self) {
+  return function(type, handler) {
+    const reactType = EVENT_MAP[type]
+    if (reactType) {
+      self.setState(state => {
+        delete state[propsName][reactType]
+        return { [propsName]: state[propsName] }
+      })
+    } else {
+      ReactDOM.findDOMNode(self).removeEventListener(type, handler)
+    }
+  }
+}
+
+// setAttr('rootProps', this) with state = {rootProps: {}}
+export function setAttr(propsName, self) {
   return function(name, value) {
-    self.setState({
-      [stateName]: {...self.state[stateName], [name]: value}
-    })
+    self.setState(state => ({
+      [propsName]: { ...state[propsName], [name]: value },
+    }))
   }
 }
 
-export function removeAttr(stateName, self) {
+export function removeAttr(propsName, self) {
   return function(name) {
-    delete self.state[stateName][name]
-    self.setState({
-      [stateName]: self.state[stateName]
+    self.setState(state => {
+      delete state[propsName][name]
+      return { [propsName]: state[propsName] }
     })
   }
 }
 
-export function setAttrWithValue(stateName, self, name, value) {
+export function setAttrWithValue(propsName, self, name, value) {
   return function() {
-    self.setState({
-      [stateName]: {...self.state[stateName], [name]: value}
-    })
+    setAttr(propsName, self)(name, value)
   }
 }
 
-export function removeAttrWithValue(stateName, self, name) {
+export function removeAttrWithValue(propsName, self, name) {
   return function() {
-    delete self.state[stateName][name]
-    self.setState({
-      [stateName]: self.state[stateName]
-    })
+    removeAttr(propsName, self)(name)
   }
 }
 
@@ -80,54 +140,26 @@ export function isAttachedToDOM(ref, self) {
   }
 }
 
-export function registerHandler(ref, eventName, self) {
-  return function(handler) {
-    if (self.refs[ref]) {
-      self.refs[ref].addEventListener(eventName, handler)
-    }
-  }
-}
-
-export function deregisterHandler(ref, eventName, self) {
-  return function(handler) {
-    if (self.refs[ref]) {
-      self.refs[ref].removeEventListener(eventName, handler)
-    }
-  }
-}
-
-export function registerInteractionHandler(ref, self) {
-  return function(type, handler) {
-    if (self.refs[ref]) {
-      self.refs[ref].addEventListener(type, handler)
-    }
-  }
-}
-
-export function deregisterInteractionHandler(ref, self) {
-  return function(type, handler) {
-    if (self.refs[ref]) {
-      self.refs[ref].removeEventListener(type, handler)
-    }
-  }
-}
-
-export function registerDocumentHandler(type) {
-  return function(handler) {
-    document.addEventListener(type, handler)
-  }
-}
-
-export function deregisterDocumentHandler(type) {
-  return function(handler) {
-    document.removeEventListener(type, handler)
-  }
-}
-
 export function focus(ref, self) {
   return function() {
-    if (self.refs[ref]) {
-      self.refs[ref].focus()
-    }
+    self.refs[ref].focus()
+  }
+}
+
+export function setStyle(ref, self) {
+  return function(propertyName, value) {
+    self.refs[ref].style[propertyName] = value
+  }
+}
+
+export function eventTargetHasClass() {
+  return function(target, className) {
+    return target.classList.contains(className)
+  }
+}
+
+export function isElement(selector, self) {
+  return function(el) {
+    return ReactDOM.findDOMNode(self).querySelector(selector) === el
   }
 }

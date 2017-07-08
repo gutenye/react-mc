@@ -1,16 +1,19 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import cx from 'classnames'
+import type { PropsT } from '../types'
 
-export default class SupportingText extends Component {
-  static propTypes = {}
+class SupportingText extends React.Component {
+  props: PropsT
 
   render() {
-    const {children, className, ...rest} = this.props
-    const classes = cx('mdc-card__supporting-text', className)
+    const { children, className, ...rest } = this.props
+    const rootClassName = cx('mdc-card__supporting-text', className)
     return (
-      <section className={classes} {...rest}>
+      <section className={rootClassName} {...rest}>
         {children}
       </section>
     )
   }
 }
+
+export default SupportingText

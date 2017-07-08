@@ -1,10 +1,12 @@
-> See [Roadmap to first release](https://github.com/gutenye/react-mc/issues/1)
+> See [Roadmap to first release](https://github.com/gutenye/react-mc/issues/1) [Known Bugs](https://github.com/gutenye/react-mc/issues/2)
 
 ## Philosophy
 
 - **Move fast**: as upstream changes fast, keep the code simple and keep the peace with the upstream.
 - **Just a wrapper**: keep upstream as close as possible, nothing more
 - **Individual packages** for each components, just like upstream
+- **Flow Support**
+- **Theme Support**
 
 ## Other Projects implement material-components-web
 > Learn from each other.

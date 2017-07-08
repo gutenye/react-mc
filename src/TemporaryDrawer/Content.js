@@ -1,16 +1,19 @@
-import React, { Component, PropTypes } from 'react'
+// @flow
+import React from 'react'
 import cx from 'classnames'
+import type { PropsT } from '../types'
 
-export default class Content extends Component {
-  static propTypes = {}
+class Content extends React.Component {
+  props: PropsT
 
   render() {
-    const {children, className, ...rest} = this.props
-    const classes = cx('mdc-temporary-drawer__content', className)
+    const { className, children, ...rest } = this.props
     return (
-      <nav className={classes} {...rest}>
+      <div className={cx('mdc-temporary-drawer__content', className)} {...rest}>
         {children}
-      </nav>
+      </div>
     )
   }
 }
+
+export default Content

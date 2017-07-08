@@ -1,16 +1,20 @@
-import React, { Component, PropTypes } from 'react'
+// @flow
+import React from 'react'
 import cx from 'classnames'
+import type { PropsT } from '../types'
 
-export default class ToolbarSpacer extends Component {
-  static propTypes = {}
+class ToolbarSpacer extends React.Component {
+  props: PropsT
 
   render() {
-    const {children, className, ...rest} = this.props
-    const classes = cx('mdc-permanent-drawer__toolbar-spacer', className)
+    const { className, children, ...rest } = this.props
+    const rootClassName = cx('mdc-permanent-drawer__toolbar-spacer', className)
     return (
-      <div className={classes} {...rest}>
+      <div className={rootClassName} {...rest}>
         {children}
       </div>
     )
   }
 }
+
+export default ToolbarSpacer

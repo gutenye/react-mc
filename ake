@@ -1,14 +1,21 @@
 #!/usr/bin/env bash
 
-example() {
-  npm run example
-}
+export PATH="node_modules/.bin:$PATH"
 
 build() {
   npm run build
 }
 
+docs() {
+  styleguidist server
+}
+
+humantest() {
+  webpack-dev-server --config humantest/webpack.config.js
+}
+
 case "$1" in
   b | build ) build ;;
-  e | example ) example ;;
+  humantest ) humantest ;;
+  docs ) docs ;;
 esac

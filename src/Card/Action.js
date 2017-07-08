@@ -1,17 +1,24 @@
-import React, { Component, PropTypes } from 'react'
+import React from 'react'
 import cx from 'classnames'
 import Button from '../Button'
+import type { PropsT } from '../types'
 
-export default class Action extends Component {
-  static propTypes = {}
+class Action extends React.Component {
+  props: PropsT
 
   render() {
-    const {children, className, ...rest} = this.props
-    const classes = cx('mdc-card__action', 'mdc-button--compact', className)
+    const { children, className, ...rest } = this.props
+    const rootClassName = cx(
+      'mdc-card__action',
+      'mdc-button--compact',
+      className
+    )
     return (
-      <Button className={classes} {...rest}>
+      <Button className={rootClassName} {...rest}>
         {children}
       </Button>
     )
   }
 }
+
+export default Action
