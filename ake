@@ -14,8 +14,14 @@ humantest() {
   webpack-dev-server --config humantest/webpack.config.js
 }
 
+deploy() {
+  styleguidist build
+  gh-pages -d build.docs
+}
+
 case "$1" in
   b | build ) build ;;
   humantest ) humantest ;;
   docs ) docs ;;
+  deploy ) deploy ;;
 esac

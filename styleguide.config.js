@@ -1,11 +1,12 @@
 const path = require('path')
 const Copy = require('copy-webpack-plugin')
+const Compression = require('compression-webpack-plugin')
 
 module.exports = {
   title: 'react-mc docs',
   styleguideDir: 'build.docs',
   template: 'styleguide/template.html',
-  //require: ['material-components-web/material-components-web.scss', './styleguide/global.js'],
+  require: ['material-components-web/material-components-web.scss'],
   //assetsDir: 'static',
 
   sections: [
@@ -41,12 +42,14 @@ module.exports = {
     module: {
       rules: [
         {test: /\.js$/, exclude: /node_modules/, use: ['babel-loader']},
+        {test: /\.js$/, include: /node_modules\/@material/, use: ['babel-loader']},
         {test: /\.scss$/, use: ['style-loader', 'css-loader', {loader: 'sass-loader', options: {
             includePaths: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'node_modules')]
         }}]},
       ]
     },
     plugins: [
+      new Compression()
       //new Copy([{from: 'static'}])
     ]
   }
