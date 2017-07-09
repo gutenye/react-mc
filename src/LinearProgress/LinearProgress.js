@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import ReactDOM from 'react-dom'
 import cx from 'classnames'
 import { MDCLinearProgressFoundation } from '@material/linear-progress'
 import * as helper from '../helper'
@@ -26,7 +25,6 @@ class LinearProgress extends React.Component {
   }
 
   getDefaultFoundation() {
-    this.root_ = ReactDOM.findDOMNode(this)
     // prettier-ignore
     return new MDCLinearProgressFoundation({
       addClass: helper.addClass('rootProps', this),
@@ -61,6 +59,7 @@ class LinearProgress extends React.Component {
     )
     return (
       <div
+        ref={v => (this.root_ = v)}
         role="progressbar"
         {...rootProps}
         className={rootClassName}

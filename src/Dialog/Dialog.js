@@ -1,7 +1,6 @@
 // @flow
 import React from 'react'
 import PropTypes from 'prop-types'
-import ReactDOM from 'react-dom'
 import cx from 'classnames'
 import { MDCDialogFoundation, util } from '@material/dialog'
 import * as helper from '../helper'
@@ -16,12 +15,14 @@ type PropsT = {
 }
 
 class Dialog extends React.Component {
-  props: PropsT
   static Backdrop: any
   static Body: any
   static Footer: any
   static Header: any
   static Surface: any
+  props: PropsT
+  foundation_: any
+  root_: any
 
   static defaultProps = {
     onClose: () => {},
@@ -42,27 +43,29 @@ class Dialog extends React.Component {
     surfaceProps: {},
   }
 
-  // prettier-ignore
-  foundation_ = new MDCDialogFoundation({
-    addClass: helper.addClass('rootProps', this),
-    removeClass: helper.removeClass('rootProps', this),
-    addBodyClass: helper.addClass(document.body),
-    removeBodyClass: helper.removeClass(document.body),
-    eventTargetHasClass: helper.eventTargetHasClass(),
-    registerInteractionHandler: helper.registerInteractionHandler('rootProps', this),
-    deregisterInteractionHandler: helper.deregisterInteractionHandler('rootProps', this),
-    registerSurfaceInteractionHandler: helper.registerInteractionHandler('surfaceProps', this),
-    deregisterSurfaceInteractionHandler: helper.deregisterInteractionHandler('surfaceProps', this),
-    registerDocumentKeydownHandler: helper.registerHandler(document, 'keydown'),
-    deregisterDocumentKeydownHandler: helper.deregisterHandler(document, 'keydown'),
-    registerTransitionEndHandler: helper.registerHandler('surfaceProps', this, 'transitionend'),
-    deregisterTransitionEndHandler: helper.deregisterHandler('surfaceProps', this, 'transitionend'),
-    notifyAccept: this.onAccept.bind(this),
-    notifyCancel: this.onCancel.bind(this), 
-    trapFocusOnSurface: () => this.focusTrap_ && this.focusTrap_.activate(),
-    untrapFocusOnSurface: () => this.focusTrap_ && this.focusTrap_.deactivate(),
-    isDialog: helper.isElement('.mdc-dialog__surface', this),
-  })
+  getDefaultFoundation() {
+    // prettier-ignore
+    return new MDCDialogFoundation({
+      addClass: helper.addClass('rootProps', this),
+      removeClass: helper.removeClass('rootProps', this),
+      addBodyClass: helper.addClass(document.body),
+      removeBodyClass: helper.removeClass(document.body),
+      eventTargetHasClass: helper.eventTargetHasClass(),
+      registerInteractionHandler: helper.registerHandler('rootProps', this),
+      deregisterInteractionHandler: helper.deregisterHandler('rootProps', this),
+      registerSurfaceInteractionHandler: helper.registerHandler('surfaceProps', this),
+      deregisterSurfaceInteractionHandler: helper.deregisterHandler('surfaceProps', this),
+      registerDocumentKeydownHandler: helper.registerHandler(document, 'keydown'),
+      deregisterDocumentKeydownHandler: helper.deregisterHandler(document, 'keydown'),
+      registerTransitionEndHandler: helper.registerHandler('surfaceProps', this, 'transitionend'),
+      deregisterTransitionEndHandler: helper.deregisterHandler('surfaceProps', this, 'transitionend'),
+      notifyAccept: this.onAccept,
+      notifyCancel: this.onCancel,
+      trapFocusOnSurface: () => this.focusTrap_ && this.focusTrap_.activate(),
+      untrapFocusOnSurface: () => this.focusTrap_ && this.focusTrap_.deactivate(),
+      isDialog: helper.isElement('.mdc-dialog__surface', this),
+    })
+  }
 
   focusTrap_ = null
   focusTrap_ = null
@@ -98,14 +101,14 @@ class Dialog extends React.Component {
   }
 
   componentDidMount() {
-    const node = ReactDOM.findDOMNode(this)
-    if (node instanceof HTMLElement) {
-      this.focusTrap_ = util.createFocusTrapInstance(
-        node.querySelector(MDCDialogFoundation.strings.DIALOG_SURFACE_SELECTOR),
-        node.querySelector(MDCDialogFoundation.strings.ACCEPT_SELECTOR)
-      )
-    }
+    this.focusTrap_ = util.createFocusTrapInstance(
+      this.root_.querySelector(
+        MDCDialogFoundation.strings.DIALOG_SURFACE_SELECTOR
+      ),
+      this.root_.querySelector(MDCDialogFoundation.strings.ACCEPT_SELECTOR)
+    )
 
+    this.foundation_ = this.getDefaultFoundation()
     this.foundation_.init()
 
     if (this.props.open) {
@@ -127,12 +130,12 @@ class Dialog extends React.Component {
     this.foundation_.destroy()
   }
 
-  onAccept() {
+  onAccept = () => {
     this.props.onAccept()
     this.props.onClose()
   }
 
-  onCancel() {
+  onCancel = () => {
     this.props.onCancel()
     this.props.onClose()
   }

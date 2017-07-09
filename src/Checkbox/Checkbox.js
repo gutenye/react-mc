@@ -15,6 +15,7 @@ class Checkbox extends React.Component {
     theme?: 'dark',
     disabled?: boolean,
   } & PropsT
+  foundation_: any
   root_: any
   nativeCb_: any
   ripple_: any
@@ -30,21 +31,22 @@ class Checkbox extends React.Component {
     checked: this.props.checked,
   }
 
-  // prettier-ignore
-  foundation_ = new MDCCheckboxFoundation({
-    addClass: helper.addClass('rootProps', this),
-    removeClass: helper.removeClass('rootProps', this),
-    registerAnimationEndHandler: helper.registerHandler('rootProps', this, 'animationend'),
-    deregisterAnimationEndHandler: helper.deregisterHandler('rootProps', this, 'animationed'),
-    registerChangeHandler: helper.registerHandler('nativeCbProps', this, 'change'),
-    deregisterChangeHandler: helper.deregisterHandler('nativeCbProps', this, 'change'),
-    getNativeControl: helper.getNative('nativeCb', this),
-    forceLayout: () => this.refs.root.offsetWidth,
-    isAttachedToDOM: helper.isAttachedToDOM('root', this),
-  })
+  getDefaultFoundation() {
+    // prettier-ignore
+    return new MDCCheckboxFoundation({
+      addClass: helper.addClass('rootProps', this),
+      removeClass: helper.removeClass('rootProps', this),
+      registerAnimationEndHandler: helper.registerHandler('rootProps', this, 'animationend'),
+      deregisterAnimationEndHandler: helper.deregisterHandler('rootProps', this, 'animationed'),
+      registerChangeHandler: helper.registerHandler('nativeCbProps', this, 'change'),
+      deregisterChangeHandler: helper.deregisterHandler('nativeCbProps', this, 'change'),
+      getNativeControl: helper.getNative('nativeCb', this),
+      forceLayout: () => this.root_.offsetWidth,
+      isAttachedToDOM: helper.isAttachedToDOM('root', this),
+    })
+  }
 
   initRipple_() {
-    this.root_ = this.refs.root
     this.nativeCb_ = this.refs.nativeCb
     const MATCHES = getMatchesProperty(HTMLElement.prototype)
     const adapter = Ripple.createAdapter(this, {
@@ -83,7 +85,12 @@ class Checkbox extends React.Component {
       className
     )
     return (
-      <div ref="root" {...rootProps} className={rootClassName} {...rest}>
+      <div
+        ref={v => (this.root_ = v)}
+        {...rootProps}
+        className={rootClassName}
+        {...rest}
+      >
         <input
           ref="nativeCb"
           type="checkbox"
@@ -109,6 +116,7 @@ class Checkbox extends React.Component {
   }
 
   componentDidMount() {
+    this.foundation_ = this.getDefaultFoundation()
     this.foundation_.init()
     this.ripple_ = this.initRipple_()
     this.ripple_.init()

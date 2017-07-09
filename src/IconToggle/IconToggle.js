@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import ReactDOM from 'react-dom'
 import cx from 'classnames'
 import { MDCIconToggleFoundation } from '@material/icon-toggle'
 import { MDCRippleFoundation } from '@material/ripple'
@@ -34,21 +33,20 @@ class IconToggle extends React.Component {
   }
 
   getDefaultFoundation() {
-    this.root_ = ReactDOM.findDOMNode(this)
     const { iconInnerSelector: sel } = this.root_.dataset
     this.iconEl_ = sel ? this.root_.querySelector(sel) : this.root_
     // prettier-ignore
     return new MDCIconToggleFoundation({
       addClass: (className) => this.iconEl_.classList.add(className),
       removeClass: (className) => this.iconEl_.classList.remove(className),
-      registerInteractionHandler: helper.registerInteractionHandler('rootProps', this),
-      deregisterInteractionHandler: helper.deregisterInteractionHandler('rootProps', this),
+      registerInteractionHandler: helper.registerHandler('rootProps', this),
+      deregisterInteractionHandler: helper.deregisterHandler('rootProps', this),
       setText: (text) => { this.iconEl_.textContent = text },
-      getTabIndex: helper.getTabIndex('rootProps', this),
-      setTabIndex: helper.setTabIndex('rootProps', this),
+      getTabIndex: helper.getAttr('rootProps', this, 'tabIndex'),
+      setTabIndex: helper.setAttr('rootProps', this, 'tabIndex'),
       getAttr: helper.getAttr('rootProps', this),
       setAttr: helper.setAttr('rootProps', this),
-      rmAttr: helper.removeAttr('rootProps', this),
+      rmAttr: helper.rmAttr('rootProps', this),
       notifyChange: this.props.onChange,
     })
   }
@@ -86,7 +84,12 @@ class IconToggle extends React.Component {
     const { rootProps } = this.state
     const rootClassName = cx(Array.from(rootProps.className), className)
     return (
-      <i {...rootProps} className={rootClassName} {...rest}>
+      <i
+        ref={v => (this.root_ = v)}
+        {...rootProps}
+        className={rootClassName}
+        {...rest}
+      >
         {children}
       </i>
     )

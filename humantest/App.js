@@ -21,8 +21,10 @@ import {
   List,
   Radio,
   Select,
-  NativeSelect,
+  Slider,
   Snackbar,
+  Switch,
+  Toolbar,
   Textfield,
 } from '../src'
 const log = console.log.bind(console)
@@ -42,11 +44,14 @@ const getPages = () => [
   //MyLayoutGrid,
   //MyLinearProgress,
   //MyList,
-  //MyMenu,
-  MyRadio,
-  //MySelect
-  //MySnackBar
-  //MyTextfield
+  // MyMenu,
+  // MyRadio,
+  // MySelect,
+  // MySlider,
+  // MySnackbar,
+  // MySwitch,
+  // MyToolbar,
+  MyTextfield,
 ]
 
 const MyButton = () => <Button>hello</Button>
@@ -379,7 +384,7 @@ class MyList extends React.Component {
 
 class MyMenu extends React.Component {
   state = {
-    open: true,
+    open: false,
   }
   render() {
     return (
@@ -387,17 +392,17 @@ class MyMenu extends React.Component {
         <Menu.Simple
           open={this.state.open}
           onClose={() => this.setState({ open: false })}
-        >
-          <Menu.Simple.Items>
-            {[1, 2].map(i =>
-              <Menu.Simple.Item key={i}>
-                Item {i}
-              </Menu.Simple.Item>
-            )}
-          </Menu.Simple.Items>
-        </Menu.Simple>
+          items={[
+            { text: 'Facebook', onClick: () => log('Facebook') },
+            { text: 'Google', onClick: () => log('Google') },
+            { text: 'Apple', disabled: true },
+          ]}
+        />
         <button onClick={() => this.setState({ open: !this.state.open })}>
           toggle menu: {JSON.stringify(this.state.open)}
+        </button>
+        <button onClick={() => this.setState({ open: 0 })}>
+          open with selectedIndex
         </button>
       </div>
     )
@@ -419,14 +424,31 @@ class MySelect extends React.Component {
   render() {
     return (
       <div>
-        <Select label="a">
-          <Select.Option>hello</Select.Option>
-          <Select.Option>world</Select.Option>
-        </Select>
-        <NativeSelect defaultValue="b">
-          <option value="a">Hello</option>
-          <option value="b">world</option>
-        </NativeSelect>
+        <Select
+          selectedText="a"
+          items={[
+            { text: 'Facebook', role: 'option' },
+            { text: 'Google', role: 'option' },
+          ]}
+          onChange={v => log('onChange', v)}
+        />
+      </div>
+    )
+  }
+}
+
+class MySlider extends React.Component {
+  state = {
+    value: 10,
+  }
+  render() {
+    return (
+      <div>
+        <Slider
+          value={this.state.value}
+          onChange={({ detail }) => this.setState({ value: detail.value })}
+        />
+        {this.state.value}
       </div>
     )
   }
@@ -436,25 +458,62 @@ class MySnackbar extends React.Component {
   render() {
     return (
       <div>
-        <Snackbar ref="snackbar" />
-        <div onClick={this.onClick}>open snackbar</div>
+        <Snackbar ref={v => (this.snackbar = v)} />
+        <div
+          onClick={() =>
+            this.snackbar.show({
+              message: new Date(),
+              actionText: 'undo',
+              actionHandler: () => log('actionhandler'),
+            })}
+        >
+          open snackbar
+        </div>
       </div>
     )
   }
+}
 
-  onClick = () => {
-    this.refs.snackbar.show({
-      message: 'hello',
-      timeout: 10000,
-      actionHandler: () => pd('click'),
-      actionText: 'OK',
-    })
+class MySwitch extends React.Component {
+  state = {
+    checked: true,
+  }
+  render() {
+    return (
+      <div>
+        <label className="mdc-switch-label">
+          <Switch
+            checked={this.state.checked}
+            onChange={e => this.setState({ checked: e.target.checked })}
+          />
+          on/off
+        </label>
+        {JSON.stringify(this.state.checked)}
+      </div>
+    )
+  }
+}
+
+class MyToolbar extends React.Component {
+  render() {
+    return (
+      <Toolbar>
+        <Toolbar.Row>
+          <Toolbar.Section align="start">
+            <Toolbar.Icon menu className="material-icons">
+              menu
+            </Toolbar.Icon>
+            <Toolbar.Title>Title</Toolbar.Title>
+          </Toolbar.Section>
+        </Toolbar.Row>
+      </Toolbar>
+    )
   }
 }
 
 class MyTextfield extends React.Component {
   render() {
-    return <Textfield label="Name" helptext="name is required" Persistent />
+    return <Textfield label="Name" helptext="name is required" persistent />
   }
 }
 

@@ -39,37 +39,122 @@ export function hasClass(propsName, self) {
   }
 }
 
-// registerHandler('rootProps', this, 'click')
-// registerHandler(document, 'click')
-export function registerHandler(propsName, self, type) {
-  if (typeof propsName === 'string') {
-    return function(handler) {
-      registerInteractionHandler(propsName, self)(type, handler)
+// getAttr('rootProps', this) with state = {rootProps: {}}
+// getAttr('rootProps', this, name)
+export function getAttr(propsName, self, name) {
+  if (name) {
+    return function() {
+      return self.state[propsName][name]
     }
   } else {
-    return function(handler) {
-      propsName.addEventListener(self, handler)
+    return function(name) {
+      return self.state[propsName][name]
+    }
+  }
+}
+
+// setAttr('rootProps', this)
+// setAttr('rootProps', this, 'tabIndex')
+// setAttr('rootProps', this, 'tabIndex', 0)
+export function setAttr(propsName, self, name, value) {
+  if (value) {
+    return function() {
+      self.setState(state => ({
+        [propsName]: { ...state[propsName], [name]: value },
+      }))
+    }
+  } else if (name) {
+    return function(value) {
+      self.setState(state => ({
+        [propsName]: { ...state[propsName], [name]: value },
+      }))
+    }
+  } else {
+    return function(name, value) {
+      self.setState(state => ({
+        [propsName]: { ...state[propsName], [name]: value },
+      }))
+    }
+  }
+}
+
+export function rmAttr(propsName, self, name) {
+  if (name) {
+    return function() {
+      self.setState(state => ({
+        [propsName]: { ...state[propsName], [name]: null },
+      }))
+    }
+  } else {
+    return function(name) {
+      self.setState(state => ({
+        [propsName]: { ...state[propsName], [name]: null },
+      }))
+    }
+  }
+}
+
+// registerHandler('rootProps', this) with state = { rootProps: {} }
+// registerHandler('rootProps', this, 'click')
+// registerHandler(document, 'click')
+// registerHandler(document)
+export function registerHandler(propsName, self, type) {
+  if (typeof propsName === 'string') {
+    if (type) {
+      return function(handler) {
+        registerHandler_(propsName, self)(type, handler)
+      }
+    } else {
+      return function(type, handler) {
+        registerHandler_(propsName, self)(type, handler)
+      }
+    }
+  } else {
+    if (self) {
+      return function(handler) {
+        propsName.addEventListener(self, handler)
+      }
+    } else {
+      return function(type, handler) {
+        propsName.addEventListener(type, handler)
+      }
     }
   }
 }
 
 export function deregisterHandler(propsName, self, type) {
   if (typeof propsName === 'string') {
-    return function(handler) {
-      deregisterInteractionHandler(propsName, self)(type, handler)
+    if (type) {
+      return function(handler) {
+        deregisterHandler_(propsName, self)(type, handler)
+      }
+    } else {
+      return function(type, handler) {
+        deregisterHandler_(propsName, self)(type, handler)
+      }
     }
   } else {
-    return function(handler) {
-      propsName.removeEventListener(self, handler)
+    if (self) {
+      return function(handler) {
+        propsName.removeEventListener(self, handler)
+      }
+    } else {
+      return function(type, handler) {
+        propsName.removeEventListener(type, handler)
+      }
     }
   }
 }
 
-// state = { rootProps: {} }
-export function registerInteractionHandler(propsName, self) {
+function registerHandler_(propsName, self) {
   return function(type, handler) {
-    // convert `click` to `onClick`
-    const reactType = EVENT_MAP[type]
+    // `click` to `onClick`
+    let reactType = EVENT_MAP[type]
+    // 'MDCSimpleMenu:selected' => 'onSelected'
+    if (type.match(/:/)) {
+      const part = type.split(/:/)[1]
+      reactType = `on${part[0].toUpperCase()}${part.slice(1, part.length)}`
+    }
     if (reactType) {
       self.setState(state => ({
         [propsName]: { ...state[propsName], [reactType]: handler },
@@ -81,53 +166,16 @@ export function registerInteractionHandler(propsName, self) {
   }
 }
 
-export function deregisterInteractionHandler(propsName, self) {
+function deregisterHandler_(propsName, self) {
   return function(type, handler) {
     const reactType = EVENT_MAP[type]
     if (reactType) {
-      self.setState(state => {
-        delete state[propsName][reactType]
-        return { [propsName]: state[propsName] }
-      })
+      self.setState(state => ({
+        [propsName]: { ...state[propsName], [reactType]: null },
+      }))
     } else {
       ReactDOM.findDOMNode(self).removeEventListener(type, handler)
     }
-  }
-}
-
-export function getAttr(propsName, self) {
-  return function(name) {
-    return self.state[propsName][name]
-  }
-}
-
-// setAttr('rootProps', this) with state = {rootProps: {}}
-export function setAttr(propsName, self) {
-  return function(name, value) {
-    self.setState(state => ({
-      [propsName]: { ...state[propsName], [name]: value },
-    }))
-  }
-}
-
-export function removeAttr(propsName, self) {
-  return function(name) {
-    self.setState(state => {
-      delete state[propsName][name]
-      return { [propsName]: state[propsName] }
-    })
-  }
-}
-
-export function setAttrWithValue(propsName, self, name, value) {
-  return function() {
-    setAttr(propsName, self)(name, value)
-  }
-}
-
-export function removeAttrWithValue(propsName, self, name) {
-  return function() {
-    removeAttr(propsName, self)(name)
   }
 }
 
@@ -167,21 +215,5 @@ export function eventTargetHasClass() {
 export function isElement(selector, self) {
   return function(el) {
     return ReactDOM.findDOMNode(self).querySelector(selector) === el
-  }
-}
-
-// state = { rootProps: { tabIndex: 0 }}
-export function getTabIndex(propsName, self) {
-  return function() {
-    return self.state[propsName].tabIndex
-  }
-}
-
-export function setTabIndex(propsName, self) {
-  return function(tabIndex) {
-    self.setState(state => {
-      state[propsName].tabIndex = tabIndex
-      return state
-    })
   }
 }

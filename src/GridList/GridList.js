@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import ReactDOM from 'react-dom'
 import cx from 'classnames'
 import { MDCGridListFoundation } from '@material/grid-list'
 import type { PropsT } from '../types'
@@ -23,7 +22,6 @@ class GridList extends React.Component {
   }
 
   getDefaultFoundation() {
-    this.root_ = ReactDOM.findDOMNode(this)
     // prettier-ignore
     return new MDCGridListFoundation({
       getOffsetWidth: () => this.root_.offsetWidth,
@@ -65,7 +63,12 @@ class GridList extends React.Component {
       className
     )
     return (
-      <div {...rootProps} className={rootClassName} {...rest}>
+      <div
+        ref={v => (this.root_ = v)}
+        {...rootProps}
+        className={rootClassName}
+        {...rest}
+      >
         {children}
       </div>
     )

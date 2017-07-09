@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import ReactDOM from 'react-dom'
 import cx from 'classnames'
 import { MDCTemporaryDrawerFoundation, util } from '@material/drawer'
 import * as helper from '../../helper'
@@ -34,7 +33,6 @@ class TemporaryDrawer extends React.Component {
   }
 
   getDefaultFoundation() {
-    this.root_ = ReactDOM.findDOMNode(this)
     this.drawer = this.root_.querySelector(
       MDCTemporaryDrawerFoundation.strings.DRAWER_SELECTOR
     )
@@ -74,8 +72,8 @@ class TemporaryDrawer extends React.Component {
       saveElementTabState: (el) => util.saveElementTabState(el),
       restoreElementTabState: (el) => util.restoreElementTabState(el),
       makeElementUntabbable: (el) => el.setAttribute('tabindex', -1),
-      notifyOpen: () => this.props.onOpen,
-      notifyClose: () => this.props.onClose,
+      notifyOpen: this.props.onOpen,
+      notifyClose: this.props.onClose,
       isRtl: () => getComputedStyle(this.root_).getPropertyValue('direction') === 'rtl',
       isDrawer: (el) => el === this.drawer,
     })
@@ -86,7 +84,12 @@ class TemporaryDrawer extends React.Component {
     const { rootProps } = this.state
     const rootClassName = cx(Array.from(rootProps.className), className)
     return (
-      <aside {...rootProps} className={rootClassName} {...rest}>
+      <aside
+        ref={v => (this.root_ = v)}
+        {...rootProps}
+        className={rootClassName}
+        {...rest}
+      >
         {children}
       </aside>
     )

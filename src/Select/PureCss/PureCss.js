@@ -1,12 +1,13 @@
-import '@material/select/dist/mdc.select.css'
+// @flow
 import React from 'react'
 import cx from 'classnames'
+import type { PropsT } from '../../types'
 
-class NativeSelect extends React.Component {
-  static propTypes = {}
+class SelectPureCss extends React.Component {
+  props: PropsT
 
   render() {
-    const { children, className, ...rest } = this.props
+    const { className, children, ...rest } = this.props
     const rootClassName = cx('mdc-select', className)
     return (
       <select className={rootClassName} {...rest}>
@@ -16,4 +17,4 @@ class NativeSelect extends React.Component {
   }
 }
 
-export default NativeSelect
+export default SelectPureCss

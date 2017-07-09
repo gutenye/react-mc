@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import ReactDOM from 'react-dom'
 import cx from 'classnames'
 import { MDCSimpleMenuFoundation } from '@material/menu'
 import { getTransformPropertyName } from '@material/menu/util'
@@ -8,25 +7,30 @@ import * as helper from '../../helper'
 import type { PropsT } from '../../types'
 
 class Menu extends React.Component {
-  static Items: any
-  static Item: any
-
   props: {
-    open: boolean,
+    /** items: [{text, disabled, ...props}]  */
+    items: Array,
+    /** open=true or open=selectedIndex */
+    open: boolean | number,
+    /** alias to onCancel */
     onClose: Function,
-    /** alias to onClose */
+    /** alias to onSelected */
+    onChange: Function,
     onCancel: Function,
+    /** onSelect({index, item}) */
     onSelected: Function,
     openFrom?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right',
   } & PropsT
   foundation_: any
   root_: any
   itemsContainer_: any
-  items: Array
+  items_: Array
 
   static defaultProps = {
     onCancel: () => {},
+    onClose: () => {},
     onSelected: () => {},
+    onChange: () => {},
   }
 
   state = {
@@ -34,13 +38,7 @@ class Menu extends React.Component {
   }
 
   getDefaultFoundation() {
-    this.root_ = ReactDOM.findDOMNode(this)
-    this.itemsContainer_ = this.root_.querySelector(
-      MDCSimpleMenuFoundation.strings.ITEMS_SELECTOR
-    )
-    this.items = [].slice.call(
-      this.itemsContainer_.querySelectorAll('.mdc-list-item[role]')
-    )
+    this.itemsContainer_ = this.refs.itemsContainer
     // prettier-ignore
     return new MDCSimpleMenuFoundation({
       addClass: helper.addClass('rootProps', this),
@@ -63,19 +61,19 @@ class Menu extends React.Component {
       setInnerScale: (x, y) => {
         this.itemsContainer_.style[getTransformPropertyName(window)] = `scale(${x}, ${y})`;
       },
-      getNumberOfItems: () => this.items.length,
+      getNumberOfItems: () => this.items_.length,
       registerInteractionHandler: helper.registerInteractionHandler('rootProps', this),
       deregisterInteractionHandler: helper.deregisterInteractionHandler('rootProps', this),
       registerBodyClickHandler: (handler) => document.body.addEventListener('click', handler),
       deregisterBodyClickHandler: (handler) => document.body.removeEventListener('click', handler),
       getYParamsForItemAtIndex: (index) => {
-        const {offsetTop: top, offsetHeight: height} = this.items[index];
+        const {offsetTop: top, offsetHeight: height} = this.items_[index].el;
         return {top, height};
       },
       setTransitionDelayForItemAtIndex: (index, value) =>
-        this.items[index].style.setProperty('transition-delay', value),
-      getIndexForEventTarget: (target) => this.items.indexOf(target),
-      notifySelected: (evtData) => this.props.onSelected({index: evtData.index, item: this.items[evtData.index]}),
+        this.items_[index].el.style.setProperty('transition-delay', value),
+      getIndexForEventTarget: (target) => this.items_.map(v => v.el).indexOf(target),
+      notifySelected: this.onSelected,
       notifyCancel: this.onCancel,
       saveFocus: () => {
         this.previousFocus_ = document.activeElement;
@@ -87,8 +85,8 @@ class Menu extends React.Component {
       },
       isFocused: () => document.activeElement === this.root_,
       focus: () => this.root_.focus(),
-      getFocusedItemIndex: () => this.items.indexOf(document.activeElement),
-      focusItemAtIndex: (index) => this.items[index].focus(),
+      getFocusedItemIndex: () => this.items_.map(v => v.el).indexOf(document.activeElement),
+      focusItemAtIndex: (index) => this.items_[index].el.focus(),
       isRtl: () => getComputedStyle(this.root_).getPropertyValue('direction') === 'rtl',
       setTransformOrigin: (origin) => {
         this.root_.style[`${getTransformPropertyName(window)}-origin`] = origin;
@@ -105,6 +103,8 @@ class Menu extends React.Component {
 
   render() {
     const {
+      items,
+      open,
       openFrom,
       onClose,
       onSelected,
@@ -121,9 +121,42 @@ class Menu extends React.Component {
       Array.from(rootProps.className),
       className
     )
+    // don't mirror items, as Select needs the el
+    this.items_ = items
+    // this.items_ = [...items]
     return (
-      <div tabIndex="-1" {...rootProps} className={rootClassName} {...rest}>
-        {children}
+      <div
+        ref={v => (this.root_ = v)}
+        tabIndex="-1"
+        {...rootProps}
+        className={rootClassName}
+        {...rest}
+      >
+        <ul
+          ref="itemsContainer"
+          className="mdc-simple-menu__items mdc-list"
+          role="menu"
+          aria-hidden="true"
+        >
+          {this.items_.map(item => {
+            const { text, disabled, el, ...rest } = item
+            const disabledProps = disabled
+              ? { tabIndex: -1, 'aria-disabled': true }
+              : { tabIndex: 0 }
+            return (
+              <li
+                key={text}
+                ref={v => (item.el = v)}
+                className="mdc-list-item"
+                role="menuitem"
+                {...disabledProps}
+                {...rest}
+              >
+                {text}
+              </li>
+            )
+          })}
+        </ul>
       </div>
     )
   }
@@ -133,7 +166,7 @@ class Menu extends React.Component {
     this.foundation_.init()
 
     if (this.props.open) {
-      this.foundation_.open()
+      this.open_(this.props)
     }
   }
 
@@ -142,8 +175,8 @@ class Menu extends React.Component {
       nextProps.open !== this.props.open &&
       nextProps.open !== this.foundation_.isOpen()
     ) {
-      if (nextProps.open) this.foundation_.open()
-      else this.foundation_.close()
+      if (nextProps.open === false) this.foundation_.close()
+      else this.open_(nextProps)
     }
   }
 
@@ -151,9 +184,26 @@ class Menu extends React.Component {
     this.foundation_.destroy()
   }
 
+  open_(props: PropsT) {
+    if (typeof props.open === 'number') {
+      this.foundation_.open({ focusIndex: props.open })
+    } else {
+      this.foundation_.open()
+    }
+  }
+
+  onSelected = (evtData: any) => {
+    const detail = {
+      index: evtData.index,
+      item: this.props.items[evtData.index],
+    }
+    this.props.onSelected({ detail })
+    this.props.onChange({ detail })
+  }
+
   onCancel = () => {
-    this.props.onClose()
     this.props.onCancel()
+    this.props.onClose()
   }
 }
 

@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import ReactDOM from 'react-dom'
 import cx from 'classnames'
 import { MDCFormFieldFoundation } from '@material/form-field'
 import type { PropsT } from '../types'
@@ -15,7 +14,6 @@ class FormField extends React.Component {
   input_: any
 
   getDefaultFoundation() {
-    this.root_ = ReactDOM.findDOMNode(this)
     this.label_ = this.root_.querySelector(
       MDCFormFieldFoundation.strings.LABEL_SELECTOR
     )
@@ -40,6 +38,7 @@ class FormField extends React.Component {
     const { align, className, children, ...rest } = this.props
     return (
       <div
+        ref={v => (this.root_ = v)}
         className={cx(
           'mdc-form-field',
           {

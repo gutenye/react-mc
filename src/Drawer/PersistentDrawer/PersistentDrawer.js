@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import cx from 'classnames'
 import { MDCPersistentDrawerFoundation, util } from '@material/drawer'
 import * as helper from '../../helper'
@@ -33,7 +32,6 @@ class PersistentDrawer extends React.Component {
 
   getDefaultFoundation() {
     const { FOCUSABLE_ELEMENTS } = MDCPersistentDrawerFoundation.strings
-    this.root_ = ReactDOM.findDOMNode(this)
     this.drawer = this.root_.querySelector(
       MDCPersistentDrawerFoundation.strings.DRAWER_SELECTOR
     )
@@ -74,7 +72,12 @@ class PersistentDrawer extends React.Component {
     const { rootProps } = this.state
     const rootClassName = cx(Array.from(rootProps.className), className)
     return (
-      <div {...rootProps} className={rootClassName} {...rest}>
+      <div
+        ref={v => (this.root_ = v)}
+        {...rootProps}
+        className={rootClassName}
+        {...rest}
+      >
         {children}
       </div>
     )
