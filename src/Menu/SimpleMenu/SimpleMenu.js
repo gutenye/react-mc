@@ -9,7 +9,7 @@ import type { PropsT } from '../../types'
 class Menu extends React.Component {
   props: {
     /** items: [{text, disabled, ...props}]  */
-    items: Array,
+    items: Array<*>,
     /** open=true or open=selectedIndex */
     open: boolean | number,
     /** alias to onCancel */
@@ -24,7 +24,8 @@ class Menu extends React.Component {
   foundation_: any
   root_: any
   itemsContainer_: any
-  items_: Array
+  previousFocus_: any
+  items_: Array<*>
 
   static defaultProps = {
     onCancel: () => {},
@@ -62,8 +63,8 @@ class Menu extends React.Component {
         this.itemsContainer_.style[getTransformPropertyName(window)] = `scale(${x}, ${y})`;
       },
       getNumberOfItems: () => this.items_.length,
-      registerInteractionHandler: helper.registerInteractionHandler('rootProps', this),
-      deregisterInteractionHandler: helper.deregisterInteractionHandler('rootProps', this),
+      registerInteractionHandler: helper.registerHandler('rootProps', this),
+      deregisterInteractionHandler: helper.deregisterHandler('rootProps', this),
       registerBodyClickHandler: (handler) => document.body.addEventListener('click', handler),
       deregisterBodyClickHandler: (handler) => document.body.removeEventListener('click', handler),
       getYParamsForItemAtIndex: (index) => {

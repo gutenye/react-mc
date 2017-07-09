@@ -89,6 +89,7 @@ class Dialog extends React.Component {
     return (
       <div>
         <aside
+          ref={v => (this.root_ = v)}
           role="alertdialog"
           {...rootProps}
           className={rootClassName}

@@ -114,7 +114,7 @@ class Select extends React.Component {
     this.setState({ menuOpen: false })
   }
 
-  openMenu = (focusIndex: number | boolean) => {
+  openMenu = (focusIndex: boolean) => {
     this.setState({ menuOpen: focusIndex })
   }
 

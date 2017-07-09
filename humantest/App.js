@@ -32,6 +32,7 @@ const log = console.log.bind(console)
 const getPages = () => [
   //MyButton,
   //MyCard,
+  MyDialog,
   //MyCheckbox,
   //MyPermanentDrawer,
   //MyPersistentDrawer,
@@ -44,14 +45,14 @@ const getPages = () => [
   //MyLayoutGrid,
   //MyLinearProgress,
   //MyList,
-  // MyMenu,
+  MyMenu,
   // MyRadio,
   // MySelect,
   // MySlider,
   // MySnackbar,
   // MySwitch,
   // MyToolbar,
-  MyTextfield,
+  // MyTextfield,
 ]
 
 const MyButton = () => <Button>hello</Button>
@@ -71,6 +72,44 @@ class MyCard extends React.Component {
           <Card.Action>Action 2</Card.Action>
         </Card.Actions>
       </Card>
+    )
+  }
+}
+
+class MyDialog extends React.Component {
+  state = {
+    open: false,
+  }
+  render() {
+    return (
+      <div>
+        <button onClick={() => this.setState({ open: true })}>
+          Open Dialog
+        </button>
+        <Dialog
+          open={this.state.open}
+          onClose={() => this.setState({ open: false })}
+          onAccept={() => console.log('onAccept')}
+          onCancel={() => console.log('onCancel')}
+        >
+          <Dialog.Surface>
+            <Dialog.Header>
+              <Dialog.Header.Title>
+                Use Google's location service?
+              </Dialog.Header.Title>
+            </Dialog.Header>
+            <Dialog.Body>
+              Let Google help apps determine location. This means sending
+              anonymous location data to Google, even when no apps are running.
+            </Dialog.Body>
+            <Dialog.Footer>
+              <Dialog.Footer.Button cancel>Cancel</Dialog.Footer.Button>
+              <Dialog.Footer.Button accept>Accept</Dialog.Footer.Button>
+            </Dialog.Footer>
+          </Dialog.Surface>
+          <Dialog.Backdrop />
+        </Dialog>
+      </div>
     )
   }
 }
@@ -286,7 +325,7 @@ class MyIconToggle extends React.Component {
       <div>
         <IconToggle
           on={this.state.on}
-          onChange={({ isOn }) => this.setState({ on: isOn })}
+          onChange={e => this.setState({ on: e.detail.isOn })}
           className="material-icons"
           dataToggleOn={{ label: 'Remove from favorites', content: 'favorite' }}
           dataToggleOff={{

@@ -47,7 +47,7 @@ class IconToggle extends React.Component {
       getAttr: helper.getAttr('rootProps', this),
       setAttr: helper.setAttr('rootProps', this),
       rmAttr: helper.rmAttr('rootProps', this),
-      notifyChange: this.props.onChange,
+      notifyChange: this.onChange,
     })
   }
 
@@ -118,6 +118,10 @@ class IconToggle extends React.Component {
   componentWillUnmount() {
     this.foundation_.destroy()
     this.ripple_.destroy()
+  }
+
+  onChange = detail => {
+    this.props.onChange({ detail })
   }
 }
 

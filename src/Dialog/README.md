@@ -1,10 +1,10 @@
 ```
 const Dialog = require('./index').default;
-initialState = {isOpen: false};
+initialState = {open: false};
 <div>
   <Dialog
-    isOpen={state.isOpen}
-    onClose={() => setState({isOpen: false})}
+    open={state.open}
+    onClose={() => setState({open: false})}
     onAccept={() => console.log('onAccept')}
     onCancel={() => console.log('onCancel')}
   >
@@ -25,7 +25,7 @@ initialState = {isOpen: false};
     </Dialog.Surface>
     <Dialog.Backdrop />
   </Dialog>
-  <button onClick={() => setState({isOpen: true})}>
+  <button onClick={() => setState({open: true})}>
     Open Dialog
   </button>
 </div>

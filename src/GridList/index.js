@@ -10,9 +10,9 @@ import TileTitle from './TileTitle'
 GridList.Tiles = Tiles
 GridList.Tile = Tile
 GridList.Tile.Primary = TilePrimary
-GridList.Tile.TilePrimaryContent = TilePrimaryContent
-GridList.Tile.TileSecondary = TileSecondary
-GridList.Tile.TileSupportText = TileSupportText
-GridList.Tile.TileTitle = TileTitle
+GridList.Tile.PrimaryContent = TilePrimaryContent
+GridList.Tile.Secondary = TileSecondary
+GridList.Tile.SupportText = TileSupportText
+GridList.Tile.Title = TileTitle
 
 export default GridList

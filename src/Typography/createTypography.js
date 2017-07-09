@@ -3,7 +3,7 @@ import React from 'react'
 import cx from 'classnames'
 import type { PropsT } from '../types'
 
-export default function createTypography(name) {
+export default function createTypography(name: string) {
   return class extends React.Component {
     props: {
       adjustMargin?: boolean,

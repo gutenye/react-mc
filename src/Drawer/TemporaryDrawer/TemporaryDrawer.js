@@ -10,6 +10,7 @@ class TemporaryDrawer extends React.Component {
   static Drawer: any
   static Header: any
   static HeaderContent: any
+  static ToolbarSpacer: any
 
   props: {
     open: boolean,

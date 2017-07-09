@@ -5,20 +5,22 @@ import { MDCSliderFoundation } from '@material/slider'
 import * as helper from '../helper'
 import type { PropsT } from '../types'
 
+type Props = {
+  min: number,
+  max: number,
+  value: number,
+  step: number,
+  disabled: boolean,
+  onChange: Function,
+  onInput: Function,
+} & PropsT
+
 class Slider extends React.Component {
-  props: {
-    min: number,
-    max: number,
-    value: number,
-    step: number,
-    disabled: boolean,
-    onChange: Function,
-    onInput: Function,
-  } & PropsT
+  props: Props
   foundation_: any
   root_: any
   thumbContainer_: any
-  trick_: any
+  track_: any
 
   static defaultProps = {
     min: 0,
@@ -115,7 +117,7 @@ class Slider extends React.Component {
     this.foundation_.setValue(this.props.value)
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps(nextProps: PropsT) {
     if (
       nextProps.value !== this.props.value &&
       nextProps.value !== this.foundation_.getValue()
