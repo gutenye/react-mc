@@ -11,7 +11,7 @@ Tracking [0.13.0](https://github.com/material-components/material-components-web
 - **Theme Support**
 
 ## Other Projects implement material-components-web
-> Learn from each other.
+> Learn from [others](https://github.com/search?q=topic%3Amaterial-components-web)
 
 - [hardtack/react-material-components-web](https://github.com/react-mdc/react-material-components-web)
 - [haoxins/react-mdc](https://github.com/haoxins/react-mdc)
