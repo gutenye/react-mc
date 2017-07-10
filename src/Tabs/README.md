@@ -1,3 +1,10 @@
+### Design & API Documentation
+
+- [Material Design guidelines: Tabs](https://material.io/guidelines/components/tabs.html)
+- [Material Components Web](https://material.io/components/web/catalog/tabs/)
+
+### Usage
+
 ```
 const TabBar = require('./index').default;
 const items = [

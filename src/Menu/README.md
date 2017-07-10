@@ -1,3 +1,10 @@
+### Design & API Documentation
+
+- [Material Design guidelines: Menus](https://material.io/guidelines/components/menus.html)
+- [Material Components Web](https://material.io/components/web/catalog/menus/)
+
+### Usage
+
 ```
 const Menu = require('./index').default;
 initialState = { open: false };

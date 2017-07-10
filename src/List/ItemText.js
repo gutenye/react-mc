@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class ItemText extends React.Component {
+  static displayName = 'List.Item.Text'
   static Secondary: any
   props: PropsT
 

@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class TabBar extends React.Component {
+  static displayName = 'Tabs'
   static Icon: any
   static IconText: any
   static Indicator: any

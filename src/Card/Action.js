@@ -4,6 +4,7 @@ import Button from '../Button'
 import type { PropsT } from '../types'
 
 class Action extends React.Component {
+  static displayName = 'Card.Action'
   props: PropsT
 
   render() {

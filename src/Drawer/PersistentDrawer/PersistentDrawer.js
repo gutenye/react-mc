@@ -5,6 +5,7 @@ import * as helper from '../../helper'
 import type { PropsT } from '../../types'
 
 class PersistentDrawer extends React.Component {
+  static displayName = 'Drawer.Persistent'
   static Content: any
   static Drawer: any
   static Header: any

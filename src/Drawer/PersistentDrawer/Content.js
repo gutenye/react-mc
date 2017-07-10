@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../../types'
 
 class Content extends React.Component {
+  static displayName = 'Drawer.Persistent.Content'
   props: PropsT
 
   render() {

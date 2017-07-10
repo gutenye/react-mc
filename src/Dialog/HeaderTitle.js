@@ -3,7 +3,19 @@ import React from 'react'
 import cx from 'classnames'
 import type { PropsT } from '../types'
 
-export default ({ className, children, ...rest }: PropsT) =>
-  <h2 className={cx('mdc-dialog__header__title', className)} {...rest}>
-    {children}
-  </h2>
+class HeaderTitle extends React.Component {
+  static displayName = 'Dialog.Header.Title'
+  props: PropsT
+
+  render() {
+    const { className, children, ...rest } = this.props
+    const rootClassName = cx('mdc-dialog__header__title', className)
+    return (
+      <div className={rootClassName} {...rest}>
+        {children}
+      </div>
+    )
+  }
+}
+
+export default HeaderTitle

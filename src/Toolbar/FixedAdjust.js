@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class FixedAdjust extends React.Component {
+  static displayName = 'Toolbar.FixedAdjust'
   props: PropsT
 
   render() {

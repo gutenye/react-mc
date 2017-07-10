@@ -120,7 +120,7 @@ class IconToggle extends React.Component {
     this.ripple_.destroy()
   }
 
-  onChange = detail => {
+  onChange = (detail: any) => {
     this.props.onChange({ detail })
   }
 }

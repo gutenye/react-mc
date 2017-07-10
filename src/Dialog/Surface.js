@@ -2,13 +2,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
+import type { PropsT } from '../types'
 
 class Surface extends React.Component {
-  props: {
-    className?: string,
-    style?: Object,
-    children: any,
-  }
+  static displayName = 'Dialog.Surface'
+  props: PropsT
 
   static contextTypes = {
     surfaceProps: PropTypes.object,

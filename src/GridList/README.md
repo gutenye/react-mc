@@ -1,3 +1,10 @@
+### Design & API Documentation
+
+- [Material Design guidelines: Grid lists](https://material.io/guidelines/components/grid-lists.html)
+- [Material Components Web](https://material.io/components/web/catalog/grid-lists/)
+
+### Usage
+
 ```
 const GridList = require('./index').default;
 <GridList>

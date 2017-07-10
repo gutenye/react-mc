@@ -3,7 +3,19 @@ import React from 'react'
 import cx from 'classnames'
 import type { PropsT } from '../types'
 
-export default ({ className, children, ...rest }: PropsT) =>
-  <div className={cx('mdc-dialog__backdrop', className)} {...rest}>
-    {children}
-  </div>
+class Backdrop extends React.Component {
+  static displayName = 'Dialog.Backdrop'
+  props: PropsT
+
+  render() {
+    const { className, children, ...rest } = this.props
+    const rootClassName = cx('mdc-dialog__backdrop', className)
+    return (
+      <div className={rootClassName} {...rest}>
+        {children}
+      </div>
+    )
+  }
+}
+
+export default Backdrop

@@ -4,8 +4,9 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class Footer extends React.Component {
-  props: PropsT
+  static displayName = 'Dialog.Footer'
   static Button: any
+  props: PropsT
 
   render() {
     const { className, children, ...rest } = this.props

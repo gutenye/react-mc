@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../../types'
 
 class Multi extends React.Component {
+  static displayName = 'Select.Multi'
   static Group: any
   static Item: any
   static Divider: any

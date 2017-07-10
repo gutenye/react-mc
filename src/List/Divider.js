@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class Divider extends React.Component {
+  static displayName = 'List.Divider'
   props: {
     inset?: boolean,
   } & PropsT

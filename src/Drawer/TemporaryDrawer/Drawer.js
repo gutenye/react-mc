@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../../types'
 
 class Drawer extends React.Component {
+  static displayName = 'Drawer.Temporary.Drawer'
   props: PropsT
 
   render() {

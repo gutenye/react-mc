@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class Primary extends React.Component {
+  static displayName = 'GridList.Tile.Primary'
   props: PropsT
 
   render() {

@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class IconText extends React.Component {
+  static displayName = 'Tabs.IconText'
   props: PropsT
 
   render() {

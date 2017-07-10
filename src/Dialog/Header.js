@@ -4,8 +4,9 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class Header extends React.Component {
-  props: PropsT
+  static displayName = 'Dialog.Header'
   static Title: any
+  props: PropsT
 
   render() {
     const { className, children, ...rest } = this.props

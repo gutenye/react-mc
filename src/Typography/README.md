@@ -1,3 +1,10 @@
+### Design & API Documentation
+
+- [Material Design guidelines: Typography](https://material.io/guidelines/style/typography.html)
+- [Material Components Web](https://material.io/components/web/catalog/typography/)
+
+### Usage
+
 ```
 const Typography = require('./index').default;
 <Typography>

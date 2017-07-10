@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../../types'
 
 class Item extends React.Component {
+  static displayName = 'Select.Multi.Item'
   props: PropsT
 
   render() {

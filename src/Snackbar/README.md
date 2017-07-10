@@ -1,3 +1,10 @@
+### Design & API Documentation
+
+- [Material Design guidelines: Snackbars & toasts](https://material.io/guidelines/components/snackbars-toasts.html)
+- [Material Components Web](https://material.io/components/web/catalog/snackbars/)
+
+### Usage
+
 ```
 const Snackbar = require('./index').default;
 <div>

@@ -1,3 +1,10 @@
+### Design & API Documentation
+
+- [Material Design guidelines: Cards](https://material.io/guidelines/components/cards.html)
+- [Material Components Web](https://material.io/components/web/catalog/cards/)
+
+### Usage
+
 ```
 const Card = require('./index').default;
 <Card>

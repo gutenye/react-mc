@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../../types'
 
 class ToolbarSpacer extends React.Component {
+  static displayName = 'Drawer.Temporary.ToolbarSpacer'
   props: PropsT
 
   render() {

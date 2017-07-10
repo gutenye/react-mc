@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class Icon extends React.Component {
+  static displayName = 'Toolbar.Icon'
   props: {
     menu?: boolean,
   } & PropsT

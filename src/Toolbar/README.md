@@ -1,3 +1,10 @@
+### Design & API Documentation
+
+- [Material Design guidelines: Toolbars](https://material.io/guidelines/components/toolbars.html)
+- [Material Components Web](https://material.io/components/web/catalog/toolbar/)
+
+### Usage
+
 ```
 const Toolbar = require('./index').default;
 <Toolbar>

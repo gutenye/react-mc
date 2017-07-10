@@ -1,3 +1,10 @@
+### Design & API Documentation
+
+- [Material Design guidelines: Dialogs](https://material.io/guidelines/components/dialogs.html)
+- [Material Components Web](https://material.io/components/web/catalog/dialogs/)
+
+### Usage
+
 ```
 const Dialog = require('./index').default;
 initialState = {open: false};

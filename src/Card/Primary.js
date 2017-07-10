@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class Primary extends React.Component {
+  static displayName = 'Card.Primary'
   props: PropsT
 
   render() {

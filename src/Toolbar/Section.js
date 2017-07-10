@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class Section extends React.Component {
+  static displayName = 'Toolbar.Section'
   props: {
     align: 'start' | 'end',
     shrinkToFit?: boolean,

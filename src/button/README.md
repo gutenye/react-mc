@@ -1,6 +1,11 @@
-## Usage
+### Design & API Documentation
 
-### Flat
+- [Material Design guidelines: Buttons](https://material.io/guidelines/components/buttons.html)
+- [Material Components Web](https://material.io/components/web/catalog/buttons/)
+
+### Usage
+
+**Flat**
 
 ```
 <Button>
@@ -8,7 +13,7 @@
 </Button>
 ```
 
-### Colored
+**Colored**
 
 ```
 <Button accent>
@@ -16,7 +21,7 @@
 </Button>
 ```
 
-### Raised
+**Raised**
 
 ```
 <Button raised>
@@ -24,7 +29,7 @@
 </Button>
 ```
 
-### Disabled
+**Disabled**
 
 ```
 <Button raised disabled>

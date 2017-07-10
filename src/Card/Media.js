@@ -3,6 +3,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class Media extends React.Component {
+  static displayName = 'Card.Media'
   props: PropsT
 
   render() {

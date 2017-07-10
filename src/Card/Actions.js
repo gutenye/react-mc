@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class Actions extends React.Component {
+  static displayName = 'Card.Actions'
   props: {
     vertical: boolean,
   } & PropsT

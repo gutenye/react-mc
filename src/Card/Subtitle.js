@@ -3,6 +3,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class Subtitle extends React.Component {
+  static displayName = 'Card.Subtitle'
   props: PropsT
 
   render() {

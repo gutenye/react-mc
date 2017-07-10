@@ -6,6 +6,7 @@ import * as helper from '../../helper'
 import { PropsT } from '../../types'
 
 class TemporaryDrawer extends React.Component {
+  static displayName = 'Drawer.Temporary'
   static Content: any
   static Drawer: any
   static Header: any

@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class Inner extends React.Component {
+  static displayName = 'LayoutGrid.Inner'
   props: PropsT
 
   render() {

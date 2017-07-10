@@ -3,6 +3,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class SupportingText extends React.Component {
+  static displayName = 'Card.SupportingText'
   props: PropsT
 
   render() {

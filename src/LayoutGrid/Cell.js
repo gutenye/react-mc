@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class Cell extends React.Component {
+  static displayName = 'LayoutGrid.Cell'
   props: {
     /** 1-12 */
     span?: number,

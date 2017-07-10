@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class Row extends React.Component {
+  static displayName = 'Toolbar.Row'
   props: PropsT
 
   render() {

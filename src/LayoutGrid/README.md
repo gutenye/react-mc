@@ -1,3 +1,10 @@
+### Design & API Documentation
+
+- [Material Design guidelines: Layout grid guidelines](https://material.io/guidelines/layout/responsive-ui.html#responsive-ui-grid)
+- [Material Components Web](https://material.io/components/web/catalog/layout-grids/)
+
+### Usage
+
 ```
 const LayoutGrid = require('./index').default;
 <LayoutGrid>

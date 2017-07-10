@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class Title extends React.Component {
+  static displayName = 'Toolbar.Title'
   props: PropsT
 
   render() {

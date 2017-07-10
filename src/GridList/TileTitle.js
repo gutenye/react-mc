@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class Title extends React.Component {
+  static displayName = 'GridList.Tile.Title'
   props: PropsT
 
   render() {

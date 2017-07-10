@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class Indicator extends React.Component {
+  static displayName = 'Tabs.Indicator'
   props: PropsT
 
   render() {

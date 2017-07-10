@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../../types'
 
 class PermanentDrawer extends React.Component {
+  static displayName = 'Drawer.Permanent'
   static Content: any
   static ToolbarSpacer: any
   props: PropsT

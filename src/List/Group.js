@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class Group extends React.Component {
+  static displayName = 'List.Group'
   static Subheader: any
   props: PropsT
 

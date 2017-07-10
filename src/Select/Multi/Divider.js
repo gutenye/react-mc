@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../../types'
 
 class Divider extends React.Component {
+  static displayName = 'Select.Multi.Divider'
   props: PropsT
 
   render() {

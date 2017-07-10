@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class Anchor extends React.Component {
+  static displayName = 'Menu.Anchor'
   props: PropsT
 
   render() {

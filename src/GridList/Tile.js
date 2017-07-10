@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class GridTile extends React.Component {
+  static displayName = 'GridList.Tile'
   static Primary: any
   static PrimaryContent: any
   static Secondary: any

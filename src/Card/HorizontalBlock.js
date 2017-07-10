@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class HorizontalBlock extends React.Component {
+  static displayName = 'Card.HorizontalBlock'
   static Title: any
   props: PropsT
 

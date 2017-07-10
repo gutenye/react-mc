@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class EndDetail extends React.Component {
+  static displayName = 'List.Item.EndDetail'
   props: PropsT
 
   render() {

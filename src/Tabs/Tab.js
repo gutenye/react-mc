@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../types'
 
 class Tab extends React.Component {
+  static displayName = 'Tabs.Tab'
   props: {
     active?: boolean,
     withIconAndText?: boolean,

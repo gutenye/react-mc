@@ -4,6 +4,7 @@ import cx from 'classnames'
 import type { PropsT } from '../../types'
 
 class SelectPureCss extends React.Component {
+  static displayName = 'Select.PureCss'
   props: PropsT
 
   render() {

@@ -7,6 +7,7 @@ import * as helper from '../../helper'
 import type { PropsT } from '../../types'
 
 class Menu extends React.Component {
+  static displayName = 'Menu.Simple'
   props: {
     /** items: [{text, disabled, ...props}]  */
     items: Array<*>,
