@@ -5,12 +5,13 @@ const Compression = require('compression-webpack-plugin')
 module.exports = {
   title: 'react-mc docs',
   styleguideDir: 'build.docs',
-  template: 'styleguide/template.html',
+  template: 'docs/template.html',
   require: ['material-components-web/material-components-web.scss'],
   //assetsDir: 'static',
 
+  // prettier-ignore
   sections: [
-    { name: 'Getting Started', content: 'styleguide/README.md' },
+    { name: 'Getting Started', content: 'docs/README.md' },
     { name: 'Buttons', sections: [
       { name: 'Buttons', content: 'src/Button/README.md',  components: 'src/Button/[A-Z]*.js' },
       { name: 'Floating Action Buttons', content: 'src/Fab/README.md', components: 'src/Fab/[A-Z]*.js' },
@@ -46,25 +47,41 @@ module.exports = {
   styles: {
     ComponentsList: {
       isChild: {
-        display: 'none'
-      }
-    }
+        display: 'none',
+      },
+    },
   },
 
   webpackConfig: {
     module: {
       rules: [
-        {test: /\.js$/, exclude: /node_modules/, use: ['babel-loader']},
-        {test: /\.js$/, include: /node_modules\/@material/, use: ['babel-loader']},
-        {test: /\.scss$/, use: ['style-loader', 'css-loader', {loader: 'sass-loader', options: {
-            includePaths: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'node_modules')]
-        }}]},
-      ]
+        { test: /\.js$/, exclude: /node_modules/, use: ['babel-loader'] },
+        {
+          test: /\.js$/,
+          include: /node_modules\/@material/,
+          use: ['babel-loader'],
+        },
+        {
+          test: /\.scss$/,
+          use: [
+            'style-loader',
+            'css-loader',
+            {
+              loader: 'sass-loader',
+              options: {
+                includePaths: [
+                  path.resolve(__dirname, 'src'),
+                  path.resolve(__dirname, 'node_modules'),
+                ],
+              },
+            },
+          ],
+        },
+      ],
     },
     plugins: [
-      new Compression()
+      new Compression(),
       //new Copy([{from: 'static'}])
-    ]
-  }
+    ],
+  },
 }
-
