@@ -1,8 +1,8 @@
 # react-mc, React wrapper of Google's material components web
 
 [Documentation](http://gutenye.github.io/react-mc) |
-[Contributing](https://opensource.guide/how-to-contribute/)
-[CHANGELOG](/releases) |
+[Contributing](https://opensource.guide/how-to-contribute/) |
+[Changelog](/releases) |
 [by Guten](http://guten.me) |
 [Gratipay](https://gratipay.com/gutenye) |
 [Bountysource](https://www.bountysource.com/teams/gutenye)
