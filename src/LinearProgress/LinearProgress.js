@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import { MDCLinearProgressFoundation } from '@material/linear-progress'
+import { MDCLinearProgressFoundation } from '@material/linear-progress/dist/mdc.linearProgress'
 import * as helper from '../helper'
 import type { PropsT } from '../types'
 

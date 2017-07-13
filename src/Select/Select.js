@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import { MDCSelectFoundation } from '@material/select'
+import { MDCSelectFoundation } from '@material/select/dist/mdc.select'
 import Menu from '../Menu'
 import * as helper from '../helper'
 import type { PropsT } from '../types'

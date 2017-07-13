@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import { MDCSnackbarFoundation } from '@material/snackbar'
+import { MDCSnackbarFoundation } from '@material/snackbar/dist/mdc.snackbar'
 import * as helper from '../helper'
 import type { PropsT } from '../types'
 

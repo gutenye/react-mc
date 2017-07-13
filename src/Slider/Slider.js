@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import { MDCSliderFoundation } from '@material/slider'
+import { MDCSliderFoundation } from '@material/slider/dist/mdc.slider'
 import * as helper from '../helper'
 import type { PropsT } from '../types'
 

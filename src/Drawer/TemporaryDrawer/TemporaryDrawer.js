@@ -1,7 +1,10 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import { MDCTemporaryDrawerFoundation, util } from '@material/drawer'
+import {
+  MDCTemporaryDrawerFoundation,
+  util,
+} from '@material/drawer/dist/mdc.drawer'
 import * as helper from '../../helper'
 import { PropsT } from '../../types'
 

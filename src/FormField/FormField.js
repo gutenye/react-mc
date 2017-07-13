@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import { MDCFormFieldFoundation } from '@material/form-field'
+import { MDCFormFieldFoundation } from '@material/form-field/dist/mdc.formField'
 import type { PropsT } from '../types'
 
 class FormField extends React.Component {

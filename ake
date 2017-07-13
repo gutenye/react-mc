@@ -3,7 +3,7 @@
 export PATH="node_modules/.bin:$PATH"
 
 build() {
-  babel src --out-dir lib --ignore __tests__
+  babel src --out-dir lib --ignore __tests__ "$@"
 }
 
 docs() {
@@ -21,6 +21,7 @@ deploy() {
 
 case "$1" in
   b | build ) build ;;
+  w | watch ) build --watch ;;
   humantest ) humantest ;;
   docs ) docs ;;
   deploy ) deploy ;;

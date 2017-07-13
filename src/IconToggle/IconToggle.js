@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import { MDCIconToggleFoundation } from '@material/icon-toggle'
-import { MDCRippleFoundation } from '@material/ripple'
+import { MDCIconToggleFoundation } from '@material/icon-toggle/dist/mdc.iconToggle'
+import { MDCRippleFoundation } from '@material/ripple/dist/mdc.ripple'
 import Ripple from '../Ripple'
 import * as helper from '../helper'
 import type { PropsT } from '../types'

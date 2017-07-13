@@ -1,12 +1,12 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import { MDCCheckboxFoundation } from '@material/checkbox'
-import { MDCRippleFoundation } from '@material/ripple'
-import { getMatchesProperty } from '@material/ripple/util'
+import { MDCCheckboxFoundation } from '@material/checkbox/dist/mdc.checkbox'
+import { MDCRippleFoundation, util } from '@material/ripple/dist/mdc.ripple'
 import Ripple from '../Ripple'
 import * as helper from '../helper'
 import type { PropsT } from '../types'
+const { getMatchesProperty } = util
 
 class Checkbox extends React.Component {
   props: {

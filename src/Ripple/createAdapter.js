@@ -1,13 +1,10 @@
 import ReactDOM from 'react-dom'
-import {
-  applyPassive,
-  supportsCssVariables,
-  getMatchesProperty,
-} from '@material/ripple/util'
+import { util } from '@material/ripple/dist/mdc.ripple'
 import * as helper from '../helper'
+const { applyPassive, supportsCssVariables, getMatchesProperty } = util
 
 /*
- * import { MDCRippleFoundation} from '@material/ripple'
+ * import { MDCRippleFoundation} from '@material/ripple/dist/mdc.ripple'
  * import Ripple from '../Ripple'
  *
  * class Button extends React.Component {

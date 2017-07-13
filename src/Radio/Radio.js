@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import { MDCRadioFoundation } from '@material/radio'
+import { MDCRadioFoundation } from '@material/radio/dist/mdc.radio'
 import * as helper from '../helper'
 import type { PropsT } from '../types'
 

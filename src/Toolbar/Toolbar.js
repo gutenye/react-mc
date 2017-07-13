@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import { MDCToolbarFoundation, util } from '@material/toolbar'
+import { MDCToolbarFoundation, util } from '@material/toolbar/dist/mdc.toolbar'
 import * as helper from '../helper'
 import type { PropsT } from '../types'
 

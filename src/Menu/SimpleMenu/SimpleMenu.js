@@ -1,10 +1,10 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import { MDCSimpleMenuFoundation } from '@material/menu'
-import { getTransformPropertyName } from '@material/menu/util'
+import { MDCSimpleMenuFoundation, util } from '@material/menu/dist/mdc.menu'
 import * as helper from '../../helper'
 import type { PropsT } from '../../types'
+const { getTransformPropertyName } = util
 
 class Menu extends React.Component {
   static displayName = 'Menu.Simple'

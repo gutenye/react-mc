@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import { MDCTextfieldFoundation } from '@material/textfield'
+import { MDCTextfieldFoundation } from '@material/textfield/dist/mdc.textfield'
 import * as helper from '../helper'
 import type { PropsT } from '../types'
 

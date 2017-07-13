@@ -2,7 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
-import { MDCDialogFoundation, util } from '@material/dialog'
+import { MDCDialogFoundation, util } from '@material/dialog/dist/mdc.dialog'
 import * as helper from '../helper'
 
 type PropsT = {

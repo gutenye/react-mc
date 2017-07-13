@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import { MDCGridListFoundation } from '@material/grid-list'
+import { MDCGridListFoundation } from '@material/grid-list/dist/mdc.gridList'
 import type { PropsT } from '../types'
 
 class GridList extends React.Component {

@@ -1,6 +1,9 @@
 import React from 'react'
 import cx from 'classnames'
-import { MDCPersistentDrawerFoundation, util } from '@material/drawer'
+import {
+  MDCPersistentDrawerFoundation,
+  util,
+} from '@material/drawer/dist/mdc.drawer'
 import * as helper from '../../helper'
 import type { PropsT } from '../../types'
 
