@@ -21,7 +21,7 @@ initialState = {on: false};
   >
     favorite_border
   </IconToggle>
-  <span>{JSON.stringify(state)}</span>
+  <div>{JSON.stringify(state)}</div>
 </div>
 ```
 

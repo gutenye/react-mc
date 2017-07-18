@@ -11,12 +11,12 @@
   ],
   "repository": "gutenye/react-mc",
   "keywords": [
-    "react",
-    "material-components",
     "material-components-web",
     "react-material-components-web",
     "material-design",
-    "mdc"
+    "material-components",
+    "mdc",
+    "react"
   ],
   "author": "gutenye",
   "license": "MIT",

@@ -35,6 +35,6 @@ initialState = {open: false};
   <button onClick={() => setState({open: true})}>
     OPEN DIALOG
   </button>
-  <span>{JSON.stringify(state)}</span>
+  <div>{JSON.stringify(state)}</div>
 </div>
 ```
