@@ -8,8 +8,19 @@
 ```
 const Switch = require('./index').default;
 initialState = { checked: false };
-<Switch
-  checked={state.checked}
-  onChange={e => setState({ checked: e.target.checked })}
-/>
+<div>
+  <Switch
+    checked={state.checked}
+    onChange={e => setState({ checked: e.target.checked })}
+  />
+  <div>{JSON.stringify(state)}</div>
+</div>
+```
+
+```
+const Switch = require('./index').default;
+<div>
+  <h>Disabled</h>
+  <Switch disabled onChange={() => {}} />
+</div>
 ```

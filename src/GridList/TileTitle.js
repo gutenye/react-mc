@@ -9,8 +9,9 @@ class Title extends React.Component {
 
   render() {
     const { className, children, ...rest } = this.props
+    const rootClassName = cx('mdc-grid-tile__title', className)
     return (
-      <span className={cx('mdc-grid-tile__title', className)} {...rest}>
+      <span className={rootClassName} {...rest}>
         {children}
       </span>
     )

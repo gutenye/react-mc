@@ -8,7 +8,7 @@ class GridList extends React.Component {
   static Tiles: any
 
   props: {
-    titleGutter1?: boolean,
+    tileGutter1?: boolean,
     headerCaption?: boolean,
     twolineCaption?: boolean,
     withIconAlign?: 'start' | 'end',

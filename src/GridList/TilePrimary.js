@@ -9,8 +9,9 @@ class Primary extends React.Component {
 
   render() {
     const { className, children, ...rest } = this.props
+    const rootClassName = cx('mdc-grid-tile__primary', className)
     return (
-      <div className={cx('mdc-grid-tile__primary', className)} {...rest}>
+      <div className={rootClassName} {...rest}>
         {children}
       </div>
     )

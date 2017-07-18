@@ -10,13 +10,15 @@ class GridTile extends React.Component {
   static Secondary: any
   static SupportText: any
   static Title: any
+  static Icon: any
 
   props: PropsT
 
   render() {
     const { className, children, ...rest } = this.props
+    const rootClassName = cx('mdc-grid-tile', className)
     return (
-      <li className={cx('mdc-grid-tile', className)} {...rest}>
+      <li className={rootClassName} {...rest}>
         {children}
       </li>
     )

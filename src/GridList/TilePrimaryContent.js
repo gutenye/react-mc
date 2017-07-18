@@ -8,14 +8,13 @@ class PrimaryContent extends React.Component {
   props: PropsT
 
   render() {
-    const { className, children, ...rest } = this.props
+    const { className, ...rest } = this.props
+    const rootClassName = cx('mdc-grid-tile__primary-content', className)
     return (
       <img
-        className={cx('mdc-grid-tile__primary-content', className)}
+        className={rootClassName}
         {...rest}
-      >
-        {children}
-      </img>
+      />
     )
   }
 }

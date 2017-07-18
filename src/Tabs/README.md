@@ -14,7 +14,7 @@ const items = [
 ];
 <TabBar iconsWithText>
   {items.map(item =>
-  <TabBar.Tab withIconAndText active={item.active}>
+  <TabBar.Tab key={item.text} withIconAndText active={item.active}>
     <TabBar.Icon className='material-icons'>{item.icon}</TabBar.Icon>
     <TabBar.IconText>{item.text}</TabBar.IconText>
   </TabBar.Tab>

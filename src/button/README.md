@@ -5,34 +5,33 @@
 
 ### Usage
 
-**Flat**
+```
+<doc-column>
+  <doc-row>
+    <Button>Default</Button>
+    <Button primary>Primary</Button>
+    <Button accent>Accent</Button>
+    <Button disabled>Disabled</Button>
+  </doc-row>
+  <div>
+    <h/>
+    <Button raised>Raised</Button>
+    <h/>
+    <Button raised dense>Raised Dense</Button>
+    <h/>
+    <Button raised compact>Raised Compact</Button>
+    <h/>
+    <Button raised primary>Raised Primary</Button>
+    <h/>
+    <Button raised accent>Raised Accent</Button>
+    <h/>
+    <Button raised disabled>Raised disabled</Button>
+  </div>
+</doc-column>
+```
+
+**Links with Button Style**
 
 ```
-<Button>
-  Flat Button
-</Button>
-```
-
-**Colored**
-
-```
-<Button accent>
-  Colored button
-</Button>
-```
-
-**Raised**
-
-```
-<Button raised>
-  Raised button
-</Button>
-```
-
-**Disabled**
-
-```
-<Button raised disabled>
-  Raised disabled button
-</Button>
+<Button component='a' href='https://www.google.com' target='_blank'>Google</Button>
 ```

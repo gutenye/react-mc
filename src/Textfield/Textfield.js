@@ -5,13 +5,18 @@ import { MDCTextfieldFoundation } from '@material/textfield/dist/mdc.textfield'
 import * as helper from '../helper'
 import type { PropsT } from '../types'
 
+/** rest props is passed to `<input>` element instead of root `<div>` element */
 class Textfield extends React.Component {
   props: {
+    value: string,
+    onChange: Function,
     disabled?: boolean,
     label?: string,
     helptext?: string,
     persistent?: boolean,
     multiline?: boolean,
+    validationMsg?: boolean,
+    fullwidth?: boolean,
   } & PropsT
   foundation_: any
   input_: any
@@ -22,7 +27,9 @@ class Textfield extends React.Component {
   }
 
   state = {
-    rootProps: { className: new Set(['mdc-textfield']) },
+    rootProps: {
+      className: new Set(['mdc-textfield', 'mdc-textfield--upgraded']),
+    },
     labelProps: { className: new Set() },
     inputProps: {},
     helptextProps: { className: new Set() },
@@ -61,14 +68,17 @@ class Textfield extends React.Component {
       multiline,
       children,
       className,
+      validationMsg,
+      fullwidth,
       ...rest
     } = this.props
     const { rootProps, labelProps, helptextProps, inputProps } = this.state
     const rootClassName = cx(
       Array.from(rootProps.className),
-      'mdc-textfield--upgraded',
       {
         'mdc-textfield--disabled': disabled,
+        'mdc-textfield--multiline': multiline,
+        'mdc-textfield--fullwidth': fullwidth,
       },
       className
     )
@@ -76,18 +86,20 @@ class Textfield extends React.Component {
       'mdc-textfield__label',
       Array.from(labelProps.className),
       {
-        'mdc-textfield__label--float-above': !!rest.value,
+        'mdc-textfield__label--float-above': Boolean(rest.value),
       }
     )
     const helptextClassName = cx(
       'mdc-textfield-helptext',
       Array.from(helptextProps.className),
       {
+        'mdc-textfield-helptext--validation-msg': validationMsg,
         'mdc-textfield-helptext--persistent': persistent,
       }
     )
+
     const textfield = (
-      <label {...rootProps} className={rootClassName}>
+      <div {...rootProps} className={rootClassName}>
         {multiline
           ? <textarea
               ref={v => (this.input_ = v)}
@@ -103,10 +115,13 @@ class Textfield extends React.Component {
               disabled={disabled}
               {...rest}
             />}
-        <span {...labelProps} className={labelClassName}>
-          {label}
-        </span>
-      </label>
+        {fullwidth
+          ? null
+          : label &&
+            <label {...labelProps} className={labelClassName}>
+              {label}
+            </label>}
+      </div>
     )
 
     if (helptext)

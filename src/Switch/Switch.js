@@ -3,16 +3,13 @@ import React from 'react'
 import cx from 'classnames'
 import type { PropsT } from '../types'
 
+/** rest props is passed to `<input>` element instead of root `<div>` element */
 class Switch extends React.Component {
   props: {
     checked: boolean,
     onChange: Function,
     disabled?: boolean,
   } & PropsT
-
-  static defaultProps = {
-    onChange: () => {},
-  }
 
   render() {
     const {
@@ -31,13 +28,14 @@ class Switch extends React.Component {
       className
     )
     return (
-      <div className={rootClassName} {...rest}>
+      <div className={rootClassName}>
         <input
+          type="checkbox"
+          className="mdc-switch__native-control"
           checked={checked}
           onChange={onChange}
           disabled={disabled}
-          type="checkbox"
-          className="mdc-switch__native-control"
+          {...rest}
         />
         <div className="mdc-switch__background">
           <div className="mdc-switch__knob" />

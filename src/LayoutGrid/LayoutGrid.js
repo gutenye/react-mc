@@ -6,12 +6,21 @@ import type { PropsT } from '../types'
 class LayoutGrid extends React.Component {
   static Cell: any
   static Inner: any
-  props: PropsT
+  props: {
+    fixedColumnWidth?: boolean,
+  } & PropsT
 
   render() {
-    const { className, children, ...rest } = this.props
+    const { fixedColumnWidth, className, children, ...rest } = this.props
+    const rootClassName = cx(
+      'mdc-layout-grid',
+      {
+        'mdc-layout-grid--fixed-column-width': fixedColumnWidth,
+      },
+      className
+    )
     return (
-      <div className={cx('mdc-layout-grid', className)} {...rest}>
+      <div className={rootClassName} {...rest}>
         {children}
       </div>
     )

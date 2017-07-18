@@ -9,8 +9,9 @@ class Secondary extends React.Component {
 
   render() {
     const { className, children, ...rest } = this.props
+    const rootClassName = cx('mdc-grid-tile__secondary', className)
     return (
-      <span className={cx('mdc-grid-tile__secondary', className)} {...rest}>
+      <span className={rootClassName} {...rest}>
         {children}
       </span>
     )

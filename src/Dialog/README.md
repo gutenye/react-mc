@@ -33,7 +33,8 @@ initialState = {open: false};
     <Dialog.Backdrop />
   </Dialog>
   <button onClick={() => setState({open: true})}>
-    Open Dialog
+    OPEN DIALOG
   </button>
+  <span>{JSON.stringify(state)}</span>
 </div>
 ```

@@ -12,7 +12,7 @@ type Props = {
   step: number,
   disabled: boolean,
   onChange: Function,
-  onInput: Function,
+  onInput?: Function,
 } & PropsT
 
 class Slider extends React.Component {
@@ -27,7 +27,6 @@ class Slider extends React.Component {
     max: 100,
     value: 0,
     step: 0,
-    onChange: () => {},
     onInput: () => {},
   }
 
@@ -54,8 +53,8 @@ class Slider extends React.Component {
       deregisterBodyInteractionHandler: helper.deregisterHandler(document.body),
       registerResizeHandler: helper.registerHandler(window, 'resize'),
       deregisterResizeHandler: helper.deregisterHandler(window, 'resize'),
-      notifyInput: this.props.onInput,
-      notifyChange: this.onChange,
+      notifyInput: () => this.props.onInput({ detail: this.foundation_ }),
+      notifyChange: () => this.props.onChange({ detail: this.foundation_ }),
       setThumbContainerStyleProperty: (propertyName, value) => {
         this.thumbContainer_.style.setProperty(propertyName, value)
       },
@@ -75,6 +74,8 @@ class Slider extends React.Component {
       disabled,
       className,
       children,
+      onChange,
+      onInput,
       ...rest
     } = this.props
     const { rootProps, thumbContainerProps } = this.state
@@ -87,7 +88,6 @@ class Slider extends React.Component {
         aria-valuemin={min}
         aria-valuemax={max}
         aria-valuenow={value}
-        data-step={step}
         aria-disabled={disabled}
         {...rootProps}
         className={rootClassName}
@@ -115,6 +115,7 @@ class Slider extends React.Component {
     this.foundation_.init()
 
     this.foundation_.setValue(this.props.value)
+    this.foundation_.setStep(this.props.step)
   }
 
   componentWillReceiveProps(nextProps: PropsT) {
@@ -123,17 +124,15 @@ class Slider extends React.Component {
       nextProps.value !== this.foundation_.getValue()
     )
       this.foundation_.setValue(nextProps.value)
+    if (
+      nextProps.step !== this.props.step &&
+      nextProps.step !== this.foundation_.getStep()
+    )
+      this.foundation_.setStep(nextProps.step)
   }
 
   componentWillUnmount() {
     this.foundation_.destroy()
-  }
-
-  onChange = () => {
-    const detail = {
-      value: this.foundation_.getValue(),
-    }
-    this.props.onChange({ detail })
   }
 }
 

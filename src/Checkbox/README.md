@@ -7,5 +7,16 @@
 
 ```
 const Checkbox = require('./index').default;
-<Checkbox />
+initialState = { checked: false };
+<div>
+  <Checkbox checked={state.checked} onChange={e => setState({checked: e.target.checked})} />
+  <div>{JSON.stringify(state)}</div>
+</div>
+```
+
+**Disabled**
+
+```
+const Checkbox = require('./index').default;
+<Checkbox disabled onChange={() => {}} />
 ```

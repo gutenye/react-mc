@@ -10,8 +10,9 @@ class Elevation extends React.Component {
 
   render() {
     const { z, className, children, ...rest } = this.props
+    const rootClassName = cx(`mdc-elevation--z${z}`, className)
     return (
-      <div className={cx(`mdc-elevation--z${z}`, className)} {...rest}>
+      <div className={rootClassName} {...rest}>
         {children}
       </div>
     )

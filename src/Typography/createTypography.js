@@ -6,11 +6,22 @@ import type { PropsT } from '../types'
 export default function createTypography(name: string) {
   return class extends React.Component {
     props: {
+      component?: string,
       adjustMargin?: boolean,
     } & PropsT
 
+    static defaultProps = {
+      component: 'div',
+    }
+
     render() {
-      const { adjustMargin, className, children, ...rest } = this.props
+      const {
+        component,
+        adjustMargin,
+        className,
+        children,
+        ...rest
+      } = this.props
       const rootClassName = cx(
         `mdc-typography--${name}`,
         {
@@ -18,10 +29,13 @@ export default function createTypography(name: string) {
         },
         className
       )
-      return (
-        <div className={rootClassName} {...rest}>
-          {children}
-        </div>
+      return React.createElement(
+        component,
+        {
+          className: rootClassName,
+          ...rest,
+        },
+        children
       )
     }
   }

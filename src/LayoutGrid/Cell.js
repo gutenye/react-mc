@@ -8,9 +8,11 @@ class Cell extends React.Component {
   props: {
     /** 1-12 */
     span?: number,
-    /** desktop span, add `mdc-layout-grid__cell--span-${desktop}-desktop` class */
+    /** 1-12 desktop span, add `mdc-layout-grid__cell--span-${desktop}-desktop` class */
     desktop?: number,
+    /** 1-8 */
     tablet?: number,
+    /** 1-4 */
     phone?: number,
     /** 1-12 */
     order?: number,
@@ -30,22 +32,20 @@ class Cell extends React.Component {
       children,
       ...rest
     } = this.props
+    const rootClassName = cx(
+      'mdc-layout-grid__cell',
+      {
+        [`mdc-layout-grid__cell--span-${span}`]: span,
+        [`mdc-layout-grid__cell--span-${desktop}-desktop`]: desktop,
+        [`mdc-layout-grid__cell--span-${tablet}-tablet`]: tablet,
+        [`mdc-layout-grid__cell--span-${phone}-phone`]: phone,
+        [`mdc-layout-grid__cell--order-${order}`]: order,
+        [`mdc-layout-grid__cell--align-${align}`]: align,
+      },
+      className
+    )
     return (
-      <div
-        className={cx(
-          'mdc-layout-grid__cell',
-          {
-            [`mdc-layout-grid__cell--span-${span}`]: span,
-            [`mdc-layout-grid__cell--span-${desktop}-desktop`]: desktop,
-            [`mdc-layout-grid__cell--span-${tablet}-tablet`]: tablet,
-            [`mdc-layout-grid__cell--span-${phone}-phone`]: phone,
-            [`mdc-layout-grid__cell--order-${order}`]: order,
-            [`mdc-layout-grid__cell--align-${align}`]: align,
-          },
-          className
-        )}
-        {...rest}
-      >
+      <div className={rootClassName} {...rest}>
         {children}
       </div>
     )

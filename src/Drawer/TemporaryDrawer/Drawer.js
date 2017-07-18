@@ -9,8 +9,9 @@ class Drawer extends React.Component {
 
   render() {
     const { className, children, ...rest } = this.props
+    const rootClassName = cx('mdc-temporary-drawer__drawer', className)
     return (
-      <div className={cx('mdc-temporary-drawer__drawer', className)} {...rest}>
+      <div className={rootClassName} {...rest}>
         {children}
       </div>
     )

@@ -6,8 +6,8 @@ import { MDCRippleFoundation, util } from '@material/ripple/dist/mdc.ripple'
 import Ripple from '../Ripple'
 import * as helper from '../helper'
 import type { PropsT } from '../types'
-const { getMatchesProperty } = util
 
+/** rest props is passed to `<input>` element instead of root `<div>` element */
 class Checkbox extends React.Component {
   props: {
     checked: boolean,
@@ -20,15 +20,9 @@ class Checkbox extends React.Component {
   nativeCb_: any
   ripple_: any
 
-  static defaultProps = {
-    checked: false,
-    onChange: () => {},
-  }
-
   state = {
     rootProps: { className: new Set() },
     nativeCbProps: {},
-    checked: this.props.checked,
   }
 
   getDefaultFoundation() {
@@ -40,15 +34,14 @@ class Checkbox extends React.Component {
       deregisterAnimationEndHandler: helper.deregisterHandler('rootProps', this, 'animationed'),
       registerChangeHandler: helper.registerHandler('nativeCbProps', this, 'change'),
       deregisterChangeHandler: helper.deregisterHandler('nativeCbProps', this, 'change'),
-      getNativeControl: helper.getNative('nativeCb', this),
+      getNativeControl: () => this.nativeCb_,
       forceLayout: () => this.root_.offsetWidth,
       isAttachedToDOM: helper.isAttachedToDOM('root', this),
     })
   }
 
   initRipple_() {
-    this.nativeCb_ = this.refs.nativeCb
-    const MATCHES = getMatchesProperty(HTMLElement.prototype)
+    const MATCHES = util.getMatchesProperty(HTMLElement.prototype)
     const adapter = Ripple.createAdapter(this, {
       isUnbounded: () => true,
       isSurfaceActive: () => this.nativeCb_[MATCHES](':active'),
@@ -73,8 +66,16 @@ class Checkbox extends React.Component {
   }
 
   render() {
-    const { children, className, theme, disabled, ...rest } = this.props
-    const { rootProps, nativeCbProps, checked } = this.state
+    const {
+      checked,
+      onChange,
+      children,
+      className,
+      theme,
+      disabled,
+      ...rest
+    } = this.props
+    const { rootProps, nativeCbProps } = this.state
     const rootClassName = cx(
       'mdc-checkbox',
       {
@@ -85,20 +86,16 @@ class Checkbox extends React.Component {
       className
     )
     return (
-      <div
-        ref={v => (this.root_ = v)}
-        {...rootProps}
-        className={rootClassName}
-        {...rest}
-      >
+      <div ref={v => (this.root_ = v)} {...rootProps} className={rootClassName}>
         <input
-          ref="nativeCb"
+          ref={v => (this.nativeCb_ = v)}
           type="checkbox"
           className="mdc-checkbox__native-control"
           {...nativeCbProps}
+          {...rest}
           checked={checked}
           disabled={disabled}
-          onChange={this.onChange}
+          onChange={onChange}
         />
         <div className="mdc-checkbox__background">
           <svg className="mdc-checkbox__checkmark" viewBox="0 0 24 24">
@@ -125,10 +122,6 @@ class Checkbox extends React.Component {
   componentWillUnmount() {
     this.foundation_.destroy()
     this.ripple_.destroy()
-  }
-
-  onChange = (e: any) => {
-    this.setState({ checked: e.target.checked })
   }
 }
 

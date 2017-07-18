@@ -6,6 +6,7 @@ import Ripple from '../Ripple'
 
 class Button extends React.Component {
   props: {
+    component?: string,
     dense: boolean,
     raised: boolean,
     compact: boolean,
@@ -15,6 +16,10 @@ class Button extends React.Component {
     children: any,
   }
   ripple_: any
+
+  static defaultProps = {
+    component: 'button',
+  }
 
   state = {
     rootProps: { className: new Set() },
@@ -27,6 +32,7 @@ class Button extends React.Component {
 
   render() {
     const {
+      component,
       dense,
       raised,
       compact,
@@ -49,10 +55,10 @@ class Button extends React.Component {
       Array.from(rootProps.className),
       className
     )
-    return (
-      <button {...rootProps} className={rootClassName} {...rest}>
-        {children}
-      </button>
+    return React.createElement(
+      component,
+      { ...rootProps, className: rootClassName, ...rest },
+      children
     )
   }
 

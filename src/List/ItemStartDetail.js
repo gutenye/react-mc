@@ -5,17 +5,25 @@ import type { PropsT } from '../types'
 
 class StartDetail extends React.Component {
   static displayName = 'List.Item.StartDetail'
-  props: PropsT
+  props: {
+    component?: any,
+  } & PropsT
+
+  static defaultProps = {
+    component: 'i',
+  }
 
   render() {
-    const { className, children, ...rest } = this.props
-    return (
-      <i
-        className={cx('mdc-list-item__start_detail', 'aria-hidden', className)}
-        {...rest}
-      >
-        {children}
-      </i>
+    const { component, className, children, ...rest } = this.props
+    const rootClassName = cx(
+      'mdc-list-item__start-detail',
+      'aria-hidden',
+      className
+    )
+    return React.createElement(
+      component,
+      { className: rootClassName, ...rest },
+      children
     )
   }
 }

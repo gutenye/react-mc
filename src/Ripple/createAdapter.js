@@ -1,6 +1,7 @@
 import ReactDOM from 'react-dom'
 import { util } from '@material/ripple/dist/mdc.ripple'
 import * as helper from '../helper'
+
 const { applyPassive, supportsCssVariables, getMatchesProperty } = util
 
 /*

@@ -6,11 +6,16 @@ import type { PropsT } from '../types'
 class Divider extends React.Component {
   static displayName = 'List.Divider'
   props: {
+    component?: any,
     inset?: boolean,
   } & PropsT
 
+  static defaultProps = {
+    component: 'li',
+  }
+
   render() {
-    const { inset, children, className, ...rest } = this.props
+    const { component, inset, children, className, ...rest } = this.props
     const rootClassName = cx(
       'mdc-list-divider',
       {
@@ -18,7 +23,11 @@ class Divider extends React.Component {
       },
       className
     )
-    return <li role="seperator" className={rootClassName} {...rest} />
+    return React.createElement(component, {
+      role: 'seperator',
+      className: rootClassName,
+      ...rest,
+    })
   }
 }
 

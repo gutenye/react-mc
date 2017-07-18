@@ -36,18 +36,15 @@ class FormField extends React.Component {
 
   render() {
     const { align, className, children, ...rest } = this.props
+    const rootClassName = cx(
+      'mdc-form-field',
+      {
+        [`mdc-form-field--align-${align}`]: align,
+      },
+      className
+    )
     return (
-      <div
-        ref={v => (this.root_ = v)}
-        className={cx(
-          'mdc-form-field',
-          {
-            [`mdc-form-field--align-${align}`]: align,
-          },
-          className
-        )}
-        {...rest}
-      >
+      <div ref={v => (this.root_ = v)} className={rootClassName} {...rest}>
         {children}
       </div>
     )

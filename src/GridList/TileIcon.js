@@ -3,19 +3,18 @@ import React from 'react'
 import cx from 'classnames'
 import type { PropsT } from '../types'
 
-class Anchor extends React.Component {
-  static displayName = 'Menu.Anchor'
+class TileIcon extends React.Component {
   props: PropsT
 
   render() {
     const { className, children, ...rest } = this.props
-    const rootClassName = cx('mdc-menu-anchor', className)
+    const rootClassName = cx('mdc-grid-tile__icon', className)
     return (
-      <div className={rootClassName} {...rest}>
+      <i className={rootClassName} {...rest}>
         {children}
-      </div>
+      </i>
     )
   }
 }
 
-export default Anchor
+export default TileIcon

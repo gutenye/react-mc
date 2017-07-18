@@ -25,18 +25,19 @@ class Fab extends React.Component {
   render() {
     const { mini, plain, className, children, ...rest } = this.props
     const { rootProps } = this.state
+    const rootClassName = cx(
+      'mdc-fab',
+      {
+        'mdc-fab--mini': mini,
+        'mdc-fab--plain': plain,
+      },
+      Array.from(rootProps.className),
+      className
+    )
     return (
       <button
         {...rootProps}
-        className={cx(
-          'mdc-fab',
-          {
-            'mdc-fab--mini': mini,
-            'mdc-fab--plain': plain,
-          },
-          Array.from(rootProps.className),
-          className
-        )}
+        className={rootClassName}
         aria-label="Favorite"
         {...rest}
       >

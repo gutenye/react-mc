@@ -6,7 +6,6 @@ module.exports = {
   title: 'react-mc docs',
   styleguideDir: 'build.docs',
   template: 'docs/template.html',
-  require: ['material-components-web/material-components-web.scss'],
   //assetsDir: 'static',
 
   // prettier-ignore
@@ -60,22 +59,6 @@ module.exports = {
           test: /\.js$/,
           include: /node_modules\/@material/,
           use: ['babel-loader'],
-        },
-        {
-          test: /\.scss$/,
-          use: [
-            'style-loader',
-            'css-loader',
-            {
-              loader: 'sass-loader',
-              options: {
-                includePaths: [
-                  path.resolve(__dirname, 'src'),
-                  path.resolve(__dirname, 'node_modules'),
-                ],
-              },
-            },
-          ],
         },
       ],
     },

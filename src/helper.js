@@ -179,15 +179,6 @@ function deregisterHandler_(propsName, self) {
   }
 }
 
-export function getNative(ref, self) {
-  return function() {
-    if (!self.refs[ref]) {
-      throw new Error('Invalid state for operation')
-    }
-    return self.refs[ref]
-  }
-}
-
 export function isAttachedToDOM(ref, self) {
   return function() {
     return Boolean(self.refs[ref])

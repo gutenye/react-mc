@@ -4,7 +4,6 @@ import cx from 'classnames'
 import { MDCSimpleMenuFoundation, util } from '@material/menu/dist/mdc.menu'
 import * as helper from '../../helper'
 import type { PropsT } from '../../types'
-const { getTransformPropertyName } = util
 
 class Menu extends React.Component {
   static displayName = 'Menu.Simple'
@@ -15,11 +14,11 @@ class Menu extends React.Component {
     open: boolean | number,
     /** alias to onCancel */
     onClose: Function,
-    /** alias to onSelected */
-    onChange: Function,
     onCancel: Function,
     /** onSelect({index, item}) */
     onSelected: Function,
+    /** alias to onSelected */
+    onChange: Function,
     openFrom?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right',
   } & PropsT
   foundation_: any
@@ -32,7 +31,6 @@ class Menu extends React.Component {
     onCancel: () => {},
     onClose: () => {},
     onSelected: () => {},
-    onChange: () => {},
   }
 
   state = {
@@ -40,7 +38,6 @@ class Menu extends React.Component {
   }
 
   getDefaultFoundation() {
-    this.itemsContainer_ = this.refs.itemsContainer
     // prettier-ignore
     return new MDCSimpleMenuFoundation({
       addClass: helper.addClass('rootProps', this),
@@ -58,10 +55,10 @@ class Menu extends React.Component {
         return {width: window.innerWidth, height: window.innerHeight};
       },
       setScale: (x, y) => {
-        this.root_.style[getTransformPropertyName(window)] = `scale(${x}, ${y})`;
+        this.root_.style[util.getTransformPropertyName(window)] = `scale(${x}, ${y})`;
       },
       setInnerScale: (x, y) => {
-        this.itemsContainer_.style[getTransformPropertyName(window)] = `scale(${x}, ${y})`;
+        this.itemsContainer_.style[util.getTransformPropertyName(window)] = `scale(${x}, ${y})`;
       },
       getNumberOfItems: () => this.items_.length,
       registerInteractionHandler: helper.registerHandler('rootProps', this),
@@ -91,7 +88,7 @@ class Menu extends React.Component {
       focusItemAtIndex: (index) => this.items_[index].el.focus(),
       isRtl: () => getComputedStyle(this.root_).getPropertyValue('direction') === 'rtl',
       setTransformOrigin: (origin) => {
-        this.root_.style[`${getTransformPropertyName(window)}-origin`] = origin;
+        this.root_.style[`${util.getTransformPropertyName(window)}-origin`] = origin;
       },
       setPosition: (position) => {
         this.root_.style.left = 'left' in position ? position.left : null;
@@ -135,12 +132,21 @@ class Menu extends React.Component {
         {...rest}
       >
         <ul
-          ref="itemsContainer"
+          ref={v => (this.itemsContainer_ = v)}
           className="mdc-simple-menu__items mdc-list"
           role="menu"
           aria-hidden="true"
         >
-          {this.items_.map(item => {
+          {this.items_.map((item, i) => {
+            if (item.divider)
+              return (
+                <li
+                  key={i}
+                  ref={v => (item.el = v)}
+                  className="mdc-list-divider"
+                  role="seperator"
+                />
+              )
             const { text, disabled, el, ...rest } = item
             const disabledProps = disabled
               ? { tabIndex: -1, 'aria-disabled': true }

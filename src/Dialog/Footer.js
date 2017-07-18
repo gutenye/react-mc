@@ -10,8 +10,9 @@ class Footer extends React.Component {
 
   render() {
     const { className, children, ...rest } = this.props
+    const rootClassName = cx('mdc-dialog__footer', className)
     return (
-      <footer className={cx('mdc-dialog__footer', className)} {...rest}>
+      <footer className={rootClassName} {...rest}>
         {children}
       </footer>
     )

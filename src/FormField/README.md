@@ -6,8 +6,24 @@
 
 ```
 const FormField = require('./index').default;
-<FormField>
-  <input type="checkbox" id="input" />
-  <label htmlFor="input">Input Label</label>
-</FormField>
+const Checkbox = require('../Checkbox').default;
+
+<div>
+  <FormField>
+    <input type="checkbox" id="FormField1" />
+    <label htmlFor="FormField1">Name</label>
+  </FormField>
+
+  <h>Align end</h>
+  <FormField align='end'>
+    <input type="checkbox" id="FormField2" />
+    <label htmlFor="FormField2">Name</label>
+  </FormField>
+
+  <h>With MDC Components</h>
+  <FormField>
+    <Checkbox onChange={() => {}} id="FormField3" />
+    <label htmlFor="FormField3">Name</label>
+  </FormField>
+</div>
 ```

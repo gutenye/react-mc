@@ -7,8 +7,31 @@
 
 ```
 const Radio = require('./index').default;
+const FormField = require('../FormField').default;
+initialState = { company: 'google' };
 <div>
-  <Radio name="a">Facebook</Radio>
-  <Radio name="a">Google</Radio>
+  <FormField>
+    <Radio name="company" id="Radio1" value='facebook' checked={state.company === 'facebook'} onChange={e => setState({company: e.target.value})} />
+    <label htmlFor="Radio1">Facebook</label>
+  </FormField>
+  <FormField>
+    <Radio name="company" id="Radio2" value='google' checked={state.company === 'google'} onChange={e => setState({company: e.target.value})} />
+    <label htmlFor="Radio2">Google</label>
+  </FormField>
+  <div>{JSON.stringify(state)}</div>
 </div>
 ```
+
+**Disabled**
+
+```
+const Radio = require('./index').default;
+const FormField = require('../FormField').default;
+<FormField>
+  <Radio disabled onChange={() => {}} />
+  <label>Facebook</label>
+  <Radio disabled checked onChange={() => {}} />
+  <label>Google</label>
+</FormField>
+```
+

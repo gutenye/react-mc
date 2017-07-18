@@ -1,5 +1,4 @@
 /* eslint-disable */
-import 'material-components-web/material-components-web.scss'
 import React from 'react'
 import { render } from 'react-dom'
 import {
@@ -32,7 +31,7 @@ const log = console.log.bind(console)
 const getPages = () => [
   //MyButton,
   //MyCard,
-  MyDialog,
+  // MyDialog,
   //MyCheckbox,
   //MyPermanentDrawer,
   //MyPersistentDrawer,
@@ -45,8 +44,8 @@ const getPages = () => [
   //MyLayoutGrid,
   //MyLinearProgress,
   //MyList,
-  MyMenu,
-  // MyRadio,
+  // MyMenu,
+  MyRadio,
   // MySelect,
   // MySlider,
   // MySnackbar,
@@ -449,11 +448,32 @@ class MyMenu extends React.Component {
 }
 
 class MyRadio extends React.Component {
+  state = {
+    company: 'google',
+  }
+
   render() {
     return (
       <div>
-        <Radio name="a">Facebook</Radio>
-        <Radio name="a">Google</Radio>
+        <Radio
+          name="company"
+          id="Radio1"
+          value="facebook"
+          checked={this.state.company === 'facebook'}
+          onChange={e => this.setState({ company: e.target.value })}
+        />
+        <label htmlFor="Radio1">Facebook</label>
+        <Radio
+          name="company"
+          id="Radio2"
+          value="google"
+          checked={this.state.company === 'google'}
+          onChange={e => this.setState({ company: e.target.value })}
+        />
+        <label htmlFor="Radio2">Google</label>
+        <div>
+          {JSON.stringify(this.state)}
+        </div>
       </div>
     )
   }

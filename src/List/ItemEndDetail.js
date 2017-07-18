@@ -9,11 +9,13 @@ class EndDetail extends React.Component {
 
   render() {
     const { className, children, ...rest } = this.props
+    const rootClassName = cx(
+      'mdc-list-item__end-detail',
+      'aria-hidden',
+      className
+    )
     return (
-      <a
-        className={cx('mdc-list-item__end_detail', 'aria-hidden', className)}
-        {...rest}
-      >
+      <a className={rootClassName} {...rest}>
         {children}
       </a>
     )

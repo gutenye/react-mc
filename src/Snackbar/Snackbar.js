@@ -6,7 +6,10 @@ import * as helper from '../helper'
 import type { PropsT } from '../types'
 
 class Snackbar extends React.Component {
-  props: PropsT
+  props: {
+    /** start */
+    align?: string,
+  } & PropsT
   foundation_: any
   root_: any
 
@@ -36,9 +39,15 @@ class Snackbar extends React.Component {
   }
 
   render() {
-    const { children, className, ...rest } = this.props
+    const { align, children, className, ...rest } = this.props
     const { rootProps, actionProps, messageText, actionText } = this.state
-    const rootClassName = cx(Array.from(rootProps.className), className)
+    const rootClassName = cx(
+      Array.from(rootProps.className),
+      {
+        [`mdc-snackbar--align-${align}`]: align,
+      },
+      className
+    )
     return (
       <div
         ref={v => (this.root_ = v)}

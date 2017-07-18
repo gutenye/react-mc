@@ -7,5 +7,41 @@
 
 ```
 const Textfield = require('./index').default;
-<Textfield label="Name" helptext="name is required" persistent />
+const initialState = { value: '' };
+<div>
+  <h>Default</h>
+  <Textfield label="Name" value={state.value} onChange={e => setState({value: e.target.value})} />
+  {state.value}
+
+  <h>Required</h>
+  <Textfield label="Name" required />
+
+  <h>Disabled</h>
+  <Textfield label="Name" disabled />
+
+  <h>Helper Text</h>
+  <Textfield label="Name" helptext="Name is required" />
+
+  <h>Helper Text Persistent</h>
+  <Textfield label="Name" helptext="Name is required" persistent />
+
+  <h>Helper Text as validation message</h>
+  <Textfield label="Name" helptext="Must be at least 2 characters long" persistent validationMsg required minLength="2" />
+
+  <h>Pre-filled text fields</h>
+  <Textfield label="Name" value="Guten Ye" onChange={() => {}} />
+
+  <h>Pure CSS</h>
+  <Textfield placeholder='Name' />
+
+  <h>Fullwidth</h>
+  <Textfield placeholder='Fullwidth' fullwidth />
+</div>
+```
+
+**Multiline**
+
+```
+const Textfield = require('./index').default;
+<Textfield label="Comment" multiline rows="8" cols="40" />
 ```

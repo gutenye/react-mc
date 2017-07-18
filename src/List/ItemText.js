@@ -10,8 +10,9 @@ class ItemText extends React.Component {
 
   render() {
     const { className, children, ...rest } = this.props
+    const rootClassName = cx('mdc-list-item__text', className)
     return (
-      <div className={cx('mdc-list-item__text', className)} {...rest}>
+      <div className={rootClassName} {...rest}>
         {children}
       </div>
     )

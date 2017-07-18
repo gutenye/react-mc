@@ -9,8 +9,9 @@ class Inner extends React.Component {
 
   render() {
     const { className, children, ...rest } = this.props
+    const rootClassName = cx('mdc-layout-grid__inner', className)
     return (
-      <div className={cx('mdc-layout-grid__inner', className)} {...rest}>
+      <div className={rootClassName} {...rest}>
         {children}
       </div>
     )

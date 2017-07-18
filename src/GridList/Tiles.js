@@ -9,8 +9,9 @@ class Tiles extends React.Component {
 
   render() {
     const { className, children, ...rest } = this.props
+    const rootClassName = cx('mdc-grid-list__tiles', className)
     return (
-      <ul className={cx('mdc-grid-list__tiles', className)} {...rest}>
+      <ul className={rootClassName} {...rest}>
         {children}
       </ul>
     )

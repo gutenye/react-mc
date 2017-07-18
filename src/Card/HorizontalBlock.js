@@ -10,8 +10,9 @@ class HorizontalBlock extends React.Component {
 
   render() {
     const { className, children, ...rest } = this.props
+    const rootClassName = cx('mdc-dialog__horizontal-block', className)
     return (
-      <div className={cx('mdc-dialog__horizontal-block', className)} {...rest}>
+      <div className={rootClassName} {...rest}>
         {children}
       </div>
     )

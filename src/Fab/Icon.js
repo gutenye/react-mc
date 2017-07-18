@@ -9,8 +9,9 @@ class Icon extends React.Component {
 
   render() {
     const { className, children, ...rest } = this.props
+    const rootClassName = cx('mdc-fab__icon', className)
     return (
-      <span className={cx('mdc-fab__icon', className)} {...rest}>
+      <span className={rootClassName} {...rest}>
         {children}
       </span>
     )

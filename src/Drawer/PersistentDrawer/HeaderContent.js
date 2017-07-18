@@ -9,9 +9,10 @@ class HeaderContent extends React.Component {
 
   render() {
     const { className, children, ...rest } = this.props
+    const rootClassName = cx('mdc-persistent-drawer__header-content', className)
     return (
       <div
-        className={cx('mdc-persistent-drawer__header-content', className)}
+        className={rootClassName}
         {...rest}
       >
         {children}

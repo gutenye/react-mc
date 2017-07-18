@@ -7,7 +7,11 @@
 
 ```
 const Fab = require('./index').default;
-<Fab className="material-icons">
-  <Fab.Icon>favorite</Fab.Icon>
-</Fab>
+<doc-row>
+  <Fab className="material-icons"><Fab.Icon>favorite</Fab.Icon></Fab>
+  <Fab mini className="material-icons"><Fab.Icon>favorite</Fab.Icon></Fab>
+  <Fab plain className="material-icons"><Fab.Icon>favorite</Fab.Icon></Fab>
+  <Fab plain mini className="material-icons"><Fab.Icon>favorite</Fab.Icon></Fab>
+  <Fab disabled className="material-icons"><Fab.Icon>favorite</Fab.Icon></Fab>
+</doc-row>
 ```

@@ -14,6 +14,9 @@ class IconToggle extends React.Component {
     onChange: Function,
     dataToggleOn: Object,
     dataToggleOff: Object,
+    disabled?: boolean,
+    primary?: boolean,
+    accent?: boolean,
   } & PropsT
   foundation_: any
   ripple_: any
@@ -79,15 +82,31 @@ class IconToggle extends React.Component {
       onChange,
       className,
       children,
+      disabled,
+      primary,
+      accent,
       ...rest
     } = this.props
     const { rootProps } = this.state
-    const rootClassName = cx(Array.from(rootProps.className), className)
+    const rootClassName = cx(
+      Array.from(rootProps.className),
+      {
+        'mdc-icon-toggle--disabled': disabled,
+        'mdc-icon-toggle--primary': primary,
+        'mdc-icon-toggle--accent': accent,
+      },
+      className
+    )
+    const disabledProps = disabled
+      ? { tabIndex: -1, 'aria-pressed': false, 'aria-disabled': true }
+      : {}
+
     return (
       <i
         ref={v => (this.root_ = v)}
         {...rootProps}
         className={rootClassName}
+        {...disabledProps}
         {...rest}
       >
         {children}

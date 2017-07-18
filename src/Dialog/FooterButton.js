@@ -12,18 +12,19 @@ class FooterButton extends React.Component {
 
   render() {
     const { accept, cancel, className, children, ...rest } = this.props
+    const rootClassName = cx(
+      'mdc-button',
+      'mdc-dialog__footer__button',
+      {
+        'mdc-dialog__footer__button--accept': accept,
+        'mdc-dialog__footer__button--cancel': cancel,
+      },
+      className
+    )
     return (
       <button
         type="button"
-        className={cx(
-          'mdc-button',
-          'mdc-dialog__footer__button',
-          {
-            'mdc-dialog__footer__button--accept': accept,
-            'mdc-dialog__footer__button--cancel': cancel,
-          },
-          className
-        )}
+        className={rootClassName}
         {...rest}
       >
         {children}

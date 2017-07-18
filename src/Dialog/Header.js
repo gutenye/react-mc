@@ -10,8 +10,9 @@ class Header extends React.Component {
 
   render() {
     const { className, children, ...rest } = this.props
+    const rootClassName = cx('mdc-dialog__header', className)
     return (
-      <header className={cx('mdc-dialog__header', className)} {...rest}>
+      <header className={rootClassName} {...rest}>
         {children}
       </header>
     )

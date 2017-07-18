@@ -18,7 +18,7 @@ class Toolbar extends React.Component {
     fixedLastrowOnly?: boolean,
     flexible?: boolean,
     flexibleDefaultBehavior?: boolean,
-    onChange: Function,
+    onChange?: Function,
   } & PropsT
   foundation_: any
   root_: any
