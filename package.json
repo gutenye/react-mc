@@ -1,6 +1,6 @@
 {
   "name": "react-mc",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "React binding of Material Components (MDC-REACT)",
   "main": "lib/index.js",
   "scripts": {
