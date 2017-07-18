@@ -19,16 +19,11 @@ Tracking [0.13.0](https://github.com/material-components/material-components-web
 - **Flow Support**
 - **Theme Support**
 
-## Other Projects implement material-components-web
-> Learn from [others](https://github.com/search?q=topic%3Amaterial-components-web)
-
-- [hardtack/react-material-components-web](https://github.com/react-mdc/react-material-components-web)
-- [haoxins/react-mdc](https://github.com/haoxins/react-mdc)
-- [mewa/react-material-components-web](https://github.com/mewa/react-material-components-web)
-- [hartorn/react-material-web](https://github.com/hartorn/react-material-web)
-- [reactivers/react-mcw](https://github.com/reactivers/react-mcw)
-
 ## Getting Started
 
+See the [Documentation](http://gutenye.github.io/react-mc)
+
+## Contributing
 
 
+- If you like this library, star the project is the best support to the authors and contributors.

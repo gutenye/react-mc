@@ -25,3 +25,12 @@ $mdc-theme-background: #fff;
 @import "@material/button/mdc-button";
 ```
 
+
+## Other Projects implement material-components-web
+> Learn from [others](https://github.com/search?q=topic%3Amaterial-components-web)
+
+- [hardtack/react-material-components-web](https://github.com/react-mdc/react-material-components-web)
+- [haoxins/react-mdc](https://github.com/haoxins/react-mdc)
+- [mewa/react-material-components-web](https://github.com/mewa/react-material-components-web)
+- [hartorn/react-material-web](https://github.com/hartorn/react-material-web)
+- [reactivers/react-mcw](https://github.com/reactivers/react-mcw)
