@@ -17,6 +17,7 @@ class Textfield extends React.Component {
     multiline?: boolean,
     validationMsg?: boolean,
     fullwidth?: boolean,
+    box?: boolean,
   } & PropsT
   foundation_: any
   input_: any
@@ -61,6 +62,8 @@ class Textfield extends React.Component {
 
   render() {
     const {
+      value,
+      onChange,
       disabled,
       label,
       helptext,
@@ -70,6 +73,7 @@ class Textfield extends React.Component {
       className,
       validationMsg,
       fullwidth,
+      box,
       ...rest
     } = this.props
     const { rootProps, labelProps, helptextProps, inputProps } = this.state
@@ -79,6 +83,7 @@ class Textfield extends React.Component {
         'mdc-textfield--disabled': disabled,
         'mdc-textfield--multiline': multiline,
         'mdc-textfield--fullwidth': fullwidth,
+        'mdc-textfield--box': box,
       },
       className
     )
@@ -106,6 +111,8 @@ class Textfield extends React.Component {
               {...inputProps}
               className="mdc-textfield__input"
               disabled={disabled}
+              value={value}
+              onChange={onChange}
               {...rest}
             />
           : <input
@@ -113,6 +120,8 @@ class Textfield extends React.Component {
               {...inputProps}
               className="mdc-textfield__input"
               disabled={disabled}
+              value={value}
+              onChange={onChange}
               {...rest}
             />}
         {fullwidth
@@ -121,6 +130,7 @@ class Textfield extends React.Component {
             <label {...labelProps} className={labelClassName}>
               {label}
             </label>}
+        {box && <div className="mdc-textfield__bottom-line" />}
       </div>
     )
 

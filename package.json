@@ -23,7 +23,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
-    "material-components-web": "^0.14.0",
+    "material-components-web": "^0.15.0",
     "prop-types": "^15.5.10"
   },
   "devDependencies": {

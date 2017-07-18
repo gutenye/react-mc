@@ -7,11 +7,12 @@
 
 ```
 const Snackbar = require('./index').default;
-const show = (arg) => () => this.snackbar.show({timeout: 1000, ...arg});
+const show = (arg) => () => self.snackbar.show({timeout: 2000, ...arg});
+const self = {};
 <doc-row>
-  <Snackbar ref={v => (this.snackbar = v)} />
+  <Snackbar ref={v => (self.snackbar = v)} />
   <button onClick={show({message: new Date()})}>Show</button>
-  <button onClick={show({message: new Date(), actionText: 'undo', actionHandler() {}})}>With Action</button>
+  <button onClick={show({message: new Date(), actionText: 'undo', actionHandler: () => log('undo')})}>With Action</button>
   <button onClick={show({message: new Date(), multiline: true})}>With multiline</button>
   <button onClick={show({message: new Date(), actionText: 'undo', actionHandler() {}, multiline: true, actionOnBottom: true})}>With multiline and actionOnBottom</button>
 </doc-row>
@@ -21,8 +22,9 @@ const show = (arg) => () => this.snackbar.show({timeout: 1000, ...arg});
 
 ```
 const Snackbar = require('./index').default;
+const self = {};
 <div>
-  <Snackbar align='start' ref={v => (this.snackbar = v)} />
-  <button onClick={v => this.snackbar.show({message: new Date(), timeout: 1000})}>SHOW</button>
+  <Snackbar align='start' style={{zIndex: 10}} ref={v => (self.snackbar = v)} />
+  <button onClick={v => self.snackbar.show({message: new Date(), timeout: 1000})}>SHOW</button>
 </div>
 ```

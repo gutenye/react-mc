@@ -5,6 +5,8 @@
 
 ### Usage
 
+**Continuous Slider**
+
 ```
 const Slider = require('./Slider').default;
 initialState = { value: 10, inputValue: 10 };
@@ -18,10 +20,43 @@ initialState = { value: 10, inputValue: 10 };
 </div>
 ```
 
+**Discrete Slider**
+
+```
+const Slider = require('./Slider').default;
+initialState = { value: 10, inputValue: 10 };
+<div>
+  <Slider
+    discrete
+    value={state.value}
+    onChange={({ detail }) => setState({ value: detail.getValue() })}
+    onInput={({ detail }) => setState({ inputValue: detail.getValue() })}
+  />
+  <div>{JSON.stringify(state)}</div>
+</div>
+```
+
+**Discrete Slider with markers**
+
+```
+const Slider = require('./Slider').default;
+initialState = { value: 10, inputValue: 10 };
+<div>
+  <Slider
+    discrete
+    displayMarkers
+    value={state.value}
+    onChange={({ detail }) => setState({ value: detail.getValue() })}
+    onInput={({ detail }) => setState({ inputValue: detail.getValue() })}
+  />
+  <div>{JSON.stringify(state)}</div>
+</div>
+```
+
 ```
 const Slider = require('./Slider').default;
 <div>
-  <h>step 1</h>
-  <Slider step={1} onChange={() => {}} />
+  <h>step 2</h>
+  <Slider step={2} onChange={() => {}} />
 </div>
 ```

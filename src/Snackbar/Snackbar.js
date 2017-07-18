@@ -7,15 +7,15 @@ import type { PropsT } from '../types'
 
 class Snackbar extends React.Component {
   props: {
-    /** start */
-    align?: string,
+    align?: 'start',
   } & PropsT
   foundation_: any
   root_: any
+  actionButton_: any
 
   state = {
     rootProps: { className: new Set(['mdc-snackbar']) },
-    actionProps: {},
+    actionButtonProps: {},
     actionText: '',
     messageText: '',
   }
@@ -27,12 +27,22 @@ class Snackbar extends React.Component {
       removeClass: helper.removeClass('rootProps', this),
       setAriaHidden: helper.setAttr('rootProps', this, 'aria-hidden', true),
       unsetAriaHidden: helper.rmAttr('rootProps', this, 'aria-hidden', false),
-      setActionAriaHidden: helper.setAttr('actionProps', this, 'aria-hidden', true),
-      unsetActionAriaHidden: helper.rmAttr('actionProps', this, 'aria-hidden', false),
+      setActionAriaHidden: helper.setAttr('actionButtonProps', this, 'aria-hidden', true),
+      unsetActionAriaHidden: helper.rmAttr('actionButtonProps', this, 'aria-hidden', false),
       setActionText: actionText => this.setState({ actionText }),
       setMessageText: messageText => this.setState({ messageText }),
-      registerActionClickHandler: helper.registerHandler('actionProps', this, 'click'),
-      deregisterActionClickHandler: helper.deregisterHandler('actionProps', this, 'click'),
+      setFocus: () => this.actionButton_.focus(),
+      visibilityIsHidden: () => document.hidden,
+      registerCapturedBlurHandler: helper.registerHandler('actionButtonProps', this, 'blur'),
+      deregisterCapturedBlurHandler: helper.deregisterHandler('actionButtonProps', this, 'blur'),
+      registerVisibilityChangeHandler: (handler) => document.addEventListener('visibilitychange', handler),
+      deregisterVisibilityChangeHandler: (handler) => document.removeEventListener('visibilitychange', handler),
+      registerCapturedInteractionHandler: (evt, handler) =>
+        document.body.addEventListener(evt, handler, true),
+      deregisterCapturedInteractionHandler: (evt, handler) =>
+        document.body.removeEventListener(evt, handler, true),
+      registerActionClickHandler: helper.registerHandler('actionButtonProps', this, 'click'),
+      deregisterActionClickHandler: helper.deregisterHandler('actionButtonProps', this, 'click'),
       registerTransitionEndHandler: helper.registerHandler('rootProps', this, 'transitionend'),
       deregisterTransitionEndHandler: helper.deregisterHandler('rootProps', this, 'transitionend'),
     })
@@ -40,7 +50,7 @@ class Snackbar extends React.Component {
 
   render() {
     const { align, children, className, ...rest } = this.props
-    const { rootProps, actionProps, messageText, actionText } = this.state
+    const { rootProps, actionButtonProps, messageText, actionText } = this.state
     const rootClassName = cx(
       Array.from(rootProps.className),
       {
@@ -62,9 +72,10 @@ class Snackbar extends React.Component {
         </div>
         <div className="mdc-snackbar__action-wrapper">
           <button
+            ref={v => (this.actionButton_ = v)}
             type="button"
             className="mdc-button mdc-snackbar__action-button"
-            {...actionProps}
+            {...actionButtonProps}
           >
             {actionText}
           </button>

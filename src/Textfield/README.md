@@ -45,3 +45,10 @@ const initialState = { value: '' };
 const Textfield = require('./index').default;
 <Textfield label="Comment" multiline rows="8" cols="40" />
 ```
+
+**Text Field Boxes**
+
+```
+const Textfield = require('./index').default;
+<Textfield box onChange={() => {}} />
+```
