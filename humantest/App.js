@@ -7,9 +7,7 @@ import {
   Button,
   Card,
   Dialog,
-  PermanentDrawer,
-  PersistentDrawer,
-  TemporaryDrawer,
+  Drawer,
   Elevation,
   Checkbox,
   Fab,
@@ -37,8 +35,8 @@ const getPages = () => [
   // MyDialog,
   //MyCheckbox,
   //MyPermanentDrawer,
-  //MyPersistentDrawer,
-  //MyTemporaryDrawer,
+  MyPersistentDrawer,
+  // MyTemporaryDrawer,
   //MyElevation,
   //MyFab,
   //MyFormField,
@@ -54,7 +52,7 @@ const getPages = () => [
   // MySnackbar,
   // MySwitch,
   // MyTabs,
-  MyToolbar,
+  // MyToolbar,
   // MyTextfield,
 ]
 
@@ -135,33 +133,13 @@ class MyPermanentDrawer extends React.Component {
   render() {
     return (
       <div>
-        <PermanentDrawer>
-          <PermanentDrawer.ToolbarSpacer />
-          <PermanentDrawer.Content>
-            <nav id="icon-with-text-demo" className="mdc-list">
-              <a
-                className="mdc-list-item mdc-permanent-drawer--selected"
-                href="#"
-              >
-                <i
-                  className="material-icons mdc-list-item__start-detail"
-                  aria-hidden="true"
-                >
-                  inbox
-                </i>Inbox
-              </a>
-              <a className="mdc-list-item" href="#">
-                <i
-                  className="material-icons mdc-list-item__start-detail"
-                  aria-hidden="true"
-                >
-                  star
-                </i>Star
-              </a>
-            </nav>
-          </PermanentDrawer.Content>
-        </PermanentDrawer>
-        <div>Toolbar and page content go inside here.</div>
+        <DemoDrawerToolbar fixed />
+        <Toolbar.FixedAdjust style={{ display: 'flex' }}>
+          <Drawer.Permanent>
+            <DemoDrawerContent />
+          </Drawer.Permanent>
+          <main>Page content goes here</main>
+        </Toolbar.FixedAdjust>
       </div>
     )
   }
@@ -173,47 +151,29 @@ class MyPersistentDrawer extends React.Component {
   }
   render() {
     return (
-      <div>
-        <PersistentDrawer
+      <div style={{ display: 'flex' }}>
+        <Drawer.Persistent
           open={this.state.open}
           onOpen={() => log('onOpen')}
           onClose={() => log('onClose')}
         >
-          <PersistentDrawer.Drawer>
-            <PersistentDrawer.Header>
-              <PersistentDrawer.HeaderContent>
-                Header here
-              </PersistentDrawer.HeaderContent>
-            </PersistentDrawer.Header>
-            <nav
-              id="icon-with-text-demo"
-              className="mdc-persistent-drawer__content mdc-list"
-            >
-              <a
-                className="mdc-list-item mdc-persistent-drawer--selected"
-                href="#"
-              >
-                <i
-                  className="material-icons mdc-list-item__start-detail"
-                  aria-hidden="true"
-                >
-                  inbox
-                </i>Inbox
-              </a>
-              <a className="mdc-list-item" href="#">
-                <i
-                  className="material-icons mdc-list-item__start-detail"
-                  aria-hidden="true"
-                >
-                  star
-                </i>Star
-              </a>
-            </nav>
-          </PersistentDrawer.Drawer>
-        </PersistentDrawer>
-        <button onClick={() => this.setState({ open: !this.state.open })}>
-          Toggle Drawer: {JSON.stringify(this.state.open)}
-        </button>
+          <Drawer.Persistent.Drawer>
+            <Drawer.Persistent.ToolbarSpacer />
+            <DemoDrawerContent />
+          </Drawer.Persistent.Drawer>
+        </Drawer.Persistent>
+        <div>
+          <DemoDrawerToolbar
+            menu
+            onMenuClick={() => this.setState({ open: !this.state.open })}
+          />
+          <main>
+            <div>
+              {JSON.stringify(this.state)}
+            </div>
+            <DemoParagraphs count={10} />
+          </main>
+        </div>
       </div>
     )
   }
@@ -226,17 +186,17 @@ class MyTemporaryDrawer extends React.Component {
   render() {
     return (
       <div>
-        <TemporaryDrawer
+        <Drawer.Temporary
           open={this.state.open}
           onOpen={() => log('onOpen')}
           onClose={() => this.setState({ open: false })}
         >
-          <TemporaryDrawer.Drawer>
-            <TemporaryDrawer.Header>
-              <TemporaryDrawer.HeaderContent>
+          <Drawer.Temporary.Drawer>
+            <Drawer.Temporary.Header>
+              <Drawer.Temporary.HeaderContent>
                 Header here
-              </TemporaryDrawer.HeaderContent>
-            </TemporaryDrawer.Header>
+              </Drawer.Temporary.HeaderContent>
+            </Drawer.Temporary.Header>
             <nav
               id="icon-with-text-demo"
               className="mdc-persistent-drawer__content mdc-list"
@@ -261,8 +221,8 @@ class MyTemporaryDrawer extends React.Component {
                 </i>Star
               </a>
             </nav>
-          </TemporaryDrawer.Drawer>
-        </TemporaryDrawer>
+          </Drawer.Temporary.Drawer>
+        </Drawer.Temporary>
         <button onClick={() => this.setState({ open: !this.state.open })}>
           Toggle Drawer: {JSON.stringify(this.state.open)}
         </button>

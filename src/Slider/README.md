@@ -51,9 +51,17 @@ initialState = { value: 10, inputValue: 10 };
 </div>
 ```
 
+**Step 2**
+
 ```
+initialState = { value: 10, inputValue: 10 };
 <div>
-  <h>step 2</h>
-  <Slider step={2} onChange={() => {}} />
+  <Slider
+    step={2}
+    value={state.value}
+    onChange={({ detail }) => setState({ value: detail.getValue() })}
+    onInput={({ detail }) => setState({ inputValue: detail.getValue() })}
+  />
+  <div>{JSON.stringify(state)}</div>
 </div>
 ```

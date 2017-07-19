@@ -1,10 +1,10 @@
 // @flow
 import Permanent from './PermanentDrawer'
-import Presistent from './PersistentDrawer'
+import Persistent from './PersistentDrawer'
 import Temporary from './TemporaryDrawer'
 
 export default {
   Permanent,
-  Presistent,
+  Persistent,
   Temporary,
 }

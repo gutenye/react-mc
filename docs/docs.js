@@ -1,6 +1,8 @@
 import React from 'react'
 import Frame from 'react-frame-component'
 import { times } from 'lodash'
+import Toolbar from '../src/Toolbar'
+import List from '../src/List'
 
 window.pd = console.log.bind(console)
 window.log = console.log.bind(console)
@@ -22,8 +24,8 @@ DemoParagraphs.defaultProps = {
   count: 1,
 }
 
-window.DemoFrame = ({ children }) =>
-  <Frame>
+window.DemoFrame = ({ fullWidth, children }) =>
+  <Frame style={{ width: fullWidth ? '100%' : 320 }}>
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
@@ -42,3 +44,32 @@ window.DemoFrame = ({ children }) =>
       {children}
     </div>
   </Frame>
+
+window.DemoDrawerContent = () =>
+  <List>
+    <List.Item className="mdc-persistent-drawer--selected">
+      <List.Item.StartDetail className="material-icons">
+        inbox
+      </List.Item.StartDetail>
+      Inbox
+    </List.Item>
+    <List.Item>
+      <List.Item.StartDetail className="material-icons">
+        star
+      </List.Item.StartDetail>
+      Star
+    </List.Item>
+  </List>
+
+window.DemoDrawerToolbar = ({ menu, onMenuClick, ...rest }) =>
+  <Toolbar {...rest}>
+    <Toolbar.Row>
+      <Toolbar.Section align="start">
+        {menu &&
+          <Toolbar.Icon menu onClick={onMenuClick} className="material-icons">
+            menu
+          </Toolbar.Icon>}
+        <Toolbar.Title>Title</Toolbar.Title>
+      </Toolbar.Section>
+    </Toolbar.Row>
+  </Toolbar>

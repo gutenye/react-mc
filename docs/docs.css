@@ -71,7 +71,6 @@ demo-column > *:not(:last-child) {
 
 iframe {
   border: 1px solid #eee;
-  width: 320px;
   height: 200px;
   margin: 0px;
   overflow: scroll;
