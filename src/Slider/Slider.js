@@ -35,7 +35,13 @@ class Slider extends React.Component {
   }
 
   state = {
-    rootProps: { className: new Set(['mdc-slider']) },
+    rootProps: {
+      className: {
+        'mdc-slider': true,
+        'mdc-slider--discrete': this.props.discrete,
+        'mdc-slider--display-markers': this.props.displayMarkers,
+      },
+    },
     thumbContainerProps: {},
   }
 
@@ -108,14 +114,7 @@ class Slider extends React.Component {
       ...rest
     } = this.props
     const { rootProps, thumbContainerProps } = this.state
-    const rootClassName = cx(
-      Array.from(rootProps.className),
-      {
-        'mdc-slider--discrete': discrete,
-        'mdc-slider--display-markers': displayMarkers,
-      },
-      className
-    )
+    const rootClassName = cx(rootProps.className, className)
     return (
       <div
         ref={v => (this.root_ = v)}
@@ -133,7 +132,7 @@ class Slider extends React.Component {
           <div ref={v => (this.track_ = v)} className="mdc-slider__track" />
           {displayMarkers &&
             <div
-              ref={v => (this.trackMackerContainer_ = v)}
+              ref={v => (this.trackMarkerContainer_ = v)}
               className="mdc-slider__track-marker-container"
             />}
         </div>

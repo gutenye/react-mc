@@ -6,7 +6,7 @@
 ### Usage
 
 ```
-const Menu = require('./index').default;
+window.Menu = require('./index').default;
 initialState = { open: false, selected: null };
 <div style={{position: 'relative'}}>
   <button onClick={() => setState({open: true})}>OPEN MENU</button>

@@ -34,7 +34,12 @@ class Menu extends React.Component {
   }
 
   state = {
-    rootProps: { className: new Set(['mdc-simple-menu']) },
+    rootProps: {
+      className: {
+        'mdc-simple-menu': true,
+        [`mdc-simple-menu--open-from-${this.props.openFrom}`]: 'openFrom',
+      },
+    },
   }
 
   getDefaultFoundation() {
@@ -113,13 +118,7 @@ class Menu extends React.Component {
       ...rest
     } = this.props
     const { rootProps } = this.state
-    const rootClassName = cx(
-      {
-        [`mdc-simple-menu--open-from-${openFrom}`]: 'openFrom',
-      },
-      Array.from(rootProps.className),
-      className
-    )
+    const rootClassName = cx(rootProps.className, className)
     // don't mirror items, as Select needs the el
     this.items_ = items
     // this.items_ = [...items]

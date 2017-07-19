@@ -1,5 +1,7 @@
 /* eslint-disable */
 import React from 'react'
+import '../docs/docs'
+import '../docs/docs.css'
 import { render } from 'react-dom'
 import {
   Button,
@@ -23,6 +25,7 @@ import {
   Slider,
   Snackbar,
   Switch,
+  Tabs,
   Toolbar,
   Textfield,
 } from '../src'
@@ -45,12 +48,13 @@ const getPages = () => [
   //MyLinearProgress,
   //MyList,
   // MyMenu,
-  MyRadio,
+  // MyRadio,
   // MySelect,
   // MySlider,
   // MySnackbar,
   // MySwitch,
-  // MyToolbar,
+  // MyTabs,
+  MyToolbar,
   // MyTextfield,
 ]
 
@@ -553,19 +557,60 @@ class MySwitch extends React.Component {
   }
 }
 
+class MyTabs extends React.Component {
+  render() {
+    const items = [
+      {
+        text: 'Recents',
+        icon: <i className="mdc-tab__icon material-icons">phone</i>,
+      },
+      {
+        text: 'Favorites',
+        icon: <i className="mdc-tab__icon material-icons">favorite</i>,
+        active: true,
+      },
+      {
+        text: 'Nearby',
+        icon: <i className="mdc-tab__icon material-icons">person_pin</i>,
+      },
+    ]
+    return <Tabs indicator="primary" items={items} onChange={pd} />
+  }
+}
+
 class MyToolbar extends React.Component {
   render() {
     return (
-      <Toolbar>
-        <Toolbar.Row>
-          <Toolbar.Section align="start">
-            <Toolbar.Icon menu className="material-icons">
-              menu
-            </Toolbar.Icon>
-            <Toolbar.Title>Title</Toolbar.Title>
-          </Toolbar.Section>
-        </Toolbar.Row>
-      </Toolbar>
+      <div style={{ width: 320 }}>
+        <Toolbar
+          fixed
+          waterfall
+          flexible
+          flexibleDefaultBehavior
+          fixedLastrowOnly
+        >
+          <Toolbar.Row>
+            <Toolbar.Section align="start">
+              <Toolbar.Icon menu className="material-icons">
+                menu
+              </Toolbar.Icon>
+              <Toolbar.Title>Title</Toolbar.Title>
+            </Toolbar.Section>
+          </Toolbar.Row>
+          <Toolbar.Row>
+            <Toolbar.Section align="end">
+              <Toolbar.Icon className="material-icons">
+                file_download
+              </Toolbar.Icon>
+              <Toolbar.Icon className="material-icons">print</Toolbar.Icon>
+              <Toolbar.Icon className="material-icons">more_vert</Toolbar.Icon>
+            </Toolbar.Section>
+          </Toolbar.Row>
+        </Toolbar>
+        <Toolbar.FixedAdjust style={{ marginTop: 224, minHeight: 1000 }}>
+          <DemoParagraphs count={3} />
+        </Toolbar.FixedAdjust>
+      </div>
     )
   }
 }

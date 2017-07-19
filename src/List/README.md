@@ -8,7 +8,7 @@
 **Single-line List**
 
 ```
-const List = require('./index').default;
+window.List = require('./index').default;
 <div>
 <List>
   {_.times(2).map(i =>
@@ -62,7 +62,6 @@ const List = require('./index').default;
 **Two-line List**
 
 ```
-const List = require('./index').default;
 <div>
 <List>
   {_.times(2).map(i =>
@@ -80,7 +79,6 @@ const List = require('./index').default;
 **List Dividers**
 
 ```
-const List = require('./index').default;
 <div>
 <List>
   <List.Item>Hello</List.Item>
@@ -99,7 +97,6 @@ const List = require('./index').default;
 **List Groups**
 
 ```
-const List = require('./index').default;
 <List.Group>
   <List.Group.Subheader>List 1</List.Group.Subheader>
   <List>{_.times(2).map(i => <List.Item key={i}><List.Item.StartDetail className='bg1' />Hello</List.Item>)}</List>

@@ -14,7 +14,12 @@ class Snackbar extends React.Component {
   actionButton_: any
 
   state = {
-    rootProps: { className: new Set(['mdc-snackbar']) },
+    rootProps: {
+      className: {
+        'mdc-snackbar': true,
+        [`mdc-snackbar--align-${this.props.align}`]: this.props.align,
+      },
+    },
     actionButtonProps: {},
     actionText: '',
     messageText: '',
@@ -51,13 +56,7 @@ class Snackbar extends React.Component {
   render() {
     const { align, children, className, ...rest } = this.props
     const { rootProps, actionButtonProps, messageText, actionText } = this.state
-    const rootClassName = cx(
-      Array.from(rootProps.className),
-      {
-        [`mdc-snackbar--align-${align}`]: align,
-      },
-      className
-    )
+    const rootClassName = cx(rootProps.className, className)
     return (
       <div
         ref={v => (this.root_ = v)}

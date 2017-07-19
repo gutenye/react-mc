@@ -31,7 +31,7 @@ class TemporaryDrawer extends React.Component {
 
   state = {
     rootProps: {
-      className: new Set(['mdc-temporary-drawer', 'mdc-typography']),
+      className: { 'mdc-temporary-drawer': true, 'mdc-typography': true },
     },
 
     drawerProps: {},
@@ -87,7 +87,7 @@ class TemporaryDrawer extends React.Component {
   render() {
     const { open, onOpen, onClose, className, children, ...rest } = this.props
     const { rootProps } = this.state
-    const rootClassName = cx(Array.from(rootProps.className), className)
+    const rootClassName = cx(rootProps.className, className)
     return (
       <aside
         ref={v => (this.root_ = v)}

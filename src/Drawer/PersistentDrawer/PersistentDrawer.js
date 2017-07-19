@@ -30,7 +30,7 @@ class PersistentDrawer extends React.Component {
 
   state = {
     rootProps: {
-      className: new Set(['mdc-persistent-drawer', 'mdc-typography']),
+      className: { 'mdc-persistent-drawer': true, 'mdc-typography': true },
     },
   }
 
@@ -74,7 +74,7 @@ class PersistentDrawer extends React.Component {
   render() {
     const { open, onOpen, onClose, className, children, ...rest } = this.props
     const { rootProps } = this.state
-    const rootClassName = cx(Array.from(rootProps.className), className)
+    const rootClassName = cx(rootProps.className, className)
     return (
       <div
         ref={v => (this.root_ = v)}

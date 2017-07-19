@@ -6,6 +6,7 @@ module.exports = {
   title: 'react-mc docs',
   styleguideDir: 'build.docs',
   template: 'docs/template.html',
+  require: ['./docs/docs.js', './docs/docs.css'],
   //assetsDir: 'static',
 
   // prettier-ignore
@@ -54,12 +55,8 @@ module.exports = {
   webpackConfig: {
     module: {
       rules: [
-        { test: /\.js$/, exclude: /node_modules/, use: ['babel-loader'] },
-        {
-          test: /\.js$/,
-          include: /node_modules\/@material/,
-          use: ['babel-loader'],
-        },
+        { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+        { test: /\.js$/, use: ['babel-loader'], exclude: /node_modules/ },
       ],
     },
     plugins: [

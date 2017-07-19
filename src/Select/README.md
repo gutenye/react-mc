@@ -7,7 +7,7 @@
 ### Usage
 
 ```
-const Select = require('./index').default;
+window.Select = require('./index').default;
 <Select
   selectedText="a"
   items={[

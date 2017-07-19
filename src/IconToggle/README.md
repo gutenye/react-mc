@@ -6,7 +6,7 @@
 ### Usage
 
 ```
-const IconToggle = require('./index').default;
+window.IconToggle = require('./index').default;
 initialState = {on: false};
 <div>
   <IconToggle
@@ -26,19 +26,17 @@ initialState = {on: false};
 ```
 
 ```
-const IconToggle = require('./index').default;
-<doc-row>
+<demo-row>
   <IconToggle className="material-icons" onChange={() => {}}>favorite_border</IconToggle>
   <IconToggle primary className="material-icons" onChange={() => {}}>favorite_border</IconToggle>
   <IconToggle accent className="material-icons" onChange={() => {}}>favorite_border</IconToggle>
   <IconToggle disabled className="material-icons" onChange={() => {}}>favorite_border</IconToggle>
-</doc-row>
+</demo-row>
 ```
 
 **Using Font Awesome**
 
 ```
-const IconToggle = require('./index').default;
 <IconToggle data-icon-inner-selector=".fa" onChange={() => {}}>
   <i className="fa fa-star-o" aria-hidden="true"></i>
 </IconToggle>

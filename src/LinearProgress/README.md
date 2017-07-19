@@ -6,7 +6,7 @@
 ### Usage
 
 ```
-const LinearProgress = require('./index').default;
+window.LinearProgress = require('./index').default;
 <div>
   <h>Determinate</h>
   <LinearProgress progress={0.5} />

@@ -10,7 +10,7 @@ const { applyPassive, supportsCssVariables, getMatchesProperty } = util
  *
  * class Button extends React.Component {
  *   state = {
- *     rootProps: { className: new Set() }}
+ *     rootProps: { className: {} }}
  *   }
  * 
  *   initRipple_() {

@@ -25,7 +25,12 @@ class IconToggle extends React.Component {
 
   state = {
     rootProps: {
-      className: new Set(['mdc-icon-toggle']),
+      className: {
+        'mdc-icon-toggle': true,
+        'mdc-icon-toggle--disabled': this.props.disabled,
+        'mdc-icon-toggle--primary': this.props.primary,
+        'mdc-icon-toggle--accent': this.props.accent,
+      },
       role: 'button',
       tabIndex: 0,
       'aria-pressed': 'false',
@@ -88,15 +93,7 @@ class IconToggle extends React.Component {
       ...rest
     } = this.props
     const { rootProps } = this.state
-    const rootClassName = cx(
-      Array.from(rootProps.className),
-      {
-        'mdc-icon-toggle--disabled': disabled,
-        'mdc-icon-toggle--primary': primary,
-        'mdc-icon-toggle--accent': accent,
-      },
-      className
-    )
+    const rootClassName = cx(rootProps.className, className)
     const disabledProps = disabled
       ? { tabIndex: -1, 'aria-pressed': false, 'aria-disabled': true }
       : {}

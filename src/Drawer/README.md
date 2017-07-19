@@ -6,7 +6,7 @@
 ### Usage
 
 ```
-const PermanentDrawer = require('./PermanentDrawer/index').default;
+window.PermanentDrawer = require('./PermanentDrawer/index').default;
 <div>
   <PermanentDrawer>
     <PermanentDrawer.ToolbarSpacer />

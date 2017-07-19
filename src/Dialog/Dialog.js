@@ -39,7 +39,12 @@ class Dialog extends React.Component {
   }
 
   state = {
-    rootProps: { className: new Set() },
+    rootProps: {
+      className: {
+        'mdc-dialog': true,
+      },
+    },
+
     surfaceProps: {},
   }
 
@@ -81,11 +86,7 @@ class Dialog extends React.Component {
       ...rest
     } = this.props
     const { rootProps } = this.state
-    const rootClassName = cx(
-      'mdc-dialog',
-      Array.from(rootProps.className),
-      className
-    )
+    const rootClassName = cx(rootProps.className, className)
     return (
       <div>
         <aside

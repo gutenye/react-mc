@@ -8,7 +8,7 @@
 **Continuous Slider**
 
 ```
-const Slider = require('./Slider').default;
+window.Slider = require('./Slider').default;
 initialState = { value: 10, inputValue: 10 };
 <div>
   <Slider
@@ -23,7 +23,6 @@ initialState = { value: 10, inputValue: 10 };
 **Discrete Slider**
 
 ```
-const Slider = require('./Slider').default;
 initialState = { value: 10, inputValue: 10 };
 <div>
   <Slider
@@ -39,7 +38,6 @@ initialState = { value: 10, inputValue: 10 };
 **Discrete Slider with markers**
 
 ```
-const Slider = require('./Slider').default;
 initialState = { value: 10, inputValue: 10 };
 <div>
   <Slider
@@ -54,7 +52,6 @@ initialState = { value: 10, inputValue: 10 };
 ```
 
 ```
-const Slider = require('./Slider').default;
 <div>
   <h>step 2</h>
   <Slider step={2} onChange={() => {}} />

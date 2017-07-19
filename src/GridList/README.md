@@ -6,7 +6,7 @@
 ### Usage
 
 ```
-const GridList = require('./index').default;
+GridList = require('./index').default;
 <GridList>
   <GridList.Tiles>
     {_.times(8).map(v =>
@@ -26,7 +26,6 @@ const GridList = require('./index').default;
 **with 1px gutter**
 
 ```
-const GridList = require('./index').default;
 <GridList tileGutter1>
   <GridList.Tiles>
     {_.times(4).map(v =>
@@ -46,7 +45,6 @@ const GridList = require('./index').default;
 **Image only**
 
 ```
-const GridList = require('./index').default;
 <GridList>
   <GridList.Tiles>
     {_.times(4).map(v =>
@@ -63,7 +61,6 @@ const GridList = require('./index').default;
 **Header caption**
 
 ```
-const GridList = require('./index').default;
 <GridList headerCaption>
   <GridList.Tiles>
     {_.times(4).map(v =>
@@ -83,7 +80,6 @@ const GridList = require('./index').default;
 **Footer caption with icon**
 
 ```
-const GridList = require('./index').default;
 <GridList withIconAlign='end'>
   <GridList.Tiles>
     {_.times(4).map(v =>

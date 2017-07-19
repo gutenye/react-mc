@@ -29,11 +29,29 @@ class Textfield extends React.Component {
 
   state = {
     rootProps: {
-      className: new Set(['mdc-textfield', 'mdc-textfield--upgraded']),
+      className: {
+        'mdc-textfield': true,
+        'mdc-textfield--upgraded': true,
+        'mdc-textfield--disabled': this.props.disabled,
+        'mdc-textfield--multiline': this.props.multiline,
+        'mdc-textfield--fullwidth': this.props.fullwidth,
+        'mdc-textfield--box': this.props.box,
+      },
     },
-    labelProps: { className: new Set() },
+    labelProps: {
+      className: {
+        'mdc-textfield__label': true,
+        'mdc-textfield__label--float-above': Boolean(this.props.value),
+      },
+    },
     inputProps: {},
-    helptextProps: { className: new Set() },
+    helptextProps: {
+      className: {
+        'mdc-textfield-helptext': true,
+        'mdc-textfield-helptext--validation-msg': this.props.validationMsg,
+        'mdc-textfield-helptext--persistent': this.props.persistent,
+      },
+    },
   }
 
   getDefaultFoundation() {
@@ -77,31 +95,9 @@ class Textfield extends React.Component {
       ...rest
     } = this.props
     const { rootProps, labelProps, helptextProps, inputProps } = this.state
-    const rootClassName = cx(
-      Array.from(rootProps.className),
-      {
-        'mdc-textfield--disabled': disabled,
-        'mdc-textfield--multiline': multiline,
-        'mdc-textfield--fullwidth': fullwidth,
-        'mdc-textfield--box': box,
-      },
-      className
-    )
-    const labelClassName = cx(
-      'mdc-textfield__label',
-      Array.from(labelProps.className),
-      {
-        'mdc-textfield__label--float-above': Boolean(rest.value),
-      }
-    )
-    const helptextClassName = cx(
-      'mdc-textfield-helptext',
-      Array.from(helptextProps.className),
-      {
-        'mdc-textfield-helptext--validation-msg': validationMsg,
-        'mdc-textfield-helptext--persistent': persistent,
-      }
-    )
+    const rootClassName = cx(rootProps.className, className)
+    const labelClassName = cx(labelProps.className)
+    const helptextClassName = cx(helptextProps.className)
 
     const textfield = (
       <div {...rootProps} className={rootClassName}>

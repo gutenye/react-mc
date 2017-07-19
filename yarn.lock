@@ -307,6 +307,15 @@ ajv@^4.7.0, ajv@^4.9.1:
     co "^4.6.0"
     json-stable-stringify "^1.0.1"
 
+ajv@^5.0.0:
+  version "5.2.2"
+  resolved "http://registry.npm.taobao.org/ajv/download/ajv-5.2.2.tgz#47c68d69e86f5d953103b0074a9430dc63da5e39"
+  dependencies:
+    co "^4.6.0"
+    fast-deep-equal "^1.0.0"
+    json-schema-traverse "^0.3.0"
+    json-stable-stringify "^1.0.1"
+
 ajv@^5.1.5:
   version "5.2.0"
   resolved "http://registry.npm.taobao.org/ajv/download/ajv-5.2.0.tgz#c1735024c5da2ef75cc190713073d44f098bf486"
@@ -2237,18 +2246,18 @@ eslint-config-airbnb@^15.0.2:
   dependencies:
     eslint-config-airbnb-base "^11.2.0"
 
-eslint-config-guten-react@1.1.14:
-  version "1.1.14"
-  resolved "http://registry.npm.taobao.org/eslint-config-guten-react/download/eslint-config-guten-react-1.1.14.tgz#409b8fa4ceae52dc6d04978663092118dd92913b"
+eslint-config-guten-react@1.1.15:
+  version "1.1.15"
+  resolved "http://registry.npm.taobao.org/eslint-config-guten-react/download/eslint-config-guten-react-1.1.15.tgz#b93b9d202ee9012dc272f4b3f5216c72f1e22c5a"
   dependencies:
     eslint-config-airbnb "^15.0.2"
-    eslint-config-guten "^1.1.14"
+    eslint-config-guten "^1.1.15"
     eslint-plugin-jsx-a11y "^5.1.1"
     eslint-plugin-react "^7.1.0"
 
-eslint-config-guten@^1.1.14:
-  version "1.1.14"
-  resolved "http://registry.npm.taobao.org/eslint-config-guten/download/eslint-config-guten-1.1.14.tgz#fb1efd05fc9533049eaad46772187e63512281db"
+eslint-config-guten@^1.1.15:
+  version "1.1.15"
+  resolved "http://registry.npm.taobao.org/eslint-config-guten/download/eslint-config-guten-1.1.15.tgz#f9d9d810f9d047b269cfb032c29742b64a25965f"
   dependencies:
     babel-eslint "^7.2.3"
     eslint "^3.19.0"
@@ -2489,6 +2498,10 @@ extsprintf@1.0.2:
 fast-deep-equal@^0.1.0:
   version "0.1.0"
   resolved "http://registry.npm.taobao.org/fast-deep-equal/download/fast-deep-equal-0.1.0.tgz#5c6f4599aba6b333ee3342e2ed978672f1001f8d"
+
+fast-deep-equal@^1.0.0:
+  version "1.0.0"
+  resolved "http://registry.npm.taobao.org/fast-deep-equal/download/fast-deep-equal-1.0.0.tgz#96256a3bc975595eb36d82e9929d060d893439ff"
 
 fast-levenshtein@~2.0.4:
   version "2.0.6"
@@ -4834,6 +4847,10 @@ react-dom@^15.6.1:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
+react-frame-component@^1.1.1:
+  version "1.1.1"
+  resolved "http://registry.npm.taobao.org/react-frame-component/download/react-frame-component-1.1.1.tgz#05b7f5689a2d373f25baf0c9adb0e59d78103388"
+
 react-group@^1.0.4:
   version "1.0.5"
   resolved "http://registry.npm.taobao.org/react-group/download/react-group-1.0.5.tgz#ca07d68cbbae6d99250829e1c32f782587693c07"
@@ -5266,6 +5283,12 @@ sax@~1.2.1:
   version "1.2.4"
   resolved "http://registry.npm.taobao.org/sax/download/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
+schema-utils@^0.3.0:
+  version "0.3.0"
+  resolved "http://registry.npm.taobao.org/schema-utils/download/schema-utils-0.3.0.tgz#f5877222ce3e931edae039f17eb3716e7137f8cf"
+  dependencies:
+    ajv "^5.0.0"
+
 select-hose@^2.0.0:
   version "2.0.0"
   resolved "http://registry.npm.taobao.org/select-hose/download/select-hose-2.0.0.tgz#625d8658f865af43ec962bfc376a37359a4994ca"
@@ -5603,6 +5626,13 @@ style-loader@^0.17.0:
   resolved "http://registry.npm.taobao.org/style-loader/download/style-loader-0.17.0.tgz#e8254bccdb7af74bd58274e36107b4d5ab4df310"
   dependencies:
     loader-utils "^1.0.2"
+
+style-loader@^0.18.2:
+  version "0.18.2"
+  resolved "http://registry.npm.taobao.org/style-loader/download/style-loader-0.18.2.tgz#cc31459afbcd6d80b7220ee54b291a9fd66ff5eb"
+  dependencies:
+    loader-utils "^1.0.2"
+    schema-utils "^0.3.0"
 
 supports-color@^2.0.0:
   version "2.0.0"

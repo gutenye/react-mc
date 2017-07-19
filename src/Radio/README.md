@@ -6,8 +6,7 @@
 ### Usage
 
 ```
-const Radio = require('./index').default;
-const FormField = require('../FormField').default;
+window.Radio = require('./index').default;
 initialState = { company: 'google' };
 <div>
   <FormField>
@@ -25,8 +24,6 @@ initialState = { company: 'google' };
 **Disabled**
 
 ```
-const Radio = require('./index').default;
-const FormField = require('../FormField').default;
 <FormField>
   <Radio disabled onChange={() => {}} />
   <label>Facebook</label>

@@ -1,13 +1,13 @@
 import ReactDOM from 'react-dom'
 import EVENT_MAP from './EVENT_MAP'
 
-// addClass('rootProps', this) with state = {rootProps: {className: new Set()}}
+// addClass('rootProps', this) with state = {rootProps: {className: {'mdc-hello': true}}}
 // addClass(document.body)
 export function addClass(propsName, self) {
   if (typeof propsName === 'string') {
     return function(className) {
       self.setState(state => {
-        state[propsName].className.add(className)
+        state[propsName].className[className] = true
         return { [propsName]: state[propsName] }
       })
     }
@@ -22,7 +22,7 @@ export function removeClass(propsName, self) {
   if (typeof propsName === 'string') {
     return function(className) {
       self.setState(state => {
-        state[propsName].className.delete(className)
+        state[propsName].className[className] = false
         return { [propsName]: state[propsName] }
       })
     }
@@ -35,7 +35,7 @@ export function removeClass(propsName, self) {
 
 export function hasClass(propsName, self) {
   return function(className) {
-    return self.state[propsName].className.has(className)
+    return self.state[propsName].className[className]
   }
 }
 
@@ -96,25 +96,35 @@ export function rmAttr(propsName, self, name) {
 
 // registerHandler('rootProps', this) with state = { rootProps: {} }
 // registerHandler('rootProps', this, 'click')
+// registerHandler('rootProps', this, 'selected', handler)
 // registerHandler(document, 'click')
 // registerHandler(document)
-export function registerHandler(propsName, self, type) {
+export function registerHandler(propsName, self, type, handler) {
   if (typeof propsName === 'string') {
-    if (type) {
+    if (handler) {
+      // ('rootProps', this, 'selected', handler)
+      return function() {
+        registerHandler_(propsName, self)(type, handler)
+      }
+    } else if (type) {
+      // ('rootProps', this, 'click')
       return function(handler) {
         registerHandler_(propsName, self)(type, handler)
       }
     } else {
+      // ('rootProps', this)
       return function(type, handler) {
         registerHandler_(propsName, self)(type, handler)
       }
     }
   } else {
     if (self) {
+      // (document, 'click')
       return function(handler) {
         propsName.addEventListener(self, handler)
       }
     } else {
+      // (document)
       return function(type, handler) {
         propsName.addEventListener(type, handler)
       }

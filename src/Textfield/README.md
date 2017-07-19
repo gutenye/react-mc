@@ -6,7 +6,7 @@
 ### Usage
 
 ```
-const Textfield = require('./index').default;
+window.Textfield = require('./index').default;
 const initialState = { value: '' };
 <div>
   <h>Default</h>
@@ -42,13 +42,11 @@ const initialState = { value: '' };
 **Multiline**
 
 ```
-const Textfield = require('./index').default;
 <Textfield label="Comment" multiline rows="8" cols="40" />
 ```
 
 **Text Field Boxes**
 
 ```
-const Textfield = require('./index').default;
 <Textfield box onChange={() => {}} />
 ```

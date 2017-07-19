@@ -6,22 +6,21 @@
 ### Usage
 
 ```
-const Snackbar = require('./index').default;
+window.Snackbar = require('./index').default;
 const show = (arg) => () => self.snackbar.show({timeout: 2000, ...arg});
 const self = {};
-<doc-row>
+<demo-row>
   <Snackbar ref={v => (self.snackbar = v)} />
   <button onClick={show({message: new Date()})}>Show</button>
   <button onClick={show({message: new Date(), actionText: 'undo', actionHandler: () => log('undo')})}>With Action</button>
   <button onClick={show({message: new Date(), multiline: true})}>With multiline</button>
   <button onClick={show({message: new Date(), actionText: 'undo', actionHandler() {}, multiline: true, actionOnBottom: true})}>With multiline and actionOnBottom</button>
-</doc-row>
+</demo-row>
 ```
 
 **Start Aligned**
 
 ```
-const Snackbar = require('./index').default;
 const self = {};
 <div>
   <Snackbar align='start' style={{zIndex: 10}} ref={v => (self.snackbar = v)} />

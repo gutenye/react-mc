@@ -6,7 +6,7 @@
 ### Usage
 
 ```
-const Typography = require('./index').default;
+window.Typography = require('./index').default;
 <Typography>
   <Typography.Display4>Display 4</Typography.Display4>
   <Typography.Display3>Display 3</Typography.Display3>
@@ -31,7 +31,6 @@ const Typography = require('./index').default;
 **With margin adjustments**
 
 ```
-const Typography = require('./index').default;
 <Typography>
   <Typography.Display4 adjustMargin>Display 4</Typography.Display4>
   <Typography.Display3 adjustMargin>Display 3</Typography.Display3>

@@ -21,7 +21,14 @@ class LinearProgress extends React.Component {
   root_: any
 
   state = {
-    rootProps: { className: new Set(['mdc-linear-progress']) },
+    rootProps: {
+      className: {
+        'mdc-linear-progress': true,
+        'mdc-linear-progress--indeterminate': this.props.indeterminate,
+        'mdc-linear-progress--reversed': this.props.reversed,
+        'mdc-linear-progress--accent': this.props.accent,
+      },
+    },
   }
 
   getDefaultFoundation() {
@@ -48,15 +55,7 @@ class LinearProgress extends React.Component {
       ...rest
     } = this.props
     const { rootProps } = this.state
-    const rootClassName = cx(
-      {
-        'mdc-linear-progress--indeterminate': indeterminate,
-        'mdc-linear-progress--reversed': reversed,
-        'mdc-linear-progress--accent': accent,
-      },
-      Array.from(rootProps.className),
-      className
-    )
+    const rootClassName = cx(rootProps.className, className)
     return (
       <div
         ref={v => (this.root_ = v)}

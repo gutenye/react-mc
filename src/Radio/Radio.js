@@ -2,7 +2,6 @@
 import React from 'react'
 import cx from 'classnames'
 import { MDCRadioFoundation } from '@material/radio/dist/mdc.radio'
-import { getCorrectEventName } from '@material/animation'
 import * as helper from '../helper'
 import type { PropsT } from '../types'
 
@@ -18,7 +17,12 @@ class Radio extends React.Component {
   nativeCb_: any
 
   state = {
-    rootProps: { className: new Set(['mdc-radio']) },
+    rootProps: {
+      className: {
+        'mdc-radio': true,
+        'mdc-radio--disabled': this.props.disabled,
+      },
+    },
   }
 
   getDefaultFoundation() {
@@ -33,13 +37,7 @@ class Radio extends React.Component {
   render() {
     const { checked, onChange, disabled, className, ...rest } = this.props
     const { rootProps } = this.state
-    const rootClassName = cx(
-      Array.from(rootProps.className),
-      {
-        'mdc-radio--disabled': disabled,
-      },
-      className
-    )
+    const rootClassName = cx(rootProps.className, className)
     return (
       <div ref={v => (this.root_ = v)} {...rootProps} className={rootClassName}>
         <input

@@ -5,9 +5,7 @@
 ### Usage
 
 ```
-const FormField = require('./index').default;
-const Checkbox = require('../Checkbox').default;
-
+window.FormField = require('./index').default;
 <div>
   <FormField>
     <input type="checkbox" id="FormField1" />

@@ -18,7 +18,18 @@ class GridList extends React.Component {
   root_: any
 
   state = {
-    rootProps: { className: new Set(['mdc-grid-list']) },
+    rootProps: {
+      className: {
+        'mdc-grid-list': true,
+        'mdc-grid-list--tile-gutter-1': this.props.tileGutter1,
+        'mdc-grid-list--header-caption': this.props.headerCaption,
+        'mdc-grid-list--twoline-caption': this.props.twolineCaption,
+        [`mdc-grid-list--with-icon-align-${this.props.withIconAlign}`]: this
+          .props.withIconAlign,
+        [`mdc-grid-list--tile-aspect-${this.props.aspectRatio}`]: this.props
+          .aspectRatio,
+      },
+    },
   }
 
   getDefaultFoundation() {
@@ -51,17 +62,7 @@ class GridList extends React.Component {
       ...rest
     } = this.props
     const { rootProps } = this.state
-    const rootClassName = cx(
-      {
-        'mdc-grid-list--tile-gutter-1': tileGutter1,
-        'mdc-grid-list--header-caption': headerCaption,
-        'mdc-grid-list--twoline-caption': twolineCaption,
-        [`mdc-grid-list--with-icon-align-${withIconAlign}`]: withIconAlign,
-        [`mdc-grid-list--tile-aspect-${aspectRatio}`]: aspectRatio,
-      },
-      Array.from(rootProps.className),
-      className
-    )
+    const rootClassName = cx(rootProps.className, className)
     return (
       <div
         ref={v => (this.root_ = v)}

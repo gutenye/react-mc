@@ -6,13 +6,14 @@
 ### Usage
 
 ```
-<doc-column>
-  <doc-row>
+window.Button = require('./Button').default;
+<demo-column>
+  <demo-row>
     <Button>Default</Button>
     <Button primary>Primary</Button>
     <Button accent>Accent</Button>
     <Button disabled>Disabled</Button>
-  </doc-row>
+  </demo-row>
   <div>
     <h/>
     <Button raised>Raised</Button>
@@ -27,7 +28,7 @@
     <h/>
     <Button raised disabled>Raised disabled</Button>
   </div>
-</doc-column>
+</demo-column>
 ```
 
 **Links with Button Style**

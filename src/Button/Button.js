@@ -22,7 +22,16 @@ class Button extends React.Component {
   }
 
   state = {
-    rootProps: { className: new Set() },
+    rootProps: {
+      className: {
+        'mdc-button': true,
+        'mdc-button--dense': this.props.dense,
+        'mdc-button--raised': this.props.raised,
+        'mdc-button--compact': this.props.compact,
+        'mdc-button--primary': this.props.primary,
+        'mdc-button--accent': this.props.accent,
+      },
+    },
   }
 
   initRipple_() {
@@ -43,18 +52,7 @@ class Button extends React.Component {
       ...rest
     } = this.props
     const { rootProps } = this.state
-    const rootClassName = cx(
-      'mdc-button',
-      {
-        'mdc-button--dense': dense,
-        'mdc-button--raised': raised,
-        'mdc-button--compact': compact,
-        'mdc-button--primary': primary,
-        'mdc-button--accent': accent,
-      },
-      Array.from(rootProps.className),
-      className
-    )
+    const rootClassName = cx(rootProps.className, className)
     return React.createElement(
       component,
       { ...rootProps, className: rootClassName, ...rest },

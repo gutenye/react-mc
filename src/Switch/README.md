@@ -6,7 +6,7 @@
 ### Usage
 
 ```
-const Switch = require('./index').default;
+window.Switch = require('./index').default;
 initialState = { checked: false };
 <div>
   <Switch
@@ -18,7 +18,6 @@ initialState = { checked: false };
 ```
 
 ```
-const Switch = require('./index').default;
 <div>
   <h>Disabled</h>
   <Switch disabled onChange={() => {}} />

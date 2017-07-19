@@ -6,12 +6,12 @@
 ### Usage
 
 ```
-const Fab = require('./index').default;
-<doc-row>
+window.Fab = require('./index').default;
+<demo-row>
   <Fab className="material-icons"><Fab.Icon>favorite</Fab.Icon></Fab>
   <Fab mini className="material-icons"><Fab.Icon>favorite</Fab.Icon></Fab>
   <Fab plain className="material-icons"><Fab.Icon>favorite</Fab.Icon></Fab>
   <Fab plain mini className="material-icons"><Fab.Icon>favorite</Fab.Icon></Fab>
   <Fab disabled className="material-icons"><Fab.Icon>favorite</Fab.Icon></Fab>
-</doc-row>
+</demo-row>
 ```

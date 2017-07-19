@@ -21,7 +21,13 @@ class Checkbox extends React.Component {
   ripple_: any
 
   state = {
-    rootProps: { className: new Set() },
+    rootProps: {
+      className: {
+        'mdc-checkbox': true,
+        [`mdc-checkbox--theme-${this.props.theme}`]: this.props.theme,
+        'mdc-checkbox--disabled': this.props.disabled,
+      },
+    },
     nativeCbProps: {},
   }
 
@@ -76,15 +82,7 @@ class Checkbox extends React.Component {
       ...rest
     } = this.props
     const { rootProps, nativeCbProps } = this.state
-    const rootClassName = cx(
-      'mdc-checkbox',
-      {
-        [`mdc-checkbox--theme-${theme}`]: theme,
-        'mdc-checkbox--disabled': disabled,
-      },
-      Array.from(rootProps.className),
-      className
-    )
+    const rootClassName = cx(rootProps.className, className)
     return (
       <div ref={v => (this.root_ = v)} {...rootProps} className={rootClassName}>
         <input

@@ -14,7 +14,13 @@ class Fab extends React.Component {
   ripple_: any
 
   state = {
-    rootProps: { className: new Set() },
+    rootProps: {
+      className: {
+        'mdc-fab': true,
+        'mdc-fab--mini': this.props.mini,
+        'mdc-fab--plain': this.props.plain,
+      },
+    },
   }
 
   initRipple_() {
@@ -25,15 +31,7 @@ class Fab extends React.Component {
   render() {
     const { mini, plain, className, children, ...rest } = this.props
     const { rootProps } = this.state
-    const rootClassName = cx(
-      'mdc-fab',
-      {
-        'mdc-fab--mini': mini,
-        'mdc-fab--plain': plain,
-      },
-      Array.from(rootProps.className),
-      className
-    )
+    const rootClassName = cx(rootProps.className, className)
     return (
       <button
         {...rootProps}

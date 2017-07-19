@@ -6,8 +6,8 @@
 ### Usage
 
 ```
-const Elvation = require('./index').default;
-<doc-grid-list>
+window.Elvation = require('./index').default;
+<demo-grid-list>
   <Elevation z="0" className="w100 h100" >0dp</Elevation>
   <Elevation z="1" className="w100 h100" >1dp</Elevation>
   <Elevation z="2" className="w100 h100" >2dp</Elevation>
@@ -33,5 +33,5 @@ const Elvation = require('./index').default;
   <Elevation z="22" className="w100 h100" >22dp</Elevation>
   <Elevation z="23" className="w100 h100" >23dp</Elevation>
   <Elevation z="24" className="w100 h100" >24dp</Elevation>
-</doc-grid-list>
+</demo-grid-list>
 ```

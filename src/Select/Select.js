@@ -17,7 +17,14 @@ class Select extends React.Component {
   menuEl_: any
 
   state = {
-    rootProps: { className: new Set(['mdc-select']), tabIndex: 0 },
+    rootProps: {
+      className: {
+        'mdc-select': true,
+        'mdc-select--disabled': this.props.disabled,
+      },
+      tabIndex: 0,
+    },
+
     menuProps: {},
     selectedText: this.props.selectedText,
     items: this.props.items,
@@ -71,13 +78,7 @@ class Select extends React.Component {
     delete rest.items
     delete rest.selectedText
     const { selectedText, items, rootProps, menuOpen, menuProps } = this.state
-    const rootClassName = cx(
-      Array.from(rootProps.className),
-      {
-        'mdc-select--disabled': disabled,
-      },
-      className
-    )
+    const rootClassName = cx(rootProps.className, className)
     return (
       <div
         ref={v => (this.root_ = v)}

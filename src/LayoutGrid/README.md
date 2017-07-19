@@ -11,7 +11,7 @@
 - phone span is 1 to 4.
 
 ```
-const LayoutGrid = require('./index').default;
+window.LayoutGrid = require('./index').default;
 <LayoutGrid className='bg1'>
   <LayoutGrid.Inner>
     <LayoutGrid.Cell span='6' tablet='8' className='bg2 h100'>
@@ -30,7 +30,6 @@ const LayoutGrid = require('./index').default;
 **Nested**
 
 ```
-const LayoutGrid = require('./index').default;
 <LayoutGrid>
   <LayoutGrid.Inner>
     <LayoutGrid.Cell className='bg1 h100'>
@@ -49,7 +48,6 @@ const LayoutGrid = require('./index').default;
 > Grid with max width (600px) and center alignment by default
 
 ```
-const LayoutGrid = require('./index').default;
 <LayoutGrid style={{maxWidth: 600}} className='bg1'>
   <LayoutGrid.Inner>
     <LayoutGrid.Cell className='bg2 h100'></LayoutGrid.Cell>

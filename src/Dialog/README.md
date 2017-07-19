@@ -6,7 +6,7 @@
 ### Usage
 
 ```
-const Dialog = require('./index').default;
+window.Dialog = require('./index').default;
 initialState = {open: false};
 <div>
   <Dialog

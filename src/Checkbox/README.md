@@ -6,7 +6,7 @@
 ### Usage
 
 ```
-const Checkbox = require('./index').default;
+window.Checkbox = require('./index').default;
 initialState = { checked: false };
 <div>
   <Checkbox checked={state.checked} onChange={e => setState({checked: e.target.checked})} />
@@ -17,6 +17,5 @@ initialState = { checked: false };
 **Disabled**
 
 ```
-const Checkbox = require('./index').default;
 <Checkbox disabled onChange={() => {}} />
 ```

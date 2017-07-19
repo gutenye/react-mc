@@ -30,7 +30,17 @@ class Toolbar extends React.Component {
   }
 
   state = {
-    rootProps: { className: new Set(['mdc-toolbar']) },
+    rootProps: {
+      className: {
+        'mdc-toolbar': true,
+        'mdc-toolbar--fixed': this.props.fixed,
+        'mdc-toolbar--waterfall': this.props.waterfall,
+        'mdc-toolbar--fixed-lastrow-only': this.props.fixedLastrowOnly,
+        'mdc-toolbar--flexible': this.props.flexible,
+        'mdc-toolbar--flexible-default-behavior': this.props
+          .flexibleDefaultBehavior,
+      },
+    },
   }
 
   getDefaultFoundation() {
@@ -77,17 +87,7 @@ class Toolbar extends React.Component {
       ...rest
     } = this.props
     const { rootProps } = this.state
-    const rootClassName = cx(
-      {
-        'mdc-toolbar--fixed': fixed,
-        'mdc-toolbar--waterfall': waterfall,
-        'mdc-toolbar--fixed-lastrow-only': fixedLastrowOnly,
-        'mdc-toolbar--flexible': flexible,
-        'mdc-toolbar--flexible-default-behavior': flexibleDefaultBehavior,
-      },
-      Array.from(rootProps.className),
-      className
-    )
+    const rootClassName = cx(rootProps.className, className)
     return (
       <header
         ref={v => (this.root_ = v)}
