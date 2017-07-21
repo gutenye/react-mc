@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import { MDCTabBarFoundation, MDCTabFoundation } from '@material/tabs'
+import { MDCTabBarFoundation, MDCTabFoundation } from '@material/tabs/dist/mdc.tabs'
 import Tab from './Tab'
 import * as helper from '../helper'
 import type { PropsT } from '../types'
