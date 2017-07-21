@@ -16,8 +16,12 @@ class PersistentDrawer extends React.Component {
 
   props: {
     open: boolean,
-    onOpen: Function,
-    onClose: Function,
+    onClose?: Function,
+    onOpen?: Function,
+    /** private */
+    onClose_?: Function,
+    /** private */
+    onOpen_?: Function,
   } & PropsT
   foundation_: any
   root_: any
@@ -26,6 +30,8 @@ class PersistentDrawer extends React.Component {
   static defaultProps = {
     onOpen: () => {},
     onClose: () => {},
+    onOpen_: () => {},
+    onClose_: () => {},
   }
 
   state = {
@@ -64,15 +70,30 @@ class PersistentDrawer extends React.Component {
       saveElementTabState: (el) => util.saveElementTabState(el),
       restoreElementTabState: (el) => util.restoreElementTabState(el),
       makeElementUntabbable: (el) => el.setAttribute('tabindex', -1),
-      notifyOpen: this.props.onOpen,
-      notifyClose: this.props.onClose,
+      notifyOpen: () => {
+        this.props.onOpen_()
+        this.props.onOpen()
+      },
+      notifyClose: () => {
+        this.props.onClose_()
+        this.props.onClose()
+      },
       isRtl: () => getComputedStyle(this.root_).getPropertyValue('direction') === 'rtl',
       isDrawer: (el) => el === this.drawer,
     })
   }
 
   render() {
-    const { open, onOpen, onClose, className, children, ...rest } = this.props
+    const {
+      open,
+      onClose,
+      onOpen,
+      onClose_,
+      onOpen_,
+      className,
+      children,
+      ...rest
+    } = this.props
     const { rootProps } = this.state
     const rootClassName = cx(rootProps.className, className)
     return (

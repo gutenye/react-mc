@@ -19,6 +19,7 @@ class Toolbar extends React.Component {
     flexible?: boolean,
     flexibleDefaultBehavior?: boolean,
     onChange?: Function,
+    onChange_?: Function,
   } & PropsT
   foundation_: any
   root_: any
@@ -27,6 +28,7 @@ class Toolbar extends React.Component {
 
   static defaultProps = {
     onChange: () => {},
+    onChange_: () => {},
   }
 
   state = {
@@ -63,7 +65,10 @@ class Toolbar extends React.Component {
       getViewportScrollY: () => window.pageYOffset,
       getOffsetHeight: () => this.root_.offsetHeight,
       getFirstRowElementOffsetHeight: () => this.firstRowElement_.offsetHeight,
-      notifyChange: this.props.onChange,
+      notifyChange: () => {
+        this.props.onChange_()
+        this.props.onChange()
+      },
       setStyle: (property, value) => this.root_.style.setProperty(property, value),
       setStyleForTitleElement: (property, value) => this.titleElement_.style.setProperty(property, value),
       setStyleForFlexibleRowElement: (property, value) => this.firstRowElement_.style.setProperty(property, value),
@@ -82,6 +87,8 @@ class Toolbar extends React.Component {
       fixedLastrowOnly,
       flexible,
       flexibleDefaultBehavior,
+      onChange,
+      onChange_,
       className,
       children,
       ...rest

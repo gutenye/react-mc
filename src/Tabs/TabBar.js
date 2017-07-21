@@ -18,6 +18,7 @@ class TabBar extends React.Component {
     indicator?: 'primary' | 'accent',
     theme?: 'dark',
     onChange?: Function,
+    onChange_?: Function,
   } & PropsT
   foundation_: any
   root_: any
@@ -27,6 +28,7 @@ class TabBar extends React.Component {
 
   static defaultProps = {
     onChange: () => {},
+    onChange_: () => {},
   }
 
   state = {
@@ -68,7 +70,10 @@ class TabBar extends React.Component {
       getOffsetWidth: () => this.root_.offsetWidth,
       setStyleForIndicator: (propertyName, value) => this.indicator_.style.setProperty(propertyName, value),
       getOffsetWidthForIndicator: () => this.indicator_.offsetWidth,
-      notifyChange: (evtData) => this.props.onChange({detail: evtData}),
+      notifyChange: (evtData) => {
+        this.props.onChange_({detail: evtData})
+        this.props.onChange(evtData)
+      },
       getNumberOfTabs: () => this.tabs.length,
       isTabActiveAtIndex: (index) => this.tabs[index].isActive,
       setTabActiveAtIndex: (index, isActive) => {
@@ -85,7 +90,16 @@ class TabBar extends React.Component {
   }
 
   render() {
-    const { items, indicator, theme, className, children, ...rest } = this.props
+    const {
+      items,
+      indicator,
+      theme,
+      onChange,
+      onChange_,
+      className,
+      children,
+      ...rest
+    } = this.props
     const { rootProps, tabProps } = this.state
     const rootClassName = cx(rootProps.className, className)
     return (

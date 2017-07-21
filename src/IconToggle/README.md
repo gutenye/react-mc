@@ -7,11 +7,11 @@
 
 ```
 window.IconToggle = require('./index').default;
-initialState = {on: false};
+initialState = {checked: false};
 <div>
   <IconToggle
-    on={state.on}
-    onChange={(e) => setState({ on: e.detail.isOn })}
+    checked={state.checked}
+    onChange={(e) => setState({ checked: e.target.checked })}
     className="material-icons"
     dataToggleOn={{ label: 'Remove from favorites', content: 'favorite' }}
     dataToggleOff={{

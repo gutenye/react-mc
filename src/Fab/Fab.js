@@ -39,7 +39,9 @@ class Fab extends React.Component {
         aria-label="Favorite"
         {...rest}
       >
-        {children}
+        <span className="mdc-fab__icon">
+          {children}
+        </span>
       </button>
     )
   }

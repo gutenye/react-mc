@@ -10,10 +10,17 @@ class Tab extends React.Component {
   props: {
     active?: boolean,
     withIconAndText?: boolean,
+    /** onSelect(tab) */
     onSelected: Function,
+    /** private */
+    onSelected_: Function,
   } & PropsT
   foundation_: any
   root_: any
+
+  static defaultProps = {
+    onSelected_: () => {},
+  }
 
   state = {
     rootProps: {
@@ -33,7 +40,11 @@ class Tab extends React.Component {
       deregisterInteractionHandler: helper.registerHandler('rootProps', this),
       getOffsetWidth: () => this.root_.offsetWidth,
       getOffsetLeft: () => this.root_.offsetLeft,
-      notifySelected: () => this.props.onSelected({detail: {tab: this}}),
+      notifySelected: () => {
+        const tab = this
+        this.props.onSelected_({detail: {tab}})
+        this.props.onSelected(tab)
+      }
     })
   }
 
@@ -42,6 +53,7 @@ class Tab extends React.Component {
       active,
       withIconAndText,
       onSelected,
+      onSelected_,
       className,
       children,
       ...rest

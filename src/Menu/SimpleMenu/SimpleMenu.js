@@ -12,32 +12,34 @@ class Menu extends React.Component {
     items: Array<*>,
     /** open=true or open=selectedIndex */
     open: boolean | number,
-    /** alias to onCancel */
     onClose: Function,
-    onCancel: Function,
-    /** onSelect({index, item}) */
-    onSelected: Function,
-    /** alias to onSelected */
-    onChange: Function,
+    onChange?: Function,
+    /** private, onCancel is diffrent from onClose, click disabled item does not close menu, but still call onCancel. */
+    onCancel_?: Function,
+    /** private */
+    onSelected_?: Function,
     openFrom?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right',
   } & PropsT
   foundation_: any
   root_: any
   itemsContainer_: any
   previousFocus_: any
+  bodyClickHandler_: any
   items_: Array<*>
 
   static defaultProps = {
-    onCancel: () => {},
     onClose: () => {},
-    onSelected: () => {},
+    onChange: () => {},
+    onCancel_: () => {},
+    onSelected_: () => {},
   }
 
   state = {
     rootProps: {
       className: {
         'mdc-simple-menu': true,
-        [`mdc-simple-menu--open-from-${this.props.openFrom}`]: 'openFrom',
+        [`mdc-simple-menu--open-from-${this.props.openFrom}`]: this.props
+          .openFrom,
       },
     },
   }
@@ -68,8 +70,14 @@ class Menu extends React.Component {
       getNumberOfItems: () => this.items_.length,
       registerInteractionHandler: helper.registerHandler('rootProps', this),
       deregisterInteractionHandler: helper.deregisterHandler('rootProps', this),
-      registerBodyClickHandler: (handler) => document.body.addEventListener('click', handler),
-      deregisterBodyClickHandler: (handler) => document.body.removeEventListener('click', handler),
+      registerBodyClickHandler: (handler) => {
+        this.bodyClickHandler_ = handler
+        document.body.addEventListener('click', this.bodyClickHandler)
+      },
+      deregisterBodyClickHandler: (handler) => {
+        this.bodyClickHandler_ = handler
+        document.body.removeEventListener('click', this.bodyClickHandler)
+      },
       getYParamsForItemAtIndex: (index) => {
         const {offsetTop: top, offsetHeight: height} = this.items_[index].el;
         return {top, height};
@@ -77,8 +85,16 @@ class Menu extends React.Component {
       setTransitionDelayForItemAtIndex: (index, value) =>
         this.items_[index].el.style.setProperty('transition-delay', value),
       getIndexForEventTarget: (target) => this.items_.map(v => v.el).indexOf(target),
-      notifySelected: this.onSelected,
-      notifyCancel: this.onCancel,
+      notifySelected: (evtData) => {
+        const detail = {
+          index: evtData.index,
+          item: this.props.items[evtData.index],
+        }
+        this.props.onSelected_({ detail })
+        this.props.onChange(detail.item)
+      },
+      // needs wrap into function, for component update
+      notifyCancel: () => this.props.onCancel_(),
       saveFocus: () => {
         this.previousFocus_ = document.activeElement;
       },
@@ -111,8 +127,9 @@ class Menu extends React.Component {
       open,
       openFrom,
       onClose,
-      onSelected,
-      onCancel,
+      onChange,
+      onSelected_,
+      onCancel_,
       className,
       children,
       ...rest
@@ -171,6 +188,7 @@ class Menu extends React.Component {
   componentDidMount() {
     this.foundation_ = this.getDefaultFoundation()
     this.foundation_.init()
+    window.foundation_ = this.foundation_
 
     if (this.props.open) {
       this.open_(this.props)
@@ -182,13 +200,22 @@ class Menu extends React.Component {
       nextProps.open !== this.props.open &&
       nextProps.open !== this.foundation_.isOpen()
     ) {
-      if (nextProps.open === false) this.foundation_.close()
-      else this.open_(nextProps)
+      if (nextProps.open === false) {
+        // don't call this.foundation_.close() here, as menu is automatically closed by foundation by click event on document
+      } else this.open_(nextProps)
     }
   }
 
   componentWillUnmount() {
     this.foundation_.destroy()
+  }
+
+  // Implement onClick event here, for there is no onClose event in upstream
+  // The onCancel is diffrent: it still get called on click disabled item
+  // https://github.com/material-components/material-components-web/blob/v0.15.0/packages/mdc-menu/simple/foundation.js#L94
+  bodyClickHandler = (e: any) => {
+    this.bodyClickHandler_(e)
+    if (!this.foundation_.isOpen()) this.props.onClose()
   }
 
   open_(props: PropsT) {
@@ -197,20 +224,6 @@ class Menu extends React.Component {
     } else {
       this.foundation_.open()
     }
-  }
-
-  onSelected = (evtData: any) => {
-    const detail = {
-      index: evtData.index,
-      item: this.props.items[evtData.index],
-    }
-    this.props.onSelected({ detail })
-    this.props.onChange({ detail })
-  }
-
-  onCancel = () => {
-    this.props.onCancel()
-    this.props.onClose()
   }
 }
 

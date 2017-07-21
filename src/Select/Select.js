@@ -8,13 +8,20 @@ import type { PropsT } from '../types'
 
 class Select extends React.Component {
   props: {
-    selctedText: string,
-    disabled: boolean,
+    value: string,
     onChange: Function,
+    placeholder?: string,
+    disabled?: boolean,
+    /** private */
+    onChange_?: Function,
   } & PropsT
   foundation_: any
   root_: any
   menuEl_: any
+
+  static defaultProps = {
+    onChange_: () => {},
+  }
 
   state = {
     rootProps: {
@@ -26,8 +33,8 @@ class Select extends React.Component {
     },
 
     menuProps: {},
-    selectedText: this.props.selectedText,
-    items: this.props.items,
+    selectedText: this.getSelectedText(),
+    items: this.getItems(),
     menuOpen: false,
   }
 
@@ -40,8 +47,9 @@ class Select extends React.Component {
       setAttr: helper.setAttr('rootProps', this),
       rmAttr: helper.rmAttr('rootProps', this),
       computeBoundingRect: () => this.root_.getBoundingClientRect(),
-      registerInteractionHandler: helper.registerHandler('rootProps', this),
-      deregisterInteractionHandler: helper.deregisterHandler('rootProps', this),
+      // Don't use rootProps here for Event bubbling
+      registerInteractionHandler: (type, handler) => this.root_.addEventListener(type, handler),
+      deregisterInteractionHandler: (type, handler) => this.root_.removeEventListener(type, handler),
       focus: () => this.root_.focus(),
       makeTabbable: helper.setAttr('rootProps', this, 'tabIndex', 0),
       makeUntabbable: helper.setAttr('rootProps', this, 'tabIndex', -1),
@@ -52,11 +60,14 @@ class Select extends React.Component {
       setMenuElAttr: helper.setAttr('menuProps', this),
       rmMenuElAttr: helper.rmAttr('menuProps', this),
       getMenuElOffsetHeight: () => this.menuEl_.offsetHeight,
-      openMenu: this.openMenu,
-      isMenuOpen: () => this.state.menuOpen,
-      setSelectedTextContent: (selectedText) => this.setState({selectedText}),
+      openMenu: (focusIndex) => this.setState({ menuOpen: focusIndex }),
+      isMenuOpen: () => this.state.menuOpen !== false,
+      setSelectedTextContent: (selectedText) => {
+        this.setState({selectedText})
+      },
       getNumberOfOptions: () => this.state.items.length,
       getTextForOptionAtIndex: index => this.state.items[index].text,
+      getValueForOptionAtIndex: (index) => this.state.items[index].value,
       setAttrForOptionAtIndex: (index, attr, value) => {
         this.state.items[index][attr] = value
         this.setState({items: this.state.items})
@@ -68,13 +79,28 @@ class Select extends React.Component {
       getOffsetTopForOptionAtIndex: index => this.state.items[index].el.offsetTop,
       registerMenuInteractionHandler: helper.registerHandler('menuProps', this),
       deregisterMenuInteractionHandler: helper.deregisterHandler('menuProps', this),
-      notifyChange: this.onChange,
+      notifyChange: () => {
+        const detail = {
+          value: this.foundation_.getValue(),
+          selectedIndex: this.foundation_.getSelectedIndex(),
+          selectedOptions: this.root_.querySelectorAll('[aria-selected]'),
+        }
+        this.props.onChange({ target: { value: detail.value } })
+        this.props.onChange_({ detail })
+      },
       getWindowInnerHeight: () => window.innerHeight,
     })
   }
 
   render() {
-    const { disabled, className, children, ...rest } = this.props
+    const {
+      disabled,
+      onChange,
+      onChange_,
+      className,
+      children,
+      ...rest
+    } = this.props
     delete rest.items
     delete rest.selectedText
     const { selectedText, items, rootProps, menuOpen, menuProps } = this.state
@@ -91,12 +117,14 @@ class Select extends React.Component {
         <span className="mdc-select__selected-text">
           {selectedText}
         </span>
+        {/* onSelected onCancel */}
         <Menu.Simple
           {...menuProps}
-          open={menuOpen}
-          onClose={this.onMenuClose}
+          ref={v => (this.menu_ = v)}
           className="mdc-select__menu"
           items={items}
+          open={menuOpen}
+          onClose={this.onMenuClose}
         />
       </div>
     )
@@ -111,21 +139,23 @@ class Select extends React.Component {
     this.foundation_.destroy()
   }
 
+  getItems() {
+    const { items, placeholder } = this.props
+    let result = [...items]
+    if (placeholder) result.unshift({ text: placeholder, disabled: true })
+    result = result.map(v => ({ role: 'option', ...v }))
+    return result
+  }
+
+  getSelectedText() {
+    const { placeholder, value, items } = this.props
+    if (!value && placeholder) return placeholder
+    const found = items.find(v => v.value === value)
+    return found ? found.text : ''
+  }
+
   onMenuClose = () => {
     this.setState({ menuOpen: false })
-  }
-
-  openMenu = (focusIndex: boolean) => {
-    this.setState({ menuOpen: focusIndex })
-  }
-
-  onChange = () => {
-    const detail = {
-      value: this.foundation_.getValue(),
-      selectedIndex: this.foundation_.getSelectedIndex(),
-      selectedOptions: this.root_.querySelectorAll('[aria-selected]'),
-    }
-    this.props.onChange({ detail })
   }
 }
 

@@ -8,12 +8,25 @@
 
 ```
 window.Select = require('./index').default;
-<Select
-  selectedText="a"
-  items={[
-    { text: 'Facebook', role: 'option' },
-    { text: 'Google', role: 'option' },
-  ]}
-  onChange={v => log('onChange', v)}
-/>
+window.selectItems = [
+  { text: 'Facebook', value: 'facebook' },
+  { text: 'Google', value: 'google' },
+  { text: 'Apple', value: 'apple', disabled: true },
+];
+initialState = { value: null };
+<div>
+  <Select
+    value={state.value}
+    onChange={e => setState({ value: e.target.value })}
+    placeholder='Select a company'
+    items={selectItems}
+  />
+  <div>{JSON.stringify(state)}</div>
+</div>
+```
+
+**Disabled**
+
+```
+<Select disabled placeholder='Select a company' items={selectItems}  />
 ```

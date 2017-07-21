@@ -1,10 +1,11 @@
 - [Github](https://github.com/gutenye/react-mc)
 - [Theming Guide](https://material.io/components/web/docs/theming)
+- [Implementation Details](https://github.com/gutenye/react-mc/blob/master/docs/Implementation Details.md)
+
+**Install**
 
 ```shell
-
 $ yarn add react-mc
-
 ```
 
 **App.js**

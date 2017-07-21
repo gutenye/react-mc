@@ -13,8 +13,8 @@ initialState = { value: 10, inputValue: 10 };
 <div>
   <Slider
     value={state.value}
-    onChange={({ detail }) => setState({ value: detail.getValue() })}
-    onInput={({ detail }) => setState({ inputValue: detail.getValue() })}
+    onChange={e => setState({ value: e.target.value })}
+    onInput={e => setState({ inputValue: e.target.value })}
   />
   <div>{JSON.stringify(state)}</div>
 </div>
@@ -28,8 +28,8 @@ initialState = { value: 10, inputValue: 10 };
   <Slider
     discrete
     value={state.value}
-    onChange={({ detail }) => setState({ value: detail.getValue() })}
-    onInput={({ detail }) => setState({ inputValue: detail.getValue() })}
+    onChange={e => setState({ value: e.target.value })}
+    onInput={e => setState({ inputValue: e.target.value })}
   />
   <div>{JSON.stringify(state)}</div>
 </div>
@@ -44,8 +44,8 @@ initialState = { value: 10, inputValue: 10 };
     discrete
     displayMarkers
     value={state.value}
-    onChange={({ detail }) => setState({ value: detail.getValue() })}
-    onInput={({ detail }) => setState({ inputValue: detail.getValue() })}
+    onChange={e => setState({ value: e.target.value })}
+    onInput={e => setState({ inputValue: e.target.value })}
   />
   <div>{JSON.stringify(state)}</div>
 </div>
@@ -59,8 +59,8 @@ initialState = { value: 10, inputValue: 10 };
   <Slider
     step={2}
     value={state.value}
-    onChange={({ detail }) => setState({ value: detail.getValue() })}
-    onInput={({ detail }) => setState({ inputValue: detail.getValue() })}
+    onChange={e => setState({ value: e.target.value })}
+    onInput={e => setState({ inputValue: e.target.value })}
   />
   <div>{JSON.stringify(state)}</div>
 </div>

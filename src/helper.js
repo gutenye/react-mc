@@ -160,10 +160,10 @@ function registerHandler_(propsName, self) {
   return function(type, handler) {
     // `click` to `onClick`
     let reactType = EVENT_MAP[type]
-    // 'MDCSimpleMenu:selected' => 'onSelected'
+    // 'MDCSimpleMenu:selected' => 'onSelected_'
     if (type.match(/:/)) {
       const part = type.split(/:/)[1]
-      reactType = `on${part[0].toUpperCase()}${part.slice(1, part.length)}`
+      reactType = `on${part[0].toUpperCase()}${part.slice(1, part.length)}_`
     }
     if (reactType) {
       self.setState(state => ({

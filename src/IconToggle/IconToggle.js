@@ -9,19 +9,24 @@ import type { PropsT } from '../types'
 
 class IconToggle extends React.Component {
   props: {
-    on: boolean,
-    /** onChange(detail); detail: {isOn} */
+    checked: boolean,
     onChange: Function,
     dataToggleOn: Object,
     dataToggleOff: Object,
     disabled?: boolean,
     primary?: boolean,
     accent?: boolean,
+    /** private */
+    onChange_?: Function,
   } & PropsT
   foundation_: any
   ripple_: any
   root_: any
   iconEl_: any
+
+  static defaultProps = {
+    onChange_: () => {},
+  }
 
   state = {
     rootProps: {
@@ -55,7 +60,10 @@ class IconToggle extends React.Component {
       getAttr: helper.getAttr('rootProps', this),
       setAttr: helper.setAttr('rootProps', this),
       rmAttr: helper.rmAttr('rootProps', this),
-      notifyChange: this.onChange,
+      notifyChange: (detail) => {
+        this.props.onChange_({ detail })
+        this.props.onChange({ target: { checked: detail.isOn } })
+      }
     })
   }
 
@@ -81,10 +89,11 @@ class IconToggle extends React.Component {
 
   render() {
     const {
-      on,
+      checked,
       dataToggleOn,
       dataToggleOff,
       onChange,
+      onChange_,
       className,
       children,
       disabled,
@@ -134,10 +143,6 @@ class IconToggle extends React.Component {
   componentWillUnmount() {
     this.foundation_.destroy()
     this.ripple_.destroy()
-  }
-
-  onChange = (detail: any) => {
-    this.props.onChange({ detail })
   }
 }
 

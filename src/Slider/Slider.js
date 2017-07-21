@@ -15,6 +15,8 @@ type Props = {
   displayMarkers?: boolean,
   onChange: Function,
   onInput?: Function,
+  onInput_?: Function,
+  onChange_?: Function,
 } & PropsT
 
 class Slider extends React.Component {
@@ -32,6 +34,8 @@ class Slider extends React.Component {
     value: 0,
     step: 0,
     onInput: () => {},
+    onInput_: () => {},
+    onChange_: () => {},
   }
 
   state = {
@@ -64,8 +68,16 @@ class Slider extends React.Component {
       deregisterBodyInteractionHandler: helper.deregisterHandler(document.body),
       registerResizeHandler: helper.registerHandler(window, 'resize'),
       deregisterResizeHandler: helper.deregisterHandler(window, 'resize'),
-      notifyInput: () => this.props.onInput({ detail: this.foundation_ }),
-      notifyChange: () => this.props.onChange({ detail: this.foundation_ }),
+      notifyInput: () => {
+        const value = this.foundation_.getValue()
+        this.props.onInput_({ detail: this.foundation_ })
+        this.props.onInput({ target: { value }})
+      },
+      notifyChange: () => {
+        const value = this.foundation_.getValue()
+        this.props.onChange({ target: { value } })
+        this.props.onChange_({ detail: this.foundation_ })
+      },
       setThumbContainerStyleProperty: (propertyName, value) => {
         this.thumbContainer_.style.setProperty(propertyName, value)
       },
@@ -111,6 +123,8 @@ class Slider extends React.Component {
       children,
       onChange,
       onInput,
+      onChange_,
+      onInput_,
       ...rest
     } = this.props
     const { rootProps, thumbContainerProps } = this.state

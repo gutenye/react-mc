@@ -3,16 +3,19 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 import { MDCDialogFoundation, util } from '@material/dialog/dist/mdc.dialog'
+import type { PropsT } from '../types'
 import * as helper from '../helper'
 
-type PropsT = {
+type Props = {
   open: boolean,
   onClose: Function,
-  onAccept: Function,
-  onCancel: Function,
-  className?: string,
-  children: any,
-}
+  onAccept?: Function,
+  onCancel?: Function,
+  /** private */
+  onAccept_?: Function,
+  /** private */
+  onCancel_?: Function,
+} & PropsT
 
 class Dialog extends React.Component {
   static Backdrop: any
@@ -20,14 +23,15 @@ class Dialog extends React.Component {
   static Footer: any
   static Header: any
   static Surface: any
-  props: PropsT
+  props: Props
   foundation_: any
   root_: any
 
   static defaultProps = {
-    onClose: () => {},
     onAccept: () => {},
     onCancel: () => {},
+    onAccept_: () => {},
+    onCancel_: () => {},
   }
 
   static childContextTypes = {
@@ -64,8 +68,16 @@ class Dialog extends React.Component {
       deregisterDocumentKeydownHandler: helper.deregisterHandler(document, 'keydown'),
       registerTransitionEndHandler: helper.registerHandler('surfaceProps', this, 'transitionend'),
       deregisterTransitionEndHandler: helper.deregisterHandler('surfaceProps', this, 'transitionend'),
-      notifyAccept: this.onAccept,
-      notifyCancel: this.onCancel,
+      notifyAccept: () => {
+        this.props.onAccept()
+        this.props.onAccept_()
+        this.props.onClose()
+      },
+      notifyCancel: () => {
+        this.props.onCancel()
+        this.props.onCancel_()
+        this.props.onClose()
+      },
       trapFocusOnSurface: () => this.focusTrap_ && this.focusTrap_.activate(),
       untrapFocusOnSurface: () => this.focusTrap_ && this.focusTrap_.deactivate(),
       isDialog: helper.isElement('.mdc-dialog__surface', this),
@@ -82,6 +94,8 @@ class Dialog extends React.Component {
       onClose,
       onAccept,
       onCancel,
+      onAccept_,
+      onCancel_,
       children,
       ...rest
     } = this.props
@@ -118,7 +132,7 @@ class Dialog extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps: PropsT) {
+  componentWillReceiveProps(nextProps: Props) {
     if (
       nextProps.open !== this.props.open &&
       nextProps.open !== this.foundation_.isOpen()
@@ -130,16 +144,6 @@ class Dialog extends React.Component {
 
   componentWillUnmount() {
     this.foundation_.destroy()
-  }
-
-  onAccept = () => {
-    this.props.onAccept()
-    this.props.onClose()
-  }
-
-  onCancel = () => {
-    this.props.onCancel()
-    this.props.onClose()
   }
 }
 

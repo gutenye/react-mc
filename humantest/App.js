@@ -35,7 +35,7 @@ const getPages = () => [
   // MyDialog,
   //MyCheckbox,
   //MyPermanentDrawer,
-  MyPersistentDrawer,
+  // MyPersistentDrawer,
   // MyTemporaryDrawer,
   //MyElevation,
   //MyFab,
@@ -47,7 +47,7 @@ const getPages = () => [
   //MyList,
   // MyMenu,
   // MyRadio,
-  // MySelect,
+  MySelect,
   // MySlider,
   // MySnackbar,
   // MySwitch,
@@ -197,10 +197,7 @@ class MyTemporaryDrawer extends React.Component {
                 Header here
               </Drawer.Temporary.HeaderContent>
             </Drawer.Temporary.Header>
-            <nav
-              id="icon-with-text-demo"
-              className="mdc-persistent-drawer__content mdc-list"
-            >
+            <nav className="mdc-persistent-drawer__content mdc-list">
               <a
                 className="mdc-list-item mdc-persistent-drawer--selected"
                 href="#"
@@ -391,9 +388,13 @@ class MyMenu extends React.Component {
   render() {
     return (
       <div>
+        <div>
+          {JSON.stringify(this.state)}
+        </div>
         <Menu.Simple
           open={this.state.open}
           onClose={() => this.setState({ open: false })}
+          onSelected={e => log('onSelected', e.detail)}
           items={[
             { text: 'Facebook', onClick: () => log('Facebook') },
             { text: 'Google', onClick: () => log('Google') },
@@ -401,7 +402,7 @@ class MyMenu extends React.Component {
           ]}
         />
         <button onClick={() => this.setState({ open: !this.state.open })}>
-          toggle menu: {JSON.stringify(this.state.open)}
+          toggle menu
         </button>
         <button onClick={() => this.setState({ open: 0 })}>
           open with selectedIndex
@@ -444,17 +445,28 @@ class MyRadio extends React.Component {
 }
 
 class MySelect extends React.Component {
+  state = {
+    value: null,
+    // value: 'google',
+    // value: 'wrong',
+  }
   render() {
+    const items = [
+      { text: 'Facebook', value: 'facebook' },
+      { text: 'Google', value: 'google' },
+      { text: 'Apple', value: 'apple', disabled: true },
+    ]
     return (
       <div>
         <Select
-          selectedText="a"
-          items={[
-            { text: 'Facebook', role: 'option' },
-            { text: 'Google', role: 'option' },
-          ]}
-          onChange={v => log('onChange', v)}
+          value={this.state.value}
+          onChange={e => this.setState({ value: e.detail.value })}
+          placeholder="Select a company"
+          items={items}
         />
+        <div>
+          {JSON.stringify(this.state)}
+        </div>
       </div>
     )
   }
