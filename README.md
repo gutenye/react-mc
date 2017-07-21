@@ -7,12 +7,13 @@
 [Gratipay](https://gratipay.com/gutenye) |
 [Bountysource](https://www.bountysource.com/teams/gutenye)
 
-> See [Roadmap to first release](https://github.com/gutenye/react-mc/issues/1) and [Known Bugs](https://github.com/gutenye/react-mc/issues/2)
+> See [Roadmap to first release](https://github.com/gutenye/react-mc/issues/1)
 
 Tracking [0.15.0](https://github.com/material-components/material-components-web/blob/master/CHANGELOG.md#0150-2017-07-10)
 
 ## Philosophy
 
+- **React Convention**: `<Select value onChange(e => e.target.value) />`
 - **Move fast**: as upstream changes fast, keep the code simple and keep the peace with the upstream.
 - **Just a wrapper**: keep upstream as close as possible, nothing more
 - **Individual packages** for each components, just like upstream
