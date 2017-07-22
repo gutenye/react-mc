@@ -45,13 +45,13 @@ module.exports = {
   },
 
   styles: {
-    /*
     ComponentsList: {
-      isChild: {
-        display: 'none',
+      heading: {
+        '& + ul > $isChild': {
+          display: 'none',
+        }
       },
     },
-    */
   },
 
   webpackConfig: {
