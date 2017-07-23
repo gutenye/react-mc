@@ -37,6 +37,30 @@ h {
   margin-top: 20px;
 }
 
+demo-mobile {
+  display: block;
+  width: 425px;
+  background-color: #efeff4;
+}
+
+.demo-settings-page {
+}
+
+.demo-settings-page .mdc-list {
+  border-top: 1px solid rgba(0, 0, 0, .12);
+  border-bottom: 1px solid rgba(0, 0, 0, .12);
+  background-color: white;
+}
+
+.demo-settings-page .mdc-list-item__end-detail {
+  color: #c7c7cc;
+}
+
+.demo-settings-page seperator {
+  display: block;
+  height: 48px;
+}
+
 demo-grid-list {
   display: flex;
   align-items: center;

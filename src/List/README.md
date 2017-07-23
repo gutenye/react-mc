@@ -5,6 +5,38 @@
 
 ### Usage
 
+**Example: Settings Page**
+
+```
+<demo-mobile class='demo-settings-page'>
+  <List avatarList>
+    <List.Item>
+      <List.Item.StartDetail component='img' src='https://www.google.com/images/branding/googleg/1x/googleg_standard_color_128dp.png' />
+      <List.Item.Text>
+        Guten Ye
+        <List.Item.Text.Secondary>Apple Id, iCloud, iTunes & App Store</List.Item.Text.Secondary>
+      </List.Item.Text>
+      <List.Item.EndDetail className='material-icons'>keyboard_arrow_right</List.Item.EndDetail>
+    </List.Item>
+  </List>
+  <seperator />
+
+  <List>
+    <List.Item>
+      <List.Item.StartDetail className='material-icons'>network_wifi</List.Item.StartDetail>
+      Wi-Fi
+      <List.Item.EndDetail className='material-icons'>keyboard_arrow_right</List.Item.EndDetail>
+    </List.Item>
+    <List.Divider inset />
+    <List.Item>
+      <List.Item.StartDetail className='material-icons'>bluetooth</List.Item.StartDetail>
+      Bluetooth
+      <List.Item.EndDetail className='material-icons'>keyboard_arrow_right</List.Item.EndDetail>
+    </List.Item>
+  </List>
+</demo-mobile>
+```
+
 **Single-line List**
 
 ```
