@@ -4,7 +4,7 @@ export PATH="node_modules/.bin:$PATH"
 
 build() {
   babel src -d lib --ignore __tests__ "$@"
-  flow-copy-source src lib
+  flow-copy-source src lib --ignore '**/__tests__/*'
 }
 
 docs() {
