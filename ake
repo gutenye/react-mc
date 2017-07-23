@@ -3,6 +3,7 @@
 export PATH="node_modules/.bin:$PATH"
 
 build() {
+  rm -r lib/* 2>/dev/null
   babel src -d lib --ignore __tests__ "$@"
   flow-copy-source src lib --ignore '**/__tests__/*'
 }

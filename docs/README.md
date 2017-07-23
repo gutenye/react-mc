@@ -2,11 +2,13 @@
 - [Theming Guide](https://material.io/components/web/docs/theming)
 - [Implementation Details](https://github.com/gutenye/react-mc/blob/master/docs/Implementation Details.md)
 
-**Install**
+## Install
 
 ```shell
 $ yarn add react-mc
 ```
+
+## Getting Started
 
 **App.js**
 
@@ -25,6 +27,10 @@ $mdc-theme-background: #fff;
 
 @import "@material/button/mdc-button";
 ```
+
+## Flow support
+
+Flow support is out of box, internal, flow use `node_modules/react-mc/lib/index.js.flow` instead of `index.js` file.
 
 
 ## Other Projects implement material-components-web
