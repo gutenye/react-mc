@@ -1,5 +1,5 @@
 export type PropsC = {
-  component?: string | any,
+  component: string | any,
   className?: string,
   style?: Object,
   children: any,

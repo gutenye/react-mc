@@ -1,5 +1,6 @@
 // @flow
 import React from 'react'
+import PropTypes from 'prop-types'
 import cx from 'classnames'
 import { MDCToolbarFoundation, util } from '@material/toolbar/dist/mdc.toolbar'
 import * as helper from '../helper'
@@ -30,6 +31,11 @@ class Toolbar extends React.Component {
   root_: any
   firstRowElement_: any
   titleElement_: any
+  fixedAdjustElement_: any
+
+  static contextTypes = {
+    window: PropTypes.any,
+  }
 
   state = {
     rootProps: {
@@ -52,17 +58,19 @@ class Toolbar extends React.Component {
     this.titleElement_ = this.root_.querySelector(
       MDCToolbarFoundation.strings.TITLE_SELECTOR
     )
+    // fix for demo
+    const window_ = this.context.window || window
     // prettier-ignore
     return new MDCToolbarFoundation({
       hasClass: helper.hasClass('rootProps', this),
       addClass: helper.addClass('rootProps', this),
       removeClass: helper.removeClass('rootProps', this),
-      registerScrollHandler: (handler) => window.addEventListener('scroll', handler, util.applyPassive()),
-      deregisterScrollHandler: (handler) => window.removeEventListener('scroll', handler, util.applyPassive()),
-      registerResizeHandler: (handler) => window.addEventListener('resize', handler),
-      deregisterResizeHandler: (handler) => window.removeEventListener('resize', handler),
-      getViewportWidth: () => window.innerWidth,
-      getViewportScrollY: () => window.pageYOffset,
+      registerScrollHandler: (handler) => window_.addEventListener('scroll', handler, util.applyPassive()),
+      deregisterScrollHandler: (handler) => window_.removeEventListener('scroll', handler, util.applyPassive()),
+      registerResizeHandler: (handler) => window_.addEventListener('resize', handler),
+      deregisterResizeHandler: (handler) => window_.removeEventListener('resize', handler),
+      getViewportWidth: () => window_.innerWidth,
+      getViewportScrollY: () => window_.pageYOffset,
       getOffsetHeight: () => this.root_.offsetHeight,
       getFirstRowElementOffsetHeight: () => this.firstRowElement_.offsetHeight,
       notifyChange: () => {
@@ -73,8 +81,8 @@ class Toolbar extends React.Component {
       setStyleForTitleElement: (property, value) => this.titleElement_.style.setProperty(property, value),
       setStyleForFlexibleRowElement: (property, value) => this.firstRowElement_.style.setProperty(property, value),
       setStyleForFixedAdjustElement: (property, value) => {
-        if (this.fixedAdjustElement) {
-          this.fixedAdjustElement.style.setProperty(property, value);
+        if (this.fixedAdjustElement_) {
+          this.fixedAdjustElement_.style.setProperty(property, value);
         }
       },
     })
@@ -112,6 +120,11 @@ class Toolbar extends React.Component {
 
   componentWillUnmount() {
     this.foundation_.destroy()
+  }
+
+  set fixedAdjustElement(fixedAdjustElement: any) {
+    this.fixedAdjustElement_ = fixedAdjustElement.root_
+    this.foundation_.updateAdjustElementStyles()
   }
 }
 

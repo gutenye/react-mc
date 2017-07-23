@@ -3,18 +3,16 @@ import React from 'react'
 import cx from 'classnames'
 import { MDCRippleFoundation } from '@material/ripple/dist/mdc.ripple'
 import Ripple from '../Ripple'
+import type { PropsC } from '../types'
 
 class Button extends React.Component {
   props: {
-    component?: string,
     dense: boolean,
     raised: boolean,
     compact: boolean,
     primary: boolean,
     accent: boolean,
-    className?: string,
-    children: any,
-  }
+  } & PropsC
   ripple_: any
 
   static defaultProps = {

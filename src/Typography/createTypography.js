@@ -6,7 +6,6 @@ import type { PropsC } from '../types'
 export default function createTypography(name: string) {
   return class extends React.Component {
     props: {
-      component?: string,
       adjustMargin?: boolean,
     } & PropsC
 

@@ -47,12 +47,12 @@ const getPages = () => [
   //MyList,
   // MyMenu,
   // MyRadio,
-  MySelect,
+  // MySelect,
   // MySlider,
   // MySnackbar,
   // MySwitch,
   // MyTabs,
-  // MyToolbar,
+  MyToolbar,
   // MyTextfield,
 ]
 
@@ -552,39 +552,45 @@ class MyTabs extends React.Component {
 
 class MyToolbar extends React.Component {
   render() {
-    return (
-      <div style={{ width: 320 }}>
-        <Toolbar
-          fixed
-          waterfall
-          flexible
-          flexibleDefaultBehavior
-          fixedLastrowOnly
-        >
-          <Toolbar.Row>
-            <Toolbar.Section align="start">
-              <Toolbar.Icon menu className="material-icons">
-                menu
-              </Toolbar.Icon>
-              <Toolbar.Title>Title</Toolbar.Title>
-            </Toolbar.Section>
-          </Toolbar.Row>
-          <Toolbar.Row>
-            <Toolbar.Section align="end">
-              <Toolbar.Icon className="material-icons">
-                file_download
-              </Toolbar.Icon>
-              <Toolbar.Icon className="material-icons">print</Toolbar.Icon>
-              <Toolbar.Icon className="material-icons">more_vert</Toolbar.Icon>
-            </Toolbar.Section>
-          </Toolbar.Row>
-        </Toolbar>
-        <Toolbar.FixedAdjust style={{ marginTop: 224, minHeight: 1000 }}>
-          <DemoParagraphs count={3} />
-        </Toolbar.FixedAdjust>
-      </div>
-    )
+    return <MyWaterfallFlexibleToolbar />
   }
+}
+
+const MyWaterfallFlexibleToolbar = () => {
+  const self = {}
+  return (
+    <div style={{ width: 320 }}>
+      <Toolbar
+        fixed
+        waterfall
+        flexible
+        flexibleDefaultBehavior
+        ref={v => (self.toolbar = v)}
+      >
+        <Toolbar.Row>
+          <Toolbar.Section align="start">
+            <Toolbar.Icon menu className="material-icons">
+              menu
+            </Toolbar.Icon>
+            <Toolbar.Title>Title</Toolbar.Title>
+          </Toolbar.Section>
+          <Toolbar.Section align="end">
+            <Toolbar.Icon className="material-icons">
+              file_download
+            </Toolbar.Icon>
+            <Toolbar.Icon className="material-icons">print</Toolbar.Icon>
+            <Toolbar.Icon className="material-icons">more_vert</Toolbar.Icon>
+          </Toolbar.Section>
+        </Toolbar.Row>
+      </Toolbar>
+      <Toolbar.FixedAdjust
+        ref={v => (self.toolbar.fixedAdjustElement = v)}
+        style={{ minHeight: 1000 }}
+      >
+        <DemoParagraphs count={3} />
+      </Toolbar.FixedAdjust>
+    </div>
+  )
 }
 
 class MyTextfield extends React.Component {

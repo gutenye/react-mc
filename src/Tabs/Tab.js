@@ -81,19 +81,19 @@ class Tab extends React.Component {
     this.foundation_.destroy()
   }
 
-  get isActive() {
+  get isActive(): boolean {
     return this.foundation_.isActive()
   }
 
-  set isActive(isActive) {
+  set isActive(isActive: boolean) {
     this.foundation_.setActive(isActive)
   }
 
-  get preventDefaultOnClick() {
+  get preventDefaultOnClick(): boolean {
     return this.foundation_.preventsDefaultOnClick()
   }
 
-  set preventDefaultOnClick(preventDefaultOnClick) {
+  set preventDefaultOnClick(preventDefaultOnClick: boolean) {
     this.foundation_.setPreventDefaultOnClick(preventDefaultOnClick)
   }
 
@@ -101,11 +101,11 @@ class Tab extends React.Component {
     this.foundation_.measureSelf()
   }
 
-  get computedWidth() {
+  get computedWidth(): number {
     return this.foundation_.getComputedWidth()
   }
 
-  get computedLeft() {
+  get computedLeft(): number {
     return this.foundation_.getComputedLeft()
   }
 }

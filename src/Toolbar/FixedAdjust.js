@@ -10,11 +10,18 @@ class FixedAdjust extends React.Component {
     component: 'main',
   }
   static displayName = 'Toolbar.FixedAdjust'
+  root_: any
 
   render() {
     const { component: Component, className, ...rest } = this.props
     const rootClassName = cx('mdc-toolbar-fixed-adjust', className)
-    return <Component className={rootClassName} {...rest} />
+    return (
+      <Component
+        ref={v => (this.root_ = v)}
+        className={rootClassName}
+        {...rest}
+      />
+    )
   }
 }
 

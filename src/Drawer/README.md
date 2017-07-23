@@ -10,7 +10,7 @@
 
 ```
 window.Drawer = require('./index').default;
-<DemoFrame fullWidth>
+<DemoFrame style={{width: '100%'}}>
   <div style={{display: 'flex'}}>
     <Drawer.Permanent>
       <Drawer.Permanent.ToolbarSpacer />
@@ -29,7 +29,7 @@ window.Drawer = require('./index').default;
 **Permanent Drawer Below Toolbar**
 
 ```
-<DemoFrame fullWidth>
+<DemoFrame style={{width: '100%'}}>
   <DemoDrawerToolbar fixed />
   <Toolbar.FixedAdjust style={{ display: 'flex' }}>
     <Drawer.Permanent>
@@ -46,7 +46,7 @@ window.Drawer = require('./index').default;
 
 ```
 initialState = { open: true };
-<DemoFrame fullWidth>
+<DemoFrame style={{width: '100%'}}>
   <div style={{ display: 'flex' }}>
     <Drawer.Persistent open={state.open} >
       <Drawer.Persistent.Drawer>

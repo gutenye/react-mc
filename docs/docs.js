@@ -24,8 +24,8 @@ DemoParagraphs.defaultProps = {
   count: 1,
 }
 
-window.DemoFrame = ({ fullWidth, children }) =>
-  <Frame style={{ width: fullWidth ? '100%' : 320 }}>
+window.DemoFrame = ({ style, children }) =>
+  <Frame style={{ width: 320, ...style }}>
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
