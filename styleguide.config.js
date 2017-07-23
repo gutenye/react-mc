@@ -8,7 +8,7 @@ module.exports = {
   template: 'docs/template.html',
   require: ['./docs/docs.js', './docs/docs.css'],
   serverPort: 4010,
-  //assetsDir: 'static',
+  assetsDir: 'static',
 
   // prettier-ignore
   sections: [
@@ -66,7 +66,7 @@ module.exports = {
     },
     plugins: [
       new Compression(),
-      //new Copy([{from: 'static'}])
+      new Copy([{ from: 'static' }])
     ],
   },
 }
