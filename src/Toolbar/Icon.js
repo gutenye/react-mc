@@ -1,25 +1,25 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class Icon extends React.Component {
-  static displayName = 'Toolbar.Icon'
   props: {
     menu?: boolean,
-  } & PropsT
+  } & PropsC
+
+  static defaultProps = {
+    component: 'i',
+  }
+  static displayName = 'Toolbar.Icon'
 
   render() {
-    const { menu, className, children, ...rest } = this.props
+    const { component: Component, menu, className, ...rest } = this.props
     const rootClassName = cx(
       menu ? 'mdc-toolbar__icon--menu' : 'mdc-toolbar__icon',
       className
     )
-    return (
-      <i className={rootClassName} {...rest}>
-        {children}
-      </i>
-    )
+    return <Component className={rootClassName} {...rest} />
   }
 }
 

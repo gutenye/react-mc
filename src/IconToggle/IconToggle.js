@@ -5,7 +5,7 @@ import { MDCIconToggleFoundation } from '@material/icon-toggle/dist/mdc.iconTogg
 import { MDCRippleFoundation } from '@material/ripple/dist/mdc.ripple'
 import Ripple from '../Ripple'
 import * as helper from '../helper'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class IconToggle extends React.Component {
   props: {
@@ -18,15 +18,16 @@ class IconToggle extends React.Component {
     accent?: boolean,
     /** private */
     onChange_?: Function,
-  } & PropsT
+  } & PropsC
+
+  static defaultProps = {
+    component: 'i',
+    onChange_: () => {},
+  }
   foundation_: any
   ripple_: any
   root_: any
   iconEl_: any
-
-  static defaultProps = {
-    onChange_: () => {},
-  }
 
   state = {
     rootProps: {
@@ -89,13 +90,13 @@ class IconToggle extends React.Component {
 
   render() {
     const {
+      component: Component,
       checked,
       dataToggleOn,
       dataToggleOff,
       onChange,
       onChange_,
       className,
-      children,
       disabled,
       primary,
       accent,
@@ -108,15 +109,13 @@ class IconToggle extends React.Component {
       : {}
 
     return (
-      <i
+      <Component
         ref={v => (this.root_ = v)}
         {...rootProps}
         className={rootClassName}
         {...disabledProps}
         {...rest}
-      >
-        {children}
-      </i>
+      />
     )
   }
 
@@ -131,7 +130,7 @@ class IconToggle extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps: PropsT) {
+  componentWillReceiveProps(nextProps: PropsC) {
     if (
       nextProps.on !== this.props.on &&
       nextProps.on !== this.foundation_.isOn()

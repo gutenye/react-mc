@@ -1,21 +1,21 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class Elevation extends React.Component {
   props: {
     z: number | string,
-  } & PropsT
+  } & PropsC
+
+  static defaultProps = {
+    component: 'div',
+  }
 
   render() {
-    const { z, className, children, ...rest } = this.props
+    const { component: Component, z, className, ...rest } = this.props
     const rootClassName = cx(`mdc-elevation--z${z}`, className)
-    return (
-      <div className={rootClassName} {...rest}>
-        {children}
-      </div>
-    )
+    return <Component className={rootClassName} {...rest} />
   }
 }
 

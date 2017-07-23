@@ -1,26 +1,26 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import type { PropsT } from '../../types'
+import type { PropsC } from '../../types'
 
 class PermanentDrawer extends React.Component {
+  props: PropsC
+
+  static defaultProps = {
+    component: 'nav',
+  }
   static displayName = 'Drawer.Permanent'
   static Content: any
   static ToolbarSpacer: any
-  props: PropsT
 
   render() {
-    const { children, className, ...rest } = this.props
+    const { component: Component, className, ...rest } = this.props
     const rootClassName = cx(
       'mdc-permanent-drawer',
       'mdc-typography',
       className
     )
-    return (
-      <nav className={rootClassName} {...rest}>
-        {children}
-      </nav>
-    )
+    return <Component className={rootClassName} {...rest} />
   }
 }
 

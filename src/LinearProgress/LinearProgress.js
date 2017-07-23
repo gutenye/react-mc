@@ -3,9 +3,9 @@ import React from 'react'
 import cx from 'classnames'
 import { MDCLinearProgressFoundation } from '@material/linear-progress/dist/mdc.linearProgress'
 import * as helper from '../helper'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
-type Props = {
+type PropsT = {
   /** 0-1 */
   progress: number,
   /** 0-1 */
@@ -13,10 +13,14 @@ type Props = {
   inDeterminate?: boolean,
   reversed?: boolean,
   accent?: boolean,
-} & PropsT
+} & PropsC
 
 class LinearProgress extends React.Component {
-  props: Props
+  props: PropsT
+
+  static defaultProps = {
+    component: 'div',
+  }
   foundation_: any
   root_: any
 
@@ -45,6 +49,7 @@ class LinearProgress extends React.Component {
 
   render() {
     const {
+      component: Component,
       progress,
       buffer,
       indeterminate,
@@ -57,7 +62,7 @@ class LinearProgress extends React.Component {
     const { rootProps } = this.state
     const rootClassName = cx(rootProps.className, className)
     return (
-      <div
+      <Component
         ref={v => (this.root_ = v)}
         role="progressbar"
         {...rootProps}
@@ -72,7 +77,7 @@ class LinearProgress extends React.Component {
         <div className="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
           <span className="mdc-linear-progress__bar-inner" />
         </div>
-      </div>
+      </Component>
     )
   }
 
@@ -82,7 +87,7 @@ class LinearProgress extends React.Component {
     this.init(this.props)
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  componentWillReceiveProps(nextProps: PropsT) {
     this.init(nextProps)
   }
 
@@ -90,7 +95,7 @@ class LinearProgress extends React.Component {
     this.foundation_.destroy()
   }
 
-  init(props: Props) {
+  init(props: PropsT) {
     const { progress, buffer } = props
     if (progress) this.foundation_.setProgress(progress)
     if (buffer) this.foundation_.setBuffer(buffer)

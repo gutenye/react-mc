@@ -1,26 +1,26 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class Title extends React.Component {
-  static displayName = 'Card.Title'
   props: {
     large: boolean,
-  } & PropsT
+  } & PropsC
+
+  static defaultProps = {
+    component: 'h1',
+  }
+  static displayName = 'Card.Title'
 
   render() {
-    const { large, children, className, ...rest } = this.props
+    const { component: Component, large, className, ...rest } = this.props
     const rootClassName = cx(
       'mdc-card__title',
       { 'md-card__title--large': large },
       className
     )
-    return (
-      <h1 className={rootClassName} {...rest}>
-        {children}
-      </h1>
-    )
+    return <Component className={rootClassName} {...rest} />
   }
 }
 

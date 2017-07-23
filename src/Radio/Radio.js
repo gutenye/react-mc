@@ -3,7 +3,7 @@ import React from 'react'
 import cx from 'classnames'
 import { MDCRadioFoundation } from '@material/radio/dist/mdc.radio'
 import * as helper from '../helper'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 /** rest props is passed to `<input>` element instead of root `<div>` element */
 class Radio extends React.Component {
@@ -11,7 +11,11 @@ class Radio extends React.Component {
     checked: boolean,
     onChange: Function,
     disabled?: boolean,
-  } & PropsT
+  } & PropsC
+
+  static defaultProps = {
+    component: 'div',
+  }
   foundation_: any
   root_: any
   nativeCb_: any
@@ -35,11 +39,22 @@ class Radio extends React.Component {
   }
 
   render() {
-    const { checked, onChange, disabled, className, ...rest } = this.props
+    const {
+      component: Component,
+      checked,
+      onChange,
+      disabled,
+      className,
+      ...rest
+    } = this.props
     const { rootProps } = this.state
     const rootClassName = cx(rootProps.className, className)
     return (
-      <div ref={v => (this.root_ = v)} {...rootProps} className={rootClassName}>
+      <Component
+        ref={v => (this.root_ = v)}
+        {...rootProps}
+        className={rootClassName}
+      >
         <input
           ref={v => (this.nativeCb_ = v)}
           type="radio"
@@ -53,7 +68,7 @@ class Radio extends React.Component {
           <div className="mdc-radio__outer-circle" />
           <div className="mdc-radio__inner-circle" />
         </div>
-      </div>
+      </Component>
     )
   }
 

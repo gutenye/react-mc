@@ -1,27 +1,31 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class List extends React.Component {
-  static Divider: any
-  static Group: any
-  static Item: any
   props: {
     theme?: 'dark',
     dense?: boolean,
     twoLine?: boolean,
     avatarList?: boolean,
-  } & PropsT
+  } & PropsC
+
+  static defaultProps = {
+    component: 'ul',
+  }
+  static Divider: any
+  static Group: any
+  static Item: any
 
   render() {
     const {
+      component: Component,
       theme,
       dense,
       twoLine,
       avatarList,
       className,
-      children,
       ...rest
     } = this.props
     const rootClassName = cx(
@@ -34,11 +38,7 @@ class List extends React.Component {
       },
       className
     )
-    return (
-      <ul className={rootClassName} {...rest}>
-        {children}
-      </ul>
-    )
+    return <Component className={rootClassName} {...rest} />
   }
 }
 

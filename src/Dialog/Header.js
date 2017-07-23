@@ -1,21 +1,21 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class Header extends React.Component {
+  props: PropsC
+
+  static defaultProps = {
+    component: 'header',
+  }
   static displayName = 'Dialog.Header'
   static Title: any
-  props: PropsT
 
   render() {
-    const { className, children, ...rest } = this.props
+    const { component: Component, className, ...rest } = this.props
     const rootClassName = cx('mdc-dialog__header', className)
-    return (
-      <header className={rootClassName} {...rest}>
-        {children}
-      </header>
-    )
+    return <Component className={rootClassName} {...rest} />
   }
 }
 

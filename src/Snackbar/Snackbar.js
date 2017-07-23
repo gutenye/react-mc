@@ -3,12 +3,16 @@ import React from 'react'
 import cx from 'classnames'
 import { MDCSnackbarFoundation } from '@material/snackbar/dist/mdc.snackbar'
 import * as helper from '../helper'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class Snackbar extends React.Component {
   props: {
     align?: 'start',
-  } & PropsT
+  } & PropsC
+
+  static defaultProps = {
+    component: 'div',
+  }
   foundation_: any
   root_: any
   actionButton_: any
@@ -54,11 +58,17 @@ class Snackbar extends React.Component {
   }
 
   render() {
-    const { align, children, className, ...rest } = this.props
+    const {
+      component: Component,
+      align,
+      children,
+      className,
+      ...rest
+    } = this.props
     const { rootProps, actionButtonProps, messageText, actionText } = this.state
     const rootClassName = cx(rootProps.className, className)
     return (
-      <div
+      <Component
         ref={v => (this.root_ = v)}
         aria-live="assertive"
         aria-atomic="true"
@@ -79,7 +89,7 @@ class Snackbar extends React.Component {
             {actionText}
           </button>
         </div>
-      </div>
+      </Component>
     )
   }
 

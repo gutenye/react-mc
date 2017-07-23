@@ -140,3 +140,13 @@ window.List = require('./index').default;
 </List.Group>
 ```
 
+**With custom component**
+
+```
+<List>
+  <List.Item component='a' href='#link-a'>Link A</List.Item>
+  <List.Item component='a' href='#link-b'>Link B</List.Item>
+</List>
+```
+
+

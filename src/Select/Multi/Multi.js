@@ -1,23 +1,23 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import type { PropsT } from '../../types'
+import type { PropsC } from '../../types'
 
 class Multi extends React.Component {
+  props: PropsC
+
+  static defaultProps = {
+    component: 'select',
+  }
   static displayName = 'Select.Multi'
   static Group: any
   static Item: any
   static Divider: any
-  props: PropsT
 
   render() {
-    const { className, children, ...rest } = this.props
+    const { component: Component, className, ...rest } = this.props
     const rootClassName = cx('mdc-multi-select', 'mdc-list', className)
-    return (
-      <select multiple size="6" className={rootClassName} {...rest}>
-        {children}
-      </select>
-    )
+    return <Component multiple size="6" className={rootClassName} {...rest} />
   }
 }
 

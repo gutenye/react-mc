@@ -1,20 +1,20 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class Primary extends React.Component {
+  props: PropsC
+
+  static defaultProps = {
+    component: 'div',
+  }
   static displayName = 'GridList.Tile.Primary'
-  props: PropsT
 
   render() {
-    const { className, children, ...rest } = this.props
+    const { component: Component, className, ...rest } = this.props
     const rootClassName = cx('mdc-grid-tile__primary', className)
-    return (
-      <div className={rootClassName} {...rest}>
-        {children}
-      </div>
-    )
+    return <Component className={rootClassName} {...rest} />
   }
 }
 

@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class Cell extends React.Component {
   static displayName = 'LayoutGrid.Cell'
@@ -18,10 +18,15 @@ class Cell extends React.Component {
     order?: number,
     /** top middle bottom */
     align?: string,
-  } & PropsT
+  } & PropsC
+
+  static defaultProps = {
+    component: 'div',
+  }
 
   render() {
     const {
+      component: Component,
       span,
       desktop,
       tablet,
@@ -44,11 +49,7 @@ class Cell extends React.Component {
       },
       className
     )
-    return (
-      <div className={rootClassName} {...rest}>
-        {children}
-      </div>
-    )
+    return <Component className={rootClassName} {...rest} />
   }
 }
 

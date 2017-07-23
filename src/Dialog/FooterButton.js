@@ -1,17 +1,27 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class FooterButton extends React.Component {
-  static displayName = 'Dialog.Footer.Button'
   props: {
     accept?: boolean,
     cancel?: boolean,
-  } & PropsT
+  } & PropsC
+
+  static defaultProps = {
+    component: 'button',
+  }
+  static displayName = 'Dialog.Footer.Button'
 
   render() {
-    const { accept, cancel, className, children, ...rest } = this.props
+    const {
+      component: Component,
+      accept,
+      cancel,
+      className,
+      ...rest
+    } = this.props
     const rootClassName = cx(
       'mdc-button',
       'mdc-dialog__footer__button',
@@ -21,15 +31,7 @@ class FooterButton extends React.Component {
       },
       className
     )
-    return (
-      <button
-        type="button"
-        className={rootClassName}
-        {...rest}
-      >
-        {children}
-      </button>
-    )
+    return <Component type="button" className={rootClassName} {...rest} />
   }
 }
 

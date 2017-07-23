@@ -3,10 +3,9 @@ import React from 'react'
 import cx from 'classnames'
 import { MDCSimpleMenuFoundation, util } from '@material/menu/dist/mdc.menu'
 import * as helper from '../../helper'
-import type { PropsT } from '../../types'
+import type { PropsC } from '../../types'
 
 class Menu extends React.Component {
-  static displayName = 'Menu.Simple'
   props: {
     /** items: [{text, disabled, ...props}]  */
     items: Array<*>,
@@ -19,20 +18,22 @@ class Menu extends React.Component {
     /** private */
     onSelected_?: Function,
     openFrom?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right',
-  } & PropsT
+  } & PropsC
+
+  static defaultProps = {
+    component: 'div',
+    onClose: () => {},
+    onChange: () => {},
+    onCancel_: () => {},
+    onSelected_: () => {},
+  }
+  static displayName = 'Menu.Simple'
   foundation_: any
   root_: any
   itemsContainer_: any
   previousFocus_: any
   bodyClickHandler_: any
   items_: Array<*>
-
-  static defaultProps = {
-    onClose: () => {},
-    onChange: () => {},
-    onCancel_: () => {},
-    onSelected_: () => {},
-  }
 
   state = {
     rootProps: {
@@ -123,6 +124,7 @@ class Menu extends React.Component {
 
   render() {
     const {
+      component: Component,
       items,
       open,
       openFrom,
@@ -140,7 +142,7 @@ class Menu extends React.Component {
     this.items_ = items
     // this.items_ = [...items]
     return (
-      <div
+      <Component
         ref={v => (this.root_ = v)}
         tabIndex="-1"
         {...rootProps}
@@ -181,7 +183,7 @@ class Menu extends React.Component {
             )
           })}
         </ul>
-      </div>
+      </Component>
     )
   }
 
@@ -195,7 +197,7 @@ class Menu extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps: PropsT) {
+  componentWillReceiveProps(nextProps: PropsC) {
     if (
       nextProps.open !== this.props.open &&
       nextProps.open !== this.foundation_.isOpen()
@@ -218,7 +220,7 @@ class Menu extends React.Component {
     if (!this.foundation_.isOpen()) this.props.onClose()
   }
 
-  open_(props: PropsT) {
+  open_(props: PropsC) {
     if (typeof props.open === 'number') {
       this.foundation_.open({ focusIndex: props.open })
     } else {

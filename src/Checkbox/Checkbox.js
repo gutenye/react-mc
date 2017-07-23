@@ -5,7 +5,7 @@ import { MDCCheckboxFoundation } from '@material/checkbox/dist/mdc.checkbox'
 import { MDCRippleFoundation, util } from '@material/ripple/dist/mdc.ripple'
 import Ripple from '../Ripple'
 import * as helper from '../helper'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 /** rest props is passed to `<input>` element instead of root `<div>` element */
 class Checkbox extends React.Component {
@@ -14,7 +14,12 @@ class Checkbox extends React.Component {
     onChange: Function,
     theme?: 'dark',
     disabled?: boolean,
-  } & PropsT
+  } & PropsC
+
+  static defaultProps = {
+    component: 'div',
+  }
+
   foundation_: any
   root_: any
   nativeCb_: any
@@ -73,6 +78,7 @@ class Checkbox extends React.Component {
 
   render() {
     const {
+      component: Component,
       checked,
       onChange,
       children,
@@ -84,7 +90,11 @@ class Checkbox extends React.Component {
     const { rootProps, nativeCbProps } = this.state
     const rootClassName = cx(rootProps.className, className)
     return (
-      <div ref={v => (this.root_ = v)} {...rootProps} className={rootClassName}>
+      <Component
+        ref={v => (this.root_ = v)}
+        {...rootProps}
+        className={rootClassName}
+      >
         <input
           ref={v => (this.nativeCb_ = v)}
           type="checkbox"
@@ -106,7 +116,7 @@ class Checkbox extends React.Component {
           </svg>
         </div>
         <div className="mdc-checkbox__mixedmark" />
-      </div>
+      </Component>
     )
   }
 

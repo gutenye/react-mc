@@ -2,12 +2,16 @@
 import React from 'react'
 import cx from 'classnames'
 import { MDCFormFieldFoundation } from '@material/form-field/dist/mdc.formField'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class FormField extends React.Component {
   props: {
     align?: 'end',
-  } & PropsT
+  } & PropsC
+
+  static defaultProps = {
+    component: 'div',
+  }
   foundation_: any
   root_: any
   label_: any
@@ -35,7 +39,7 @@ class FormField extends React.Component {
   }
 
   render() {
-    const { align, className, children, ...rest } = this.props
+    const { component: Component, align, className, ...rest } = this.props
     const rootClassName = cx(
       'mdc-form-field',
       {
@@ -44,9 +48,11 @@ class FormField extends React.Component {
       className
     )
     return (
-      <div ref={v => (this.root_ = v)} className={rootClassName} {...rest}>
-        {children}
-      </div>
+      <Component
+        ref={v => (this.root_ = v)}
+        className={rootClassName}
+        {...rest}
+      />
     )
   }
 

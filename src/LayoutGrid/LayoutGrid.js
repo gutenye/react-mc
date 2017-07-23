@@ -1,18 +1,28 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class LayoutGrid extends React.Component {
-  static Cell: any
-  static Inner: any
   props: {
     fixedColumnWidth?: boolean,
     align?: 'left' | 'right',
-  } & PropsT
+  } & PropsC
+
+  static defaultProps = {
+    component: 'div',
+  }
+  static Cell: any
+  static Inner: any
 
   render() {
-    const { fixedColumnWidth, align, className, children, ...rest } = this.props
+    const {
+      component: Component,
+      fixedColumnWidth,
+      align,
+      className,
+      ...rest
+    } = this.props
     const rootClassName = cx(
       'mdc-layout-grid',
       {
@@ -21,11 +31,7 @@ class LayoutGrid extends React.Component {
       },
       className
     )
-    return (
-      <div className={rootClassName} {...rest}>
-        {children}
-      </div>
-    )
+    return <Component className={rootClassName} {...rest} />
   }
 }
 

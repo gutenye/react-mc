@@ -1,35 +1,38 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import { MDCTabBarFoundation, MDCTabFoundation } from '@material/tabs/dist/mdc.tabs'
+import {
+  MDCTabBarFoundation,
+  MDCTabFoundation,
+} from '@material/tabs/dist/mdc.tabs'
 import Tab from './Tab'
 import * as helper from '../helper'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class TabBar extends React.Component {
-  static displayName = 'Tabs'
-  static Icon: any
-  static IconText: any
-  static Indicator: any
-  static Tab: any
-
   props: {
     items: Array<*>,
     indicator?: 'primary' | 'accent',
     theme?: 'dark',
     onChange?: Function,
     onChange_?: Function,
-  } & PropsT
+  } & PropsC
+
+  static defaultProps = {
+    component: 'nav',
+    onChange: () => {},
+    onChange_: () => {},
+  }
+  static displayName = 'Tabs'
+  static Icon: any
+  static IconText: any
+  static Indicator: any
+  static Tab: any
   foundation_: any
   root_: any
   indicator_: any
   tabSelectedHandler_: any
   tabs: Array<*> = []
-
-  static defaultProps = {
-    onChange: () => {},
-    onChange_: () => {},
-  }
 
   state = {
     rootProps: {
@@ -91,19 +94,19 @@ class TabBar extends React.Component {
 
   render() {
     const {
+      component: Component,
       items,
       indicator,
       theme,
       onChange,
       onChange_,
       className,
-      children,
       ...rest
     } = this.props
     const { rootProps, tabProps } = this.state
     const rootClassName = cx(rootProps.className, className)
     return (
-      <nav
+      <Component
         ref={v => (this.root_ = v)}
         {...rootProps}
         className={rootClassName}
@@ -124,7 +127,7 @@ class TabBar extends React.Component {
           ref={v => (this.indicator_ = v)}
           className="mdc-tab-bar__indicator"
         />
-      </nav>
+      </Component>
     )
   }
 

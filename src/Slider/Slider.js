@@ -3,9 +3,9 @@ import React from 'react'
 import cx from 'classnames'
 import { MDCSliderFoundation } from '@material/slider/dist/mdc.slider'
 import * as helper from '../helper'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
-type Props = {
+type PropsT = {
   min: number,
   max: number,
   value: number,
@@ -17,18 +17,13 @@ type Props = {
   onInput?: Function,
   onInput_?: Function,
   onChange_?: Function,
-} & PropsT
+} & PropsC
 
 class Slider extends React.Component {
-  props: Props
-  foundation_: any
-  root_: any
-  thumbContainer_: any
-  track_: any
-  pinValueMarker_: any
-  trackMarkerContainer_: any
+  props: PropsT
 
   static defaultProps = {
+    component: 'div',
     min: 0,
     max: 100,
     value: 0,
@@ -37,6 +32,12 @@ class Slider extends React.Component {
     onInput_: () => {},
     onChange_: () => {},
   }
+  foundation_: any
+  root_: any
+  thumbContainer_: any
+  track_: any
+  pinValueMarker_: any
+  trackMarkerContainer_: any
 
   state = {
     rootProps: {
@@ -112,6 +113,7 @@ class Slider extends React.Component {
 
   render() {
     const {
+      component: Component,
       min,
       max,
       value,
@@ -130,7 +132,7 @@ class Slider extends React.Component {
     const { rootProps, thumbContainerProps } = this.state
     const rootClassName = cx(rootProps.className, className)
     return (
-      <div
+      <Component
         ref={v => (this.root_ = v)}
         tabIndex="0"
         role="slider"
@@ -167,7 +169,7 @@ class Slider extends React.Component {
           </svg>
           <div className="mdc-slider__focus-ring" />
         </div>
-      </div>
+      </Component>
     )
   }
 
@@ -179,7 +181,7 @@ class Slider extends React.Component {
     this.foundation_.setupTrackMarker()
   }
 
-  componentWillReceiveProps(nextProps: PropsT) {
+  componentWillReceiveProps(nextProps: PropsC) {
     if (
       nextProps.value !== this.props.value &&
       nextProps.value !== this.foundation_.getValue()

@@ -1,16 +1,26 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class Card extends React.Component {
   props: {
     horizontalBlock?: boolean,
     theme?: 'dark',
-  } & PropsT
+  } & PropsC
+
+  static defaultProps = {
+    component: 'div',
+  }
 
   render() {
-    const { horizontalBlock, theme, children, className, ...rest } = this.props
+    const {
+      component: Component,
+      horizontalBlock,
+      theme,
+      className,
+      ...rest
+    } = this.props
     const rootClassName = cx(
       horizontalBlock ? 'mdc-card__horizontal-block' : 'mdc-card',
       {
@@ -18,11 +28,7 @@ class Card extends React.Component {
       },
       className
     )
-    return (
-      <div className={rootClassName} {...rest}>
-        {children}
-      </div>
-    )
+    return <Component className={rootClassName} {...rest} />
   }
 }
 

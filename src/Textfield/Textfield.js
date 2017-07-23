@@ -3,7 +3,7 @@ import React from 'react'
 import cx from 'classnames'
 import { MDCTextfieldFoundation } from '@material/textfield/dist/mdc.textfield'
 import * as helper from '../helper'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 /** rest props is passed to `<input>` element instead of root `<div>` element */
 class Textfield extends React.Component {
@@ -18,14 +18,15 @@ class Textfield extends React.Component {
     validationMsg?: boolean,
     fullwidth?: boolean,
     box?: boolean,
-  } & PropsT
-  foundation_: any
-  input_: any
+  } & PropsC
 
   static defaultProps = {
+    component: 'div',
     label: '',
     helptext: '',
   }
+  foundation_: any
+  input_: any
 
   state = {
     rootProps: {
@@ -80,6 +81,7 @@ class Textfield extends React.Component {
 
   render() {
     const {
+      component: Component,
       value,
       onChange,
       disabled,
@@ -87,7 +89,6 @@ class Textfield extends React.Component {
       helptext,
       persistent,
       multiline,
-      children,
       className,
       validationMsg,
       fullwidth,
@@ -100,7 +101,7 @@ class Textfield extends React.Component {
     const helptextClassName = cx(helptextProps.className)
 
     const textfield = (
-      <div {...rootProps} className={rootClassName}>
+      <Component {...rootProps} className={rootClassName}>
         {multiline
           ? <textarea
               ref={v => (this.input_ = v)}
@@ -127,7 +128,7 @@ class Textfield extends React.Component {
               {label}
             </label>}
         {box && <div className="mdc-textfield__bottom-line" />}
-      </div>
+      </Component>
     )
 
     if (helptext)

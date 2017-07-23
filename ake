@@ -3,7 +3,8 @@
 export PATH="node_modules/.bin:$PATH"
 
 build() {
-  babel src --out-dir lib --ignore __tests__ "$@"
+  babel src -d lib --ignore __tests__ "$@"
+  flow-copy-source src lib
 }
 
 docs() {
@@ -13,6 +14,7 @@ docs() {
 humantest() {
   webpack-dev-server --config humantest/webpack.config.js
 }
+
 
 publish() {
   styleguidist build

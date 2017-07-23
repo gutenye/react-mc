@@ -3,10 +3,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 import { MDCDialogFoundation, util } from '@material/dialog/dist/mdc.dialog'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 import * as helper from '../helper'
 
-type Props = {
+type PropsT = {
   open: boolean,
   onClose: Function,
   onAccept?: Function,
@@ -15,24 +15,25 @@ type Props = {
   onAccept_?: Function,
   /** private */
   onCancel_?: Function,
-} & PropsT
+} & PropsC
 
 class Dialog extends React.Component {
-  static Backdrop: any
-  static Body: any
-  static Footer: any
-  static Header: any
-  static Surface: any
-  props: Props
-  foundation_: any
-  root_: any
+  props: PropsT
 
   static defaultProps = {
+    component: 'aside',
     onAccept: () => {},
     onCancel: () => {},
     onAccept_: () => {},
     onCancel_: () => {},
   }
+  static Backdrop: any
+  static Body: any
+  static Footer: any
+  static Header: any
+  static Surface: any
+  foundation_: any
+  root_: any
 
   static childContextTypes = {
     surfaceProps: PropTypes.object,
@@ -89,6 +90,7 @@ class Dialog extends React.Component {
 
   render() {
     const {
+      component: Component,
       className,
       open,
       onClose,
@@ -96,23 +98,18 @@ class Dialog extends React.Component {
       onCancel,
       onAccept_,
       onCancel_,
-      children,
       ...rest
     } = this.props
     const { rootProps } = this.state
     const rootClassName = cx(rootProps.className, className)
     return (
-      <div>
-        <aside
-          ref={v => (this.root_ = v)}
-          role="alertdialog"
-          {...rootProps}
-          className={rootClassName}
-          {...rest}
-        >
-          {children}
-        </aside>
-      </div>
+      <Component
+        ref={v => (this.root_ = v)}
+        role="alertdialog"
+        {...rootProps}
+        className={rootClassName}
+        {...rest}
+      />
     )
   }
 
@@ -132,7 +129,7 @@ class Dialog extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps: Props) {
+  componentWillReceiveProps(nextProps: PropsT) {
     if (
       nextProps.open !== this.props.open &&
       nextProps.open !== this.foundation_.isOpen()

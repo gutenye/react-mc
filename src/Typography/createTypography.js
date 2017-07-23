@@ -1,14 +1,14 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 export default function createTypography(name: string) {
   return class extends React.Component {
     props: {
       component?: string,
       adjustMargin?: boolean,
-    } & PropsT
+    } & PropsC
 
     static defaultProps = {
       component: 'div',
@@ -16,10 +16,9 @@ export default function createTypography(name: string) {
 
     render() {
       const {
-        component,
+        component: Component,
         adjustMargin,
         className,
-        children,
         ...rest
       } = this.props
       const rootClassName = cx(
@@ -29,14 +28,7 @@ export default function createTypography(name: string) {
         },
         className
       )
-      return React.createElement(
-        component,
-        {
-          className: rootClassName,
-          ...rest,
-        },
-        children
-      )
+      return <Component className={rootClassName} {...rest} />
     }
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "react-mc",
-  "version": "0.15.1",
+  "version": "0.15.2",
   "description": "React binding of Material Components (MDC-REACT)",
   "main": "lib/index.js",
   "scripts": {
@@ -42,6 +42,7 @@
     "eslint-config-guten-react": "1.1.15",
     "file-loader": "^0.11.2",
     "flow-bin": "^0.49.1",
+    "flow-copy-source": "^1.2.0",
     "flow-typed": "^2.1.2",
     "gh-pages": "^1.0.0",
     "react": "^15.6.1",

@@ -7,6 +7,7 @@ module.exports = {
   styleguideDir: 'build.docs',
   template: 'docs/template.html',
   require: ['./docs/docs.js', './docs/docs.css'],
+  serverPort: 4010,
   //assetsDir: 'static',
 
   // prettier-ignore
@@ -40,6 +41,8 @@ module.exports = {
     { name: 'Toolbars', content: 'src/Toolbar/README.md', components: 'src/Toolbar/[A-Z]*.js' },
     { name: 'Typography', content: 'src/Typography/README.md', components: 'src/Typography/[A-Z]*.js' },
   ],
+
+  // remove default README.md
   getExampleFilename(componentPath) {
     return componentPath.replace(/\.js$/, '.md')
   },

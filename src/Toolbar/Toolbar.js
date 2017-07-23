@@ -3,15 +3,9 @@ import React from 'react'
 import cx from 'classnames'
 import { MDCToolbarFoundation, util } from '@material/toolbar/dist/mdc.toolbar'
 import * as helper from '../helper'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class Toolbar extends React.Component {
-  static FixedAdjust: any
-  static Icon: any
-  static Row: any
-  static Section: any
-  static Title: any
-
   props: {
     fixed?: boolean,
     waterfall?: boolean,
@@ -20,16 +14,22 @@ class Toolbar extends React.Component {
     flexibleDefaultBehavior?: boolean,
     onChange?: Function,
     onChange_?: Function,
-  } & PropsT
+  } & PropsC
+
+  static defaultProps = {
+    component: 'header',
+    onChange: () => {},
+    onChange_: () => {},
+  }
+  static FixedAdjust: any
+  static Icon: any
+  static Row: any
+  static Section: any
+  static Title: any
   foundation_: any
   root_: any
   firstRowElement_: any
   titleElement_: any
-
-  static defaultProps = {
-    onChange: () => {},
-    onChange_: () => {},
-  }
 
   state = {
     rootProps: {
@@ -82,6 +82,7 @@ class Toolbar extends React.Component {
 
   render() {
     const {
+      component: Component,
       fixed,
       waterfall,
       fixedLastrowOnly,
@@ -90,20 +91,17 @@ class Toolbar extends React.Component {
       onChange,
       onChange_,
       className,
-      children,
       ...rest
     } = this.props
     const { rootProps } = this.state
     const rootClassName = cx(rootProps.className, className)
     return (
-      <header
+      <Component
         ref={v => (this.root_ = v)}
         {...rootProps}
         className={rootClassName}
         {...rest}
-      >
-        {children}
-      </header>
+      />
     )
   }
 

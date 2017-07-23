@@ -1,20 +1,20 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class Title extends React.Component {
+  props: PropsC
+
+  static defaultProps = {
+    component: 'span',
+  }
   static displayName = 'GridList.Tile.Title'
-  props: PropsT
 
   render() {
-    const { className, children, ...rest } = this.props
+    const { component: Component, className, children, ...rest } = this.props
     const rootClassName = cx('mdc-grid-tile__title', className)
-    return (
-      <span className={rootClassName} {...rest}>
-        {children}
-      </span>
-    )
+    return <Component className={rootClassName} {...rest} />
   }
 }
 

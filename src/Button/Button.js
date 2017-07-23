@@ -41,23 +41,18 @@ class Button extends React.Component {
 
   render() {
     const {
-      component,
+      component: Component,
       dense,
       raised,
       compact,
       primary,
       accent,
       className,
-      children,
       ...rest
     } = this.props
     const { rootProps } = this.state
     const rootClassName = cx(rootProps.className, className)
-    return React.createElement(
-      component,
-      { ...rootProps, className: rootClassName, ...rest },
-      children
-    )
+    return <Component {...rootProps} className={rootClassName} {...rest} />
   }
 
   componentDidMount() {

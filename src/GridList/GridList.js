@@ -2,18 +2,21 @@
 import React from 'react'
 import cx from 'classnames'
 import { MDCGridListFoundation } from '@material/grid-list/dist/mdc.gridList'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class GridList extends React.Component {
-  static Tiles: any
-
   props: {
     tileGutter1?: boolean,
     headerCaption?: boolean,
     twolineCaption?: boolean,
     withIconAlign?: 'start' | 'end',
     aspectRatio?: string,
-  } & PropsT
+  } & PropsC
+
+  static defaultProps = {
+    component: 'div',
+  }
+  static Tiles: any
   foundation_: any
   root_: any
 
@@ -52,26 +55,24 @@ class GridList extends React.Component {
 
   render() {
     const {
+      component: Component,
       tileGutter1,
       headerCaption,
       twolineCaption,
       withIconAlign,
       aspectRatio,
       className,
-      children,
       ...rest
     } = this.props
     const { rootProps } = this.state
     const rootClassName = cx(rootProps.className, className)
     return (
-      <div
+      <Component
         ref={v => (this.root_ = v)}
         {...rootProps}
         className={rootClassName}
         {...rest}
-      >
-        {children}
-      </div>
+      />
     )
   }
 

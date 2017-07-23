@@ -5,15 +5,9 @@ import {
   util,
 } from '@material/drawer/dist/mdc.drawer'
 import * as helper from '../../helper'
-import type { PropsT } from '../../types'
+import type { PropsC } from '../../types'
 
 class PersistentDrawer extends React.Component {
-  static displayName = 'Drawer.Persistent'
-  static Content: any
-  static Drawer: any
-  static Header: any
-  static HeaderContent: any
-
   props: {
     open: boolean,
     onClose?: Function,
@@ -22,17 +16,23 @@ class PersistentDrawer extends React.Component {
     onClose_?: Function,
     /** private */
     onOpen_?: Function,
-  } & PropsT
-  foundation_: any
-  root_: any
-  drawer: any
+  } & PropsC
 
   static defaultProps = {
+    component: 'aside',
     onOpen: () => {},
     onClose: () => {},
     onOpen_: () => {},
     onClose_: () => {},
   }
+  static displayName = 'Drawer.Persistent'
+  static Content: any
+  static Drawer: any
+  static Header: any
+  static HeaderContent: any
+  foundation_: any
+  root_: any
+  drawer: any
 
   state = {
     rootProps: {
@@ -85,26 +85,24 @@ class PersistentDrawer extends React.Component {
 
   render() {
     const {
+      component: Component,
       open,
       onClose,
       onOpen,
       onClose_,
       onOpen_,
       className,
-      children,
       ...rest
     } = this.props
     const { rootProps } = this.state
     const rootClassName = cx(rootProps.className, className)
     return (
-      <div
+      <Component
         ref={v => (this.root_ = v)}
         {...rootProps}
         className={rootClassName}
         {...rest}
-      >
-        {children}
-      </div>
+      />
     )
   }
 
@@ -117,7 +115,7 @@ class PersistentDrawer extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps: PropsT) {
+  componentWillReceiveProps(nextProps: PropsC) {
     if (
       nextProps.open !== this.props.open &&
       nextProps.open !== this.foundation_.isOpen()

@@ -1,19 +1,19 @@
 import React from 'react'
 import cx from 'classnames'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class Subtitle extends React.Component {
+  props: PropsC
+
+  static defaultProps = {
+    component: 'h1',
+  }
   static displayName = 'Card.Subtitle'
-  props: PropsT
 
   render() {
-    const { children, className, ...rest } = this.props
+    const { component: Component, className, ...rest } = this.props
     const rootClassName = cx('mdc-card__subtitle', className)
-    return (
-      <h1 className={rootClassName} {...rest}>
-        {children}
-      </h1>
-    )
+    return <Component className={rootClassName} {...rest} />
   }
 }
 

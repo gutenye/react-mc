@@ -1,19 +1,19 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class TileIcon extends React.Component {
-  props: PropsT
+  props: PropsC
+
+  static defaultProps = {
+    component: 'i',
+  }
 
   render() {
-    const { className, children, ...rest } = this.props
+    const { component: Component, className, ...rest } = this.props
     const rootClassName = cx('mdc-grid-tile__icon', className)
-    return (
-      <i className={rootClassName} {...rest}>
-        {children}
-      </i>
-    )
+    return <Component className={rootClassName} {...rest} />
   }
 }
 

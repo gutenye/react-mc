@@ -3,10 +3,9 @@ import React from 'react'
 import cx from 'classnames'
 import { MDCTabFoundation } from '@material/tabs/dist/mdc.tabs'
 import * as helper from '../helper'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class Tab extends React.Component {
-  static displayName = 'Tabs.Tab'
   props: {
     active?: boolean,
     withIconAndText?: boolean,
@@ -14,13 +13,15 @@ class Tab extends React.Component {
     onSelected: Function,
     /** private */
     onSelected_: Function,
-  } & PropsT
-  foundation_: any
-  root_: any
+  } & PropsC
 
   static defaultProps = {
+    component: 'div',
     onSelected_: () => {},
   }
+  static displayName = 'Tabs.Tab'
+  foundation_: any
+  root_: any
 
   state = {
     rootProps: {
@@ -50,25 +51,23 @@ class Tab extends React.Component {
 
   render() {
     const {
+      component: Component,
       active,
       withIconAndText,
       onSelected,
       onSelected_,
       className,
-      children,
       ...rest
     } = this.props
     const { rootProps } = this.state
     const rootClassName = cx(rootProps.className, className)
     return (
-      <div
+      <Component
         ref={v => (this.root_ = v)}
         {...rootProps}
         className={rootClassName}
         {...rest}
-      >
-        {children}
-      </div>
+      />
     )
   }
 

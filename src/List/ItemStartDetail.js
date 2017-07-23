@@ -1,30 +1,24 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class StartDetail extends React.Component {
   static displayName = 'List.Item.StartDetail'
-  props: {
-    component?: any,
-  } & PropsT
+  props: PropsC
 
   static defaultProps = {
     component: 'i',
   }
 
   render() {
-    const { component, className, children, ...rest } = this.props
+    const { component: Component, className, ...rest } = this.props
     const rootClassName = cx(
       'mdc-list-item__start-detail',
       'aria-hidden',
       className
     )
-    return React.createElement(
-      component,
-      { className: rootClassName, ...rest },
-      children
-    )
+    return <Component className={rootClassName} {...rest} />
   }
 }
 

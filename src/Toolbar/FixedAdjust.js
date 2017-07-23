@@ -1,20 +1,20 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class FixedAdjust extends React.Component {
+  props: PropsC
+
+  static defaultProps = {
+    component: 'main',
+  }
   static displayName = 'Toolbar.FixedAdjust'
-  props: PropsT
 
   render() {
-    const { className, children, ...rest } = this.props
+    const { component: Component, className, ...rest } = this.props
     const rootClassName = cx('mdc-toolbar-fixed-adjust', className)
-    return (
-      <main className={rootClassName} {...rest}>
-        {children}
-      </main>
-    )
+    return <Component className={rootClassName} {...rest} />
   }
 }
 

@@ -6,33 +6,33 @@ import {
   util,
 } from '@material/drawer/dist/mdc.drawer'
 import * as helper from '../../helper'
-import { PropsT } from '../../types'
+import { PropsC } from '../../types'
 
 class TemporaryDrawer extends React.Component {
-  static displayName = 'Drawer.Temporary'
-  static Content: any
-  static Drawer: any
-  static Header: any
-  static HeaderContent: any
-  static ToolbarSpacer: any
-
   props: {
     open: boolean,
     onClose?: Function,
     onOpen?: Function,
     onClose_?: Function,
     onOpen_?: Function,
-  } & PropsT
-  foundation_: any
-  root_: any
-  drawer: any
+  } & PropsC
 
   static defaultProps = {
+    component: 'aside',
     onOpen: () => {},
     onClose: () => {},
     onOpen_: () => {},
     onClose_: () => {},
   }
+  static displayName = 'Drawer.Temporary'
+  static Content: any
+  static Drawer: any
+  static Header: any
+  static HeaderContent: any
+  static ToolbarSpacer: any
+  foundation_: any
+  root_: any
+  drawer: any
 
   state = {
     rootProps: {
@@ -97,26 +97,24 @@ class TemporaryDrawer extends React.Component {
 
   render() {
     const {
+      component: Component,
       open,
       onClose,
       onOpen,
       onClose_,
       onOpen_,
       className,
-      children,
       ...rest
     } = this.props
     const { rootProps } = this.state
     const rootClassName = cx(rootProps.className, className)
     return (
-      <aside
+      <Component
         ref={v => (this.root_ = v)}
         {...rootProps}
         className={rootClassName}
         {...rest}
-      >
-        {children}
-      </aside>
+      />
     )
   }
 
@@ -129,7 +127,7 @@ class TemporaryDrawer extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps: PropsT) {
+  componentWillReceiveProps(nextProps: PropsC) {
     if (
       nextProps.open !== this.props.open &&
       nextProps.open !== this.foundation_.isOpen()

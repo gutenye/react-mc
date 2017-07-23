@@ -4,7 +4,7 @@ import cx from 'classnames'
 import { MDCSelectFoundation } from '@material/select/dist/mdc.select'
 import Menu from '../Menu'
 import * as helper from '../helper'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class Select extends React.Component {
   props: {
@@ -14,14 +14,16 @@ class Select extends React.Component {
     disabled?: boolean,
     /** private */
     onChange_?: Function,
-  } & PropsT
+  } & PropsC
+
+  static defaultProps = {
+    component: 'div',
+    onChange_: () => {},
+  }
+
   foundation_: any
   root_: any
   menuEl_: any
-
-  static defaultProps = {
-    onChange_: () => {},
-  }
 
   state = {
     rootProps: {
@@ -94,11 +96,11 @@ class Select extends React.Component {
 
   render() {
     const {
+      component: Component,
       disabled,
       onChange,
       onChange_,
       className,
-      children,
       ...rest
     } = this.props
     delete rest.items
@@ -106,7 +108,7 @@ class Select extends React.Component {
     const { selectedText, items, rootProps, menuOpen, menuProps } = this.state
     const rootClassName = cx(rootProps.className, className)
     return (
-      <div
+      <Component
         ref={v => (this.root_ = v)}
         {...rootProps}
         className={rootClassName}
@@ -126,7 +128,7 @@ class Select extends React.Component {
           open={menuOpen}
           onClose={this.onMenuClose}
         />
-      </div>
+      </Component>
     )
   }
 

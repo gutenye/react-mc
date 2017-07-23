@@ -3,14 +3,18 @@ import React from 'react'
 import cx from 'classnames'
 import { MDCRippleFoundation } from '@material/ripple/dist/mdc.ripple'
 import Ripple from '../Ripple'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class Fab extends React.Component {
-  static Icon: any
   props: {
     mini?: boolean,
     plain?: boolean,
-  } & PropsT
+  } & PropsC
+
+  static defaultProps = {
+    component: 'button',
+  }
+  static Icon: any
   ripple_: any
 
   state = {
@@ -29,11 +33,18 @@ class Fab extends React.Component {
   }
 
   render() {
-    const { mini, plain, className, children, ...rest } = this.props
+    const {
+      component: Component,
+      mini,
+      plain,
+      className,
+      children,
+      ...rest
+    } = this.props
     const { rootProps } = this.state
     const rootClassName = cx(rootProps.className, className)
     return (
-      <button
+      <Component
         {...rootProps}
         className={rootClassName}
         aria-label="Favorite"
@@ -42,7 +53,7 @@ class Fab extends React.Component {
         <span className="mdc-fab__icon">
           {children}
         </span>
-      </button>
+      </Component>
     )
   }
 

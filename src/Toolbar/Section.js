@@ -1,17 +1,27 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class Section extends React.Component {
-  static displayName = 'Toolbar.Section'
   props: {
     align: 'start' | 'end',
     shrinkToFit?: boolean,
-  } & PropsT
+  } & PropsC
+
+  static defaultProps = {
+    component: 'div',
+  }
+  static displayName = 'Toolbar.Section'
 
   render() {
-    const { align, shrinkToFit, className, children, ...rest } = this.props
+    const {
+      component: Component,
+      align,
+      shrinkToFit,
+      className,
+      ...rest
+    } = this.props
     const rootClassName = cx(
       'mdc-toolbar__section',
       {
@@ -20,11 +30,7 @@ class Section extends React.Component {
       },
       className
     )
-    return (
-      <div className={rootClassName} {...rest}>
-        {children}
-      </div>
-    )
+    return <Component className={rootClassName} {...rest} />
   }
 }
 

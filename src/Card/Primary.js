@@ -1,20 +1,20 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import type { PropsT } from '../types'
+import type { PropsC } from '../types'
 
 class Primary extends React.Component {
+  props: PropsC
+
+  static defaultProps = {
+    component: 'section',
+  }
   static displayName = 'Card.Primary'
-  props: PropsT
 
   render() {
-    const { children, className, ...rest } = this.props
+    const { component: Component, children, className, ...rest } = this.props
     const rootClassName = cx('mdc-card__primary', className)
-    return (
-      <section className={rootClassName} {...rest}>
-        {children}
-      </section>
-    )
+    return <Component className={rootClassName} {...rest} />
   }
 }
 
