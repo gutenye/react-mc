@@ -8,6 +8,8 @@ import type { PropsC } from '../types'
 
 class Select extends React.Component {
   props: {
+    /** items = [ { text, value, disabled? } ]*/
+    items: Array<*>,
     value: string,
     onChange: Function,
     placeholder?: string,

@@ -11,6 +11,7 @@ import type { PropsC } from '../types'
 
 class TabBar extends React.Component {
   props: {
+    /** items = [ {text, icon: <i className='mdc-tab__icon material-icons'>phone<i> }] */
     items: Array<*>,
     indicator?: 'primary' | 'accent',
     theme?: 'dark',
