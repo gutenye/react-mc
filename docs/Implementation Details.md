@@ -4,7 +4,7 @@
 
 ### Form controls
 
-**value/checked and onChange**
+**value/onChange and checked/onChange**
 
 ```html
 <Textfield value onChange(e)>  e.target.value
@@ -18,7 +18,7 @@
 <Slider value onChange(e)> e.target.value
 ```
 
-**open and onClose**
+**open/onClose**
 
 ```html
 <Dialog open onClose>
@@ -27,7 +27,7 @@
 <Drawer.Temporary open onClose>
 ```
 
-### Component prop
+### The component prop
 
 As upstream's element can be any tagName, in React, we use `component` prop. 
 
@@ -37,8 +37,7 @@ As upstream's element can be any tagName, in React, we use `component` prop.
 <Button component={Link}>Hello</Button> -> <Link>Hello</Link>
 ```
 
-
-### Class name modifiers
+### Class name modifiers naming conventions
 
 Normally, `<Toolbar flexibleDefaultBehavior>` -> `<div class="mdc-toolbar--flexible-default-behavior">`
 
@@ -46,10 +45,9 @@ Some exceptions are:
 
 - `<FormField align='end'>`    -> `<div class="mdc-form-field--align-end">`
 - `<List theme='dark'>` -> `<div class="mdc-list--them-dark>`
-- `<FormField theme='dark'`   -> `theme-dark`
 - `<Card.MediaItem size='2x'>`      -> `<div class="mdc-card__media-item--2x>`
 
-### Naming Conventions
+### Component naming conventions
 
 | Upstream                  |   Current           |
 |---------------------------|---------------------|
@@ -69,7 +67,7 @@ Some exceptions are:
 
 ### Multiple Compnents vs Single Component
 
-Multiple Components are Card, Dialog, Drawer, GridList, LayoutGrid, List, Toolbar, all others are single component.
+Multiple Components are Card, Dialog, Drawer, GridList, LayoutGrid, List, Toolbar, all others are single components.
 
 **Multiple Components**
 
