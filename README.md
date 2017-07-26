@@ -11,15 +11,6 @@
 
 Tracking [0.15.0](https://github.com/material-components/material-components-web/blob/master/CHANGELOG.md#0150-2017-07-10)
 
-## Philosophy
-
-- **React Convention**: `<Select value onChange(e => e.target.value) />`
-- **Move fast**: as upstream changes fast, keep the code simple and keep the peace with the upstream.
-- **Just a wrapper**: keep upstream as close as possible, nothing more
-- **Individual packages** for each components, just like upstream
-- **Flow Support**
-- **Theme Support**
-
 ## Getting Started
 
 See the [Documentation](http://gutenye.github.io/react-mc)
