@@ -12,7 +12,7 @@ class Title extends React.Component {
   static displayName = 'GridList.Tile.Title'
 
   render() {
-    const { component: Component, className, children, ...rest } = this.props
+    const { component: Component, className, ...rest } = this.props
     const rootClassName = cx('mdc-grid-tile__title', className)
     return <Component className={rootClassName} {...rest} />
   }

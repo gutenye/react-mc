@@ -34,6 +34,7 @@ class Dialog extends React.Component {
   static Surface: any
   foundation_: any
   root_: any
+  focusTrap_: any
 
   static childContextTypes = {
     surfaceProps: PropTypes.object,
@@ -79,14 +80,11 @@ class Dialog extends React.Component {
         this.props.onCancel_()
         this.props.onClose()
       },
-      trapFocusOnSurface: () => this.focusTrap_ && this.focusTrap_.activate(),
-      untrapFocusOnSurface: () => this.focusTrap_ && this.focusTrap_.deactivate(),
+      trapFocusOnSurface: () => this.focusTrap_.activate(),
+      untrapFocusOnSurface: () => this.focusTrap_.deactivate(),
       isDialog: helper.isElement('.mdc-dialog__surface', this),
     })
   }
-
-  focusTrap_ = null
-  focusTrap_ = null
 
   render() {
     const {

@@ -12,7 +12,7 @@ class Drawer extends React.Component {
   static displayName = 'Drawer.Temporary.Drawer'
 
   render() {
-    const { component: Component, className, children, ...rest } = this.props
+    const { component: Component, className, ...rest } = this.props
     const rootClassName = cx('mdc-temporary-drawer__drawer', className)
     return <Component className={rootClassName} {...rest} />
   }

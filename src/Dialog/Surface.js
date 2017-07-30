@@ -17,7 +17,7 @@ class Surface extends React.Component {
   }
 
   render() {
-    const { component: Component, className, children, ...rest } = this.props
+    const { component: Component, className, ...rest } = this.props
     const { surfaceProps } = this.context
     const rootClassName = cx('mdc-dialog__surface', className)
     return <Component className={rootClassName} {...surfaceProps} {...rest} />

@@ -13,7 +13,7 @@ class Footer extends React.Component {
   static Button: any
 
   render() {
-    const { component: Component, className, children, ...rest } = this.props
+    const { component: Component, className, ...rest } = this.props
     const rootClassName = cx('mdc-dialog__footer', className)
     return <Component className={rootClassName} {...rest} />
   }
