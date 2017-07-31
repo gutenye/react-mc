@@ -3,6 +3,7 @@
 ## Philosophy
 
 - **React Convention**: `<Select value onChange(e => e.target.value) />`
+- **Performance**: use Foundation in react way as much as possible
 - **Move fast**: As upstream changes fast, keep the code simple and keep the peace with the upstream.
 - **Just a wrapper**: Keep upstream as close as possible, nothing more
 - **Individual packages**: For each component, just like upstream
