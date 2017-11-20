@@ -32,7 +32,7 @@ import Button from '@react-mc/button'
 
 ```scss
 $mdc-theme-primary: #9c27b0;
-$mdc-theme-accent: #76ff03;
+$mdc-theme-secondary: #76ff03;
 $mdc-theme-background: #fff;
 
 @import "@material/button/mdc-button";

@@ -20,7 +20,6 @@ humantest() {
   webpack-dev-server --config humantest/webpack.config.js
 }
 
-
 publish() {
   styleguidist build
   gh-pages -d build.docs
