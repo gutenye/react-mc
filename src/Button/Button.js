@@ -5,13 +5,47 @@ import { MDCRippleFoundation } from '@material/ripple/dist/mdc.ripple'
 import Ripple from '../Ripple'
 import type { PropsC } from '../types'
 
+export const parseThemeOptions = (theme: ?(string | string[])): string[] => {
+  if (theme) {
+    const themeItems = Array.isArray(theme) ? theme : theme.split(' ')
+    return themeItems.map(v => `mdc-theme--${v}`)
+  }
+  return []
+}
+
+function createBase(props) {
+  return class extends React.Component {
+    render() {
+      const { tag: Tag, theme, className, wrap, ...rest } = this.props
+      const classes = cx(className, parseThemeOptions(theme))
+
+      if (wrap) {
+        // sometimes we have undfeind children
+        if (!rest.children) return null
+
+        // make sure we delete our children here
+        // so we dont recrusively clonse ourselves
+        Reflect.deleteProperty(rest, 'children')
+        const child = React.Children.only(rest.children)
+        return React.cloneElement(child, {
+          ...child.props,
+          ...rest,
+          ...{ className: classes },
+        })
+      } else {
+        return <Tag className={classes} {...rest} />
+      }
+    }
+  }
+}
+
 class Button extends React.Component {
   props: {
-    dense: boolean,
     raised: boolean,
+    unelevated: boolean,
+    stroked: boolean,
+    dense: boolean,
     compact: boolean,
-    primary: boolean,
-    accent: boolean,
   } & PropsC
   ripple_: any
 
@@ -23,11 +57,11 @@ class Button extends React.Component {
     rootProps: {
       className: {
         'mdc-button': true,
-        'mdc-button--dense': this.props.dense,
         'mdc-button--raised': this.props.raised,
+        'mdc-button--unelevated': this.props.unelevated,
+        'mdc-button--stroked': this.props.stroked,
+        'mdc-button--dense': this.props.dense,
         'mdc-button--compact': this.props.compact,
-        'mdc-button--primary': this.props.primary,
-        'mdc-button--accent': this.props.accent,
       },
     },
   }
@@ -40,11 +74,11 @@ class Button extends React.Component {
   render() {
     const {
       component: Component,
-      dense,
       raised,
+      unelevated,
+      stroked,
+      dense,
       compact,
-      primary,
-      accent,
       className,
       ...rest
     } = this.props

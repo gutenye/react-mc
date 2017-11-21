@@ -67,7 +67,6 @@ Some exceptions are:
 
 ### Multiple Compnents vs Single Component
 
-Multiple Components are Card, Dialog, Drawer, GridList, LayoutGrid, List, Toolbar, all others are single components.
 
 **Multiple Components**
 

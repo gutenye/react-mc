@@ -7,7 +7,9 @@
     "test": "jest",
     "prepublishOnly": "./ake build"
   },
-  "files": ["lib/"],
+  "files": [
+    "lib/"
+  ],
   "repository": "gutenye/react-mc",
   "keywords": [
     "material-components-web",
@@ -22,7 +24,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "lodash": "^4.17.4",
-    "material-components-web": "^0.15.0",
+    "material-components-web": "^0.25.0",
     "prop-types": "^15.5.10"
   },
   "devDependencies": {
@@ -54,6 +56,7 @@
     "react-styleguidist": "^5.5.4",
     "react-test-renderer": "^15.6.1",
     "style-loader": "^0.18.2",
+    "styled-components": "^2.2.3",
     "webpack": "^3.1.0",
     "webpack-dev-server": "^2.5.0"
   },
@@ -68,7 +71,9 @@
     "transform": {
       "\\.js$": "babel-jest"
     },
-    "transformIgnorePatterns": ["/node_modules/"],
+    "transformIgnorePatterns": [
+      "/node_modules/"
+    ],
     "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js"
   }
 }

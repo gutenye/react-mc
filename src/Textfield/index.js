@@ -1,4 +1,4 @@
 // @flow
-import Textfield from './Textfield'
+import TextField from './TextField'
 
-export default Textfield
+export default TextField

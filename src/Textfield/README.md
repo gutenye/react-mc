@@ -6,47 +6,50 @@
 ### Usage
 
 ```
-window.Textfield = require('./index').default;
+window.TextField = require('./index').default;
 const initialState = { value: '' };
 <div>
   <h>Default</h>
-  <Textfield label="Name" value={state.value} onChange={e => setState({value: e.target.value})} />
+  <TextField label="Name" value={state.value} onChange={e => setState({value: e.target.value})} />
   {state.value}
 
   <h>Required</h>
-  <Textfield label="Name" required />
+  <TextField label="Name" required />
 
   <h>Disabled</h>
-  <Textfield label="Name" disabled />
+  <TextField label="Name" disabled />
 
   <h>Helper Text</h>
-  <Textfield label="Name" helptext="Name is required" />
+  <TextField label="Name" helptext="Name is required" />
 
   <h>Helper Text Persistent</h>
-  <Textfield label="Name" helptext="Name is required" persistent />
+  <TextField label="Name" helptext="Name is required" persistent />
 
   <h>Helper Text as validation message</h>
-  <Textfield label="Name" helptext="Must be at least 2 characters long" persistent validationMsg required minLength="2" />
+  <TextField label="Name" helptext="Must be at least 2 characters long" persistent validationMsg required minLength="2" />
 
   <h>Pre-filled text fields</h>
-  <Textfield label="Name" value="Guten Ye" onChange={() => {}} />
+  <TextField label="Name" value="Guten Ye" onChange={() => {}} />
 
   <h>Pure CSS</h>
-  <Textfield placeholder='Name' />
+  <TextField placeholder='Name' />
 
   <h>Fullwidth</h>
-  <Textfield placeholder='Fullwidth' fullwidth />
+  <TextField placeholder='Fullwidth' fullwidth />
+
+  <h>Leading/Trailing icons</h>
+  <TextField leadingIcon={<i className='material-icons mdc-text-field__icon' tabindex='0'>event</i>} label="Name" />
 </div>
 ```
 
-**Multiline**
+**Textarea**
 
 ```
-<Textfield label="Comment" multiline rows="8" cols="40" />
+<TextField label="Comment" multiline rows="8" cols="40" />
 ```
 
 **Text Field Boxes**
 
 ```
-<Textfield box onChange={() => {}} />
+<TextField box onChange={() => {}} />
 ```

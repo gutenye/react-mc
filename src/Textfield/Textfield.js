@@ -1,12 +1,14 @@
 // @flow
 import React from 'react'
 import cx from 'classnames'
-import { MDCTextfieldFoundation } from '@material/textfield/dist/mdc.textfield'
+import { MDCTextFieldFoundation } from '@material/textfield/dist/mdc.textfield'
 import * as helper from '../helper'
 import type { PropsC } from '../types'
 
+const { cssClasses, strings } = MDCTextFieldFoundation
+
 /** rest props is passed to `<input>` element instead of root `<div>` element */
-class Textfield extends React.Component {
+class TextField extends React.Component {
   props: {
     value: string,
     onChange: Function,
@@ -14,10 +16,12 @@ class Textfield extends React.Component {
     label?: string,
     helptext?: string,
     persistent?: boolean,
-    multiline?: boolean,
+    textarea?: boolean,
     validationMsg?: boolean,
     fullwidth?: boolean,
     box?: boolean,
+    leadingIcon?: any,
+    trailingIcon?: any,
   } & PropsC
 
   static defaultProps = {
@@ -27,56 +31,93 @@ class Textfield extends React.Component {
   }
   foundation_: any
   input_: any
+  icon_: any
 
   state = {
     rootProps: {
       className: {
-        'mdc-textfield': true,
-        'mdc-textfield--upgraded': true,
-        'mdc-textfield--disabled': this.props.disabled,
-        'mdc-textfield--multiline': this.props.multiline,
-        'mdc-textfield--fullwidth': this.props.fullwidth,
-        'mdc-textfield--box': this.props.box,
+        'mdc-text-field': true,
+        'mdc-text-field--upgraded': true,
+        'mdc-text-field--disabled': this.props.disabled,
+        'mdc-text-field--textarea': this.props.textarea,
+        'mdc-text-field--fullwidth': this.props.fullwidth,
+        'mdc-text-field--box': this.props.box,
+        'mdc-text-field--with-leading-icon': this.props.leadingIcon,
+        'mdc-text-field--with-trailing-icon': this.props.trailingIcon,
       },
     },
     labelProps: {
       className: {
-        'mdc-textfield__label': true,
-        'mdc-textfield__label--float-above': Boolean(this.props.value),
+        'mdc-text-field__label': true,
+        'mdc-text-field__label--float-above': Boolean(this.props.value),
       },
     },
     inputProps: {},
     helptextProps: {
       className: {
-        'mdc-textfield-helptext': true,
-        'mdc-textfield-helptext--validation-msg': this.props.validationMsg,
-        'mdc-textfield-helptext--persistent': this.props.persistent,
+        'mdc-text-field-helptext': true,
+        'mdc-text-field-helptext--validation-msg': this.props.validationMsg,
+        'mdc-text-field-helptext--persistent': this.props.persistent,
       },
     },
   }
 
   getDefaultFoundation() {
+    if (!this.root_.classList.contains(cssClasses.TEXT_FIELD_ICON)) {
+      this.icon_ = this.root_.querySelector(strings.ICON_SELECTOR)
+    }
+
     // prettier-ignore
-    return new MDCTextfieldFoundation({
+    return new MDCTextFieldFoundation({
       addClass: helper.addClass('rootProps', this),
       removeClass: helper.removeClass('rootProps', this),
       addClassToLabel: helper.addClass('labelProps', this),
       removeClassFromLabel: helper.removeClass('labelProps', this),
-      registerInputFocusHandler: helper.registerHandler('inputProps', this, 'focus'),
-      registerInputBlurHandler: helper.registerHandler('inputProps', this, 'blur'),
-      registerInputInputHandler: helper.registerHandler('inputProps', this, 'input'),
-      registerInputKeydownHandler: helper.registerHandler('inputProps', this, 'keydown'),
-      deregisterInputFocusHandler: helper.deregisterHandler('inputProps', this, 'focus'),
-      deregisterInputBlurHandler: helper.deregisterHandler('inputProps', this, 'blur'),
-      deregisterInputInputHandler: helper.deregisterHandler('inputProps', this, 'input'),
-      deregisterInputKeydownHandler: helper.deregisterHandler('inputProps', this, 'keydown'),
+      eventTargetHasClass: (target, className) => target.classList.contains(className),
+      registerTextFieldInteractionHandler: helper.registerHandler('rootProps', this),
+      deregisterTextFieldInteractionHandler: helper.deregisterHandler('rootProps', this),
+      // notifyIconAction
+      // registerBottomLineEventHandler
+      // deregisterBottomLineEventHandler
+      // getBottomLineFoundation
+      ...this.getInputAdapterMethods_(),
+      ...this.getHelperTextAdapterMethods_(),
+      ...this.getIconAdapterMethods_(),
+    })
+  }
+
+  getIconAdapterMethods_() {
+    return {
+      setIconAttr: (name, value) => {
+        if (this.icon_) {
+          this.icon_.setAttribute(name, value)
+        }
+      },
+    }
+  }
+
+  getInputAdapterMethods_() {
+    return {
+      registerInputInteractionHandler: helper.registerHandler(
+        'inputProps',
+        this
+      ),
+      deregisterInputInteractionHandler: helper.deregisterHandler(
+        'inputProps',
+        this
+      ),
       getNativeInput: () => this.input_,
+    }
+  }
+
+  getHelperTextAdapterMethods_() {
+    return {
       addClassToHelptext: helper.addClass('helptextProps', this),
       removeClassFromHelptext: helper.removeClass('helptextProps', this),
       helptextHasClass: helper.hasClass('helptextProps', this),
       setHelptextAttr: helper.setAttr('helptextProps', this),
       removeHelptextAttr: helper.rmAttr('helptextProps', this),
-    })
+    }
   }
 
   render() {
@@ -88,11 +129,13 @@ class Textfield extends React.Component {
       label,
       helptext,
       persistent,
-      multiline,
+      textarea,
       className,
       validationMsg,
       fullwidth,
       box,
+      leadingIcon,
+      trailingIcon,
       ...rest
     } = this.props
     const { rootProps, labelProps, helptextProps, inputProps } = this.state
@@ -100,41 +143,50 @@ class Textfield extends React.Component {
     const labelClassName = cx(labelProps.className)
     const helptextClassName = cx(helptextProps.className)
 
-    const textfield = (
-      <Component {...rootProps} className={rootClassName}>
-        {multiline
-          ? <textarea
-              ref={v => (this.input_ = v)}
-              {...inputProps}
-              className="mdc-textfield__input"
-              disabled={disabled}
-              value={value}
-              onChange={onChange}
-              {...rest}
-            />
-          : <input
-              ref={v => (this.input_ = v)}
-              {...inputProps}
-              className="mdc-textfield__input"
-              disabled={disabled}
-              value={value}
-              onChange={onChange}
-              {...rest}
-            />}
+    const textField = (
+      <Component
+        ref={v => (this.root_ = v)}
+        {...rootProps}
+        className={rootClassName}
+      >
+        {leadingIcon}
+        {textarea ? (
+          <textarea
+            ref={v => (this.input_ = v)}
+            {...inputProps}
+            className="mdc-text-field__input"
+            disabled={disabled}
+            value={value}
+            onChange={onChange}
+            {...rest}
+          />
+        ) : (
+          <input
+            ref={v => (this.input_ = v)}
+            {...inputProps}
+            className="mdc-text-field__input"
+            disabled={disabled}
+            value={value}
+            onChange={onChange}
+            {...rest}
+          />
+        )}
         {fullwidth
           ? null
-          : label &&
-            <label {...labelProps} className={labelClassName}>
-              {label}
-            </label>}
-        {box && <div className="mdc-textfield__bottom-line" />}
+          : label && (
+              <label {...labelProps} className={labelClassName}>
+                {label}
+              </label>
+            )}
+        {trailingIcon}
+        <div className="mdc-text-field__bottom-line" />
       </Component>
     )
 
     if (helptext)
       return (
         <div>
-          {textfield}
+          {textField}
           <p
             {...helptextProps}
             className={helptextClassName}
@@ -144,7 +196,7 @@ class Textfield extends React.Component {
           </p>
         </div>
       )
-    else return textfield
+    else return textField
   }
 
   componentDidMount() {
@@ -157,4 +209,4 @@ class Textfield extends React.Component {
   }
 }
 
-export default Textfield
+export default TextField

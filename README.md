@@ -17,5 +17,4 @@ See the [Documentation](http://gutenye.github.io/react-mc)
 
 ## Contributing
 
-
 - If you like this library, star the project is the best support to the authors and contributors.

@@ -168,9 +168,7 @@ class MyPersistentDrawer extends React.Component {
             onMenuClick={() => this.setState({ open: !this.state.open })}
           />
           <main>
-            <div>
-              {JSON.stringify(this.state)}
-            </div>
+            <div>{JSON.stringify(this.state)}</div>
             <DemoParagraphs count={10} />
           </main>
         </div>
@@ -260,7 +258,7 @@ class MyGridList extends React.Component {
     return (
       <GridList>
         <GridList.Tiles>
-          {[1, 2].map(v =>
+          {[1, 2].map(v => (
             <GridList.Tile key={v}>
               <GridList.Tile.Primary>
                 <GridList.Tile.PrimaryContent src="//via.placeholder.com/300x300" />
@@ -269,7 +267,7 @@ class MyGridList extends React.Component {
                 <GridList.Tile.Title>Title</GridList.Tile.Title>
               </GridList.Tile.Secondary>
             </GridList.Tile>
-          )}
+          ))}
         </GridList.Tiles>
       </GridList>
     )
@@ -345,7 +343,7 @@ class MyLinearProgress extends React.Component {
         </p>
         <p>
           <LinearProgress progress={0.5} accent />
-          Accent
+          Secondary
         </p>
       </div>
     )
@@ -356,16 +354,10 @@ class MyList extends React.Component {
   render() {
     return (
       <div>
-        <List>
-          {[1, 2].map(i =>
-            <List.Item key={i}>
-              hello {i}
-            </List.Item>
-          )}
-        </List>
+        <List>{[1, 2].map(i => <List.Item key={i}>hello {i}</List.Item>)}</List>
 
         <List twoLine>
-          {[1, 2].map(i =>
+          {[1, 2].map(i => (
             <List.Item key={i}>
               <List.Item.Text>
                 Two-line item {i}
@@ -374,7 +366,7 @@ class MyList extends React.Component {
                 </List.Item.Text.Secondary>
               </List.Item.Text>
             </List.Item>
-          )}
+          ))}
         </List>
       </div>
     )
@@ -388,9 +380,7 @@ class MyMenu extends React.Component {
   render() {
     return (
       <div>
-        <div>
-          {JSON.stringify(this.state)}
-        </div>
+        <div>{JSON.stringify(this.state)}</div>
         <Menu.Simple
           open={this.state.open}
           onClose={() => this.setState({ open: false })}
@@ -436,9 +426,7 @@ class MyRadio extends React.Component {
           onChange={e => this.setState({ company: e.target.value })}
         />
         <label htmlFor="Radio2">Google</label>
-        <div>
-          {JSON.stringify(this.state)}
-        </div>
+        <div>{JSON.stringify(this.state)}</div>
       </div>
     )
   }
@@ -464,9 +452,7 @@ class MySelect extends React.Component {
           placeholder="Select a company"
           items={items}
         />
-        <div>
-          {JSON.stringify(this.state)}
-        </div>
+        <div>{JSON.stringify(this.state)}</div>
       </div>
     )
   }
@@ -602,11 +588,7 @@ class MyTextfield extends React.Component {
 class App extends React.Component {
   render() {
     const pages = getPages()
-    return (
-      <div>
-        {pages.map((v, i) => React.createElement(v, { key: i }))}
-      </div>
-    )
+    return <div>{pages.map((v, i) => React.createElement(v, { key: i }))}</div>
   }
 }
 

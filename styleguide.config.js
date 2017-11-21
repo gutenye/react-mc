@@ -30,7 +30,7 @@ module.exports = {
       { name: 'Select Menus', content: 'src/Select/README.md', components: 'src/Select/[A-Z]*.js' },
       { name: 'Sliders', content: 'src/Slider/README.md', components: 'src/Slider/[A-Z]*.js' },
       { name: 'Switches', content: 'src/Switch/README.md', components: 'src/Switch/[A-Z]*.js' },
-      { name: 'Text Fields', content: 'src/Textfield/README.md', components: 'src/Textfield/[A-Z]*.js' },
+      { name: 'Text Fields', content: 'src/TextField/README.md', components: 'src/TextField/[A-Z]*.js' },
     ]},
     { name: 'Layout Grids', content: 'src/LayoutGrid/README.md', components: 'src/LayoutGrid/[A-Z]*.js' },
     { name: 'Linear Progress', content: 'src/LinearProgress/README.md', components: 'src/LinearProgress/[A-Z]*.js' },
@@ -52,7 +52,7 @@ module.exports = {
       heading: {
         '& + ul > $isChild': {
           display: 'none',
-        }
+        },
       },
     },
   },
@@ -64,9 +64,6 @@ module.exports = {
         { test: /\.js$/, use: ['babel-loader'], exclude: /node_modules/ },
       ],
     },
-    plugins: [
-      new Compression(),
-      new Copy([{ from: 'static' }])
-    ],
+    plugins: [new Compression(), new Copy([{ from: 'static' }])],
   },
 }

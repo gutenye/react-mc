@@ -8,7 +8,7 @@ import type { PropsC } from '../types'
 class Fab extends React.Component {
   props: {
     mini?: boolean,
-    plain?: boolean,
+    exited?: boolean,
   } & PropsC
 
   static defaultProps = {
@@ -22,7 +22,7 @@ class Fab extends React.Component {
       className: {
         'mdc-fab': true,
         'mdc-fab--mini': this.props.mini,
-        'mdc-fab--plain': this.props.plain,
+        'mdc-fab--exited': this.props.exited,
       },
     },
   }
@@ -36,7 +36,7 @@ class Fab extends React.Component {
     const {
       component: Component,
       mini,
-      plain,
+      exited,
       className,
       children,
       ...rest
@@ -50,9 +50,7 @@ class Fab extends React.Component {
         aria-label="Favorite"
         {...rest}
       >
-        <span className="mdc-fab__icon">
-          {children}
-        </span>
+        <span className="mdc-fab__icon">{children}</span>
       </Component>
     )
   }

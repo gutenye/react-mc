@@ -47,8 +47,8 @@ demo-mobile {
 }
 
 .demo-settings-page .mdc-list {
-  border-top: 1px solid rgba(0, 0, 0, .12);
-  border-bottom: 1px solid rgba(0, 0, 0, .12);
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
   background-color: white;
 }
 
@@ -73,24 +73,6 @@ demo-grid-list > * {
 
 demo-grid-list > *:not(:last-child) {
   margin-right: 20px;
-}
-
-demo-row {
-  display: flex;
-  align-items: center;
-}
-
-demo-row > *:not(:last-child) {
-  margin-right: 20px;
-}
-
-demo-column {
-  display: flex;
-  flex-direction: column;
-}
-
-demo-column > *:not(:last-child) {
-  margin-bottom: 20px;
 }
 
 iframe {

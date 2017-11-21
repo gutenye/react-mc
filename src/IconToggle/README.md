@@ -26,12 +26,12 @@ initialState = {checked: false};
 ```
 
 ```
-<demo-row>
+<DemoRow>
   <IconToggle className="material-icons" onChange={() => {}}>favorite_border</IconToggle>
   <IconToggle primary className="material-icons" onChange={() => {}}>favorite_border</IconToggle>
   <IconToggle accent className="material-icons" onChange={() => {}}>favorite_border</IconToggle>
   <IconToggle disabled className="material-icons" onChange={() => {}}>favorite_border</IconToggle>
-</demo-row>
+</DemoRow>
 ```
 
 **Using Font Awesome**

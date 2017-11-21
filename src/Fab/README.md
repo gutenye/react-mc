@@ -7,11 +7,10 @@
 
 ```
 window.Fab = require('./index').default;
-<demo-row>
+<DemoRow>
   <Fab className="material-icons">favorite</Fab>
   <Fab mini className="material-icons">favorite</Fab>
   <Fab plain className="material-icons">favorite</Fab>
   <Fab plain mini className="material-icons">favorite</Fab>
-  <Fab disabled className="material-icons">favorite</Fab>
-</demo-row>
+</DemoRow>
 ```

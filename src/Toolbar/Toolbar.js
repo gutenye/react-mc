@@ -24,6 +24,7 @@ class Toolbar extends React.Component {
   }
   static FixedAdjust: any
   static Icon: any
+  static MenuIcon: any
   static Row: any
   static Section: any
   static Title: any

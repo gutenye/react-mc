@@ -8,6 +8,7 @@
 ```
 window.Typography = require('./index').default;
 <Typography>
+  <Typography.Button>Button</Typography.Button>
   <Typography.Display4>Display 4</Typography.Display4>
   <Typography.Display3>Display 3</Typography.Display3>
   <Typography.Display2>Display 2</Typography.Display2>

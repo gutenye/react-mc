@@ -12,7 +12,6 @@ type PropsT = {
   buffer?: number,
   inDeterminate?: boolean,
   reversed?: boolean,
-  accent?: boolean,
 } & PropsC
 
 class LinearProgress extends React.Component {
@@ -30,7 +29,6 @@ class LinearProgress extends React.Component {
         'mdc-linear-progress': true,
         'mdc-linear-progress--indeterminate': this.props.indeterminate,
         'mdc-linear-progress--reversed': this.props.reversed,
-        'mdc-linear-progress--accent': this.props.accent,
       },
     },
   }
@@ -54,7 +52,6 @@ class LinearProgress extends React.Component {
       buffer,
       indeterminate,
       reversed,
-      accent,
       className,
       children,
       ...rest

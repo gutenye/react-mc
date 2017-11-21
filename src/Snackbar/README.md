@@ -9,13 +9,13 @@
 window.Snackbar = require('./index').default;
 const show = (arg) => () => self.snackbar.show({timeout: 2000, ...arg});
 const self = {};
-<demo-row>
+<DemoRow>
   <Snackbar ref={v => (self.snackbar = v)} />
   <button onClick={show({message: new Date()})}>Show</button>
   <button onClick={show({message: new Date(), actionText: 'undo', actionHandler: () => log('undo')})}>With Action</button>
   <button onClick={show({message: new Date(), multiline: true})}>With multiline</button>
   <button onClick={show({message: new Date(), actionText: 'undo', actionHandler() {}, multiline: true, actionOnBottom: true})}>With multiline and actionOnBottom</button>
-</demo-row>
+</DemoRow>
 ```
 
 **Start Aligned**

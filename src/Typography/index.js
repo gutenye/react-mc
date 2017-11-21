@@ -12,5 +12,6 @@ Typography.Subheading1 = createTypography('subheading1')
 Typography.Body2 = createTypography('body2')
 Typography.Body1 = createTypography('body1')
 Typography.Caption = createTypography('caption')
+Typography.Button = createTypography('button')
 
 export default Typography

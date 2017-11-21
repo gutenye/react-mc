@@ -47,7 +47,7 @@ const items = [
   <h>Primary Color Indicator</h>
   <TabBar indicator='primary' items={window.TabsItems} />
 
-  <h>Accent Color Indicator</h>
+  <h>Secondary Color Indicator</h>
   <TabBar indicator='accent' items={window.TabsItems} />
 </div>
 ```

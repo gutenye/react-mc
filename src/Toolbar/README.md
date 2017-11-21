@@ -13,7 +13,7 @@ window.Toolbar = require('./index').default;
   <Toolbar>
     <Toolbar.Row>
       <Toolbar.Section align="start">
-        <Toolbar.Icon menu className="material-icons">menu</Toolbar.Icon>
+        <Toolbar.MenuIcon className="material-icons">menu</Toolbar.MenuIcon>
         <Toolbar.Title>Title</Toolbar.Title>
       </Toolbar.Section>
       <Toolbar.Section align='end'>
@@ -33,7 +33,7 @@ window.Toolbar = require('./index').default;
 window.ToolbarRow = (
   <Toolbar.Row>
     <Toolbar.Section align="start">
-      <Toolbar.Icon menu className="material-icons">menu</Toolbar.Icon>
+      <Toolbar.MenuIcon className="material-icons">menu</Toolbar.MenuIcon>
       <Toolbar.Title>Title</Toolbar.Title>
     </Toolbar.Section>
     <Toolbar.Section align='end'>
@@ -100,7 +100,7 @@ window.ToolbarRow = (
   <Toolbar fixed fixedLastrowOnly waterfall flexible flexibleDefaultBehavior ref={v => this.toolbar = v}>
     <Toolbar.Row>
       <Toolbar.Section align="start">
-        <Toolbar.Icon menu className="material-icons">menu</Toolbar.Icon>
+        <Toolbar.MenuIcon className="material-icons">menu</Toolbar.MenuIcon>
         <Toolbar.Title>Title</Toolbar.Title>
       </Toolbar.Section>
     </Toolbar.Row>

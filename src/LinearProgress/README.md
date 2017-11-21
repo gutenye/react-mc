@@ -26,7 +26,7 @@ window.LinearProgress = require('./index').default;
   <h>Buffer Reversed</h>
   <LinearProgress progress={0.5} buffer={0.75} reversed />
 
-  <h>Accent</h>
+  <h>Secondary</h>
   <LinearProgress progress={0.5} accent />
 </div>
 ```
