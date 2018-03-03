@@ -4,6 +4,7 @@ import cx from 'classnames'
 import { MDCRippleFoundation } from '@material/ripple/dist/mdc.ripple'
 import Ripple from '../Ripple'
 import type { PropsC } from '../types'
+import '@material/button/dist/mdc.button.css'
 
 export const parseThemeOptions = (theme: ?(string | string[])): string[] => {
   if (theme) {
