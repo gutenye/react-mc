@@ -25,6 +25,10 @@ window.DemoRow = ({ title, children }) => (
 )
 
 const DemoRowRoot = styled.div`
+  &:not(:last-child) {
+    margin-bottom: 20px;
+  }
+
   .DemoRow-main {
     display: flex;
     align-items: center;

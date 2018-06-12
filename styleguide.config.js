@@ -7,7 +7,7 @@ module.exports = {
   styleguideDir: 'build.docs',
   template: 'docs/template.html',
   require: ['./docs/docs.js', './docs/docs.css'],
-  serverPort: 4010,
+  serverPort: 4011,
   assetsDir: 'static',
 
   // prettier-ignore
